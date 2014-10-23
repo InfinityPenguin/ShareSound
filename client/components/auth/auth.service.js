@@ -21,7 +21,7 @@ angular.module('shareSoundApp')
         var deferred = $q.defer();
 
         $http.post('/auth/local', {
-          email: user.email,
+          username: user.username,
           password: user.password
         }).
         success(function(data) {
