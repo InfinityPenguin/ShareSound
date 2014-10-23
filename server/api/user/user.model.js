@@ -73,6 +73,7 @@ UserSchema
     return hashedPassword.length;
   }, 'Password cannot be blank');
 
+
 // Validate username is not taken
 UserSchema
   .path('username')
@@ -87,6 +88,7 @@ UserSchema
       respond(true);
     });
 }, 'The specified username is already in use.');
+
 
 var validatePresenceOf = function(value) {
   return value && value.length;
