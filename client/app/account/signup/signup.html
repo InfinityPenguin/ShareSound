@@ -13,9 +13,18 @@
           <label>Username</label>
 
           <input type="text" name="username" class="form-control" ng-model="user.username"
+                 ng-minlength="1"
+                 ng-maxlength="39"
+                 ng-pattern="/^[a-zA-Z0-9_.-]*$/"
                  required/>
           <p class="help-block" ng-show="form.username.$error.required && submitted">
-            A name is required
+            A name is required.
+          </p>
+            <p class="help-block" ng-show="form.username.$error.maxlength && submitted">
+            Username must be under 39 characters. 
+          </p>
+            <p class="help-block" ng-show="form.username.$error.pattern && submitted">
+            Username can only contain letters, numbers, underscores and dashes.
           </p>
         </div>
 
@@ -25,12 +34,17 @@
           <label>Password</label>
 
           <input type="password" name="password" class="form-control" ng-model="user.password"
-                 ng-minlength="3"
+                 ng-minlength="5"
+                 ng-maxlength="39"
                  required
                  mongoose-error/>
           <p class="help-block"
              ng-show="(form.password.$error.minlength || form.password.$error.required) && submitted">
-            Password must be at least 3 characters.
+            Password must be at least 5 characters.
+          </p>
+          <p class="help-block"
+             ng-show="form.password.$error.maxlength && submitted">
+            Password must be under 39 characters.
           </p>
           <p class="help-block" ng-show="form.password.$error.mongoose">
             {{ errors.password }}

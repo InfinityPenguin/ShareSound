@@ -13,13 +13,17 @@
         <div class="form-group">
           <label>Username</label>
 
-          <input type="username" name="username" class="form-control" ng-model="user.username" required>
+          <input type="username" name="username" class="form-control" ng-model="user.username" 
+           ng-minlength="1"
+           ng-maxlength="39"
+          required>
         </div>
 
         <div class="form-group">
           <label>Password</label>
 
-          <input type="password" name="password" class="form-control" ng-model="user.password" required>
+          <input type="password" name="password" class="form-control" ng-model="user.password" 
+                 required>
         </div>
 
         <div class="form-group has-error">
@@ -31,6 +35,12 @@
           </p>
           <p class="help-block" ng-show="form.username.$error.username && submitted">
              Please enter a valid username.
+          </p>
+          <p class="help-block" ng-show="form.username.$error.minlength && submitted">
+             Username must be over 5 characters.
+          </p>
+        <p class="help-block" ng-show="form.username.$error.maxlength && submitted">
+             Username must be under 39 characters. 
           </p>
 
           <p class="help-block">{{ errors.other }}</p>
