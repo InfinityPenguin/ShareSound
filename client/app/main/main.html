@@ -6,6 +6,24 @@
     <p class="lead">Let's make music together</p>
     <img class= "logo" src="assets/images/logo.png" alt="I'm Yeoman">
   </div>
+  <script type="text/javascript" src="s3upload.js">
+    function s3_upload(){
+        var status_elem = document.getElementById("status");
+        var url_elem = document.getElementById("avatar_url");
+        var preview_elem = document.getElementById("preview");
+        var s3upload = new S3Upload({
+            file_dom_selector: 'files',
+            s3_sign_put_url: '/api/tracks'
+        });
+    }
+    /*
+    * Listen for file selection:
+    */
+    (function() {
+        var input_element = document.getElementById("files");
+        input_element.onchange = s3_upload;
+    })();
+  </script>
 </header>
 
 <div ng-hide = "true" class="container">
@@ -23,6 +41,11 @@
   <div class="container">
       <p>ShareSound v1.0.01 |
         <a href="https://docs.google.com/document/d/1tUTI4T63f9idChekUUmv8y6Y_cVL2A8cztG496aIFgU/edit?usp=sharing">About</a> |
-         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
+         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a> |
+           <input type="file" id="files"/>
+           <form method="POST" action="/api/tracks">
+             <input type="submit" value="Update profile" />
+           </form>
+       </p>
   </div>
 </footer>
