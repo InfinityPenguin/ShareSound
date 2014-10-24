@@ -5,8 +5,37 @@ var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 
+var ERR_USER_EXISTS = -1; 
+var ERR_BAD_USERNAME = -2;
+var ERR_BAD_PASSWORD = -3; 
+var ERR_NO_USER = -1; 
+var ERR_BAD_CREDENTIALS = -2; 
+var ERR_MISC = -1;
+var SUCCESS = 1; 
+
 var validationError = function(res, err) {
-  return res.json(422, err);
+    err = String(err); 
+    var code = ERR_MISC; 
+    if (err.indexOf("Username cannot be blank") > -1){
+        code = ERR_BAD_USERNAME; 
+    }
+    else if (err.indexOf("The specified username is already in use") > -1 ){
+        code = ERR_USER_EXISTS;    
+    }
+    else if (err.indexOf("Password must be between 5 and 39 characters") > -1){
+        code = ERR_BAD_PASSWORD; 
+    }
+    else if (err.indexOf("Username must be letters, numbers, underscores, or dashes") > -1){
+        code = ERR_BAD_USERNAME;    
+    }
+    else if (err.indexOf("Username must be letters, numbers, underscores, or dashes") > -1){
+        code = ERR_BAD_USERNAME;    
+    }
+    else if (err.indexOf("Username cannot be blank") > -1){
+        code = ERR_BAD_USERNAME;    
+    }
+    return res.json({"status code" : code}); 
+    
 };
 
 /**
@@ -28,9 +57,11 @@ exports.create = function (req, res, next) {
   newUser.provider = 'local';
   newUser.role = 'user';
   newUser.save(function(err, user) {
+    console.log("ERROR : " + err); 
     if (err) return validationError(res, err);
     var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
-    res.json({ token: token });
+    //res.json({ token: token });
+    res.json({"status code": SUCCESS}); 
   });
 };
 
