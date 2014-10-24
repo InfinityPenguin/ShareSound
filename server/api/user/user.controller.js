@@ -61,8 +61,8 @@ exports.create = function (req, res, next) {
     console.log("ERROR : " + err); 
     if (err) return validationError(res, err);
     var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
-    res.json({ token: token , "status code": SUCCESS});
-    //res.json({"status code": SUCCESS}); 
+    //res.json({ token: token });
+    res.json({"status code": SUCCESS, token: token}); 
   });
 };
 

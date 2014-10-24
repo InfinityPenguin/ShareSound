@@ -19,6 +19,7 @@
                  ng-pattern="/^[a-zA-Z0-9_.-]*$/"
                  required
                  mongoose-error/>-->
+
           <p class="help-block" ng-show="form.username.$error.required && submitted">
             A name is required.
           </p>
@@ -28,7 +29,7 @@
             <p class="help-block" ng-show="form.username.$error.pattern && submitted">
             Username can only contain letters, numbers, underscores and dashes.
           </p>
-          <p class="help-block" ng-show="form.username.$error.mongoose">
+        <p class="help-block" ng-show="form.username.$error.mongoose">
             {{ errors.username }}
           </p>
         </div>
