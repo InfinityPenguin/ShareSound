@@ -72,21 +72,15 @@ UserSchema
     return username.length;
   }, 'Username cannot be blank');
 
-// Validate username length
+// Validate username is letters, numbers, underscores, or dashes
 UserSchema
   .path('username')
   .validate(function(username) {
-    if (username.length >= 1 && username.length <= 39) return true;
-  }, 'Username must be between 1 to 39 characters');
+    var matches = username.match(/^[a-zA-Z0-9_.-]*$/);
+    return matches; 
+  }, 'Username must be letters, numbers, underscores, or dashes');
 
 
-/* Validate empty password
-UserSchema
-  .path('hashedPassword')
-  .validate(function(hashedPassword) {
-    if (authTypes.indexOf(this.provider) !== -1) return true;
-    return hashedPassword.length;
-  }, 'Password cannot be blank');*/
 
 // Validate unhashed password length
 UserSchema.path('hashedPassword')
