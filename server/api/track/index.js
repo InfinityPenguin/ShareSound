@@ -8,7 +8,7 @@ var router = express.Router();
 // router.get('/', controller.index);
 router.get('/:id', controller.show);
 // router.post('/', controller.create);
-router.post('/', controller.dummy);
+// router.post('/', controller.dummy);
 
 router.get('/', controller.generateSignedURL);
 router.put('/:id', controller.update);

@@ -145,8 +145,6 @@ exports.test = function(req, res) {
 };
 
 exports.download = function(req, res) {
-
-
   var s3 = new AWS.S3();
 
   res.setHeader('Content-disposition', 'attachment; filename=track.wma');
@@ -159,31 +157,32 @@ exports.download = function(req, res) {
 
 
 exports.generateSignedURL = function(req, res) {
-    AWS.config.update({accessKeyId: AWS_ACCESS_KEY, secretAccessKey: AWS_SECRET_KEY});
-    var s3 = new AWS.S3();
-    var s3_params = {
-        Bucket: S3_BUCKET,
-        Key: req.query.s3_object_name,
-        Expires: 60,
-        ContentType: req.query.s3_object_type,
-        ACL: 'bucket-owner-full-control'
-    };
+  AWS.config.update({accessKeyId: AWS_ACCESS_KEY, secretAccessKey: AWS_SECRET_KEY});
+  var s3 = new AWS.S3();
+  var s3_params = {
+      Bucket: S3_BUCKET,
+      Key: 'test_file.png',//req.query.s3_object_name,
+      Expires: 9000,
+      ContentType: 'images/png', //req.query.s3_object_type,
+      ACL: 'bucket-owner-full-control'
+  };
 
-    console.log(s3_params.Key)
+  // console.log(s3_params.Key)
 
-    s3.getSignedUrl('putObject', s3_params, function(err, data){
-        if(err){
-            console.log(err);
-        }
-        else{
-            var return_data = {
-                signed_request: data,
-                url: 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+req.query.s3_object_name
-            };
-            res.write(JSON.stringify(return_data));
-            res.end();
-        }
-    });
+  s3.getSignedUrl('putObject', s3_params, function(err, data){
+      if(err){
+          console.log(err);
+      }
+      else{
+          var return_data = {
+              signed_request: data,
+              url: 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+s3_params.Key
+          };
+          res.write(JSON.stringify(return_data));
+          res.end();
+          return res
+      }
+  });
 };
 
 exports.upload = function(req, res) {
@@ -192,10 +191,11 @@ exports.upload = function(req, res) {
   }
 }
 
+/*
 exports.dummy = function(req, res) {
   console.log('hellooooooooooo~~~~~~~~~~');
   return res.json(200, {message: "DO U FUX WIDIT?!"});
-};
+};*/
 
 function handleError(res, err) {
   return res.send(500, err);
