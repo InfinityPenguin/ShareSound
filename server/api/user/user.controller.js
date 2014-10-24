@@ -28,9 +28,6 @@ var validationError = function(res, err) {
     else if (err.indexOf("Username must be letters, numbers, underscores, or dashes") > -1){
         code = ERR_BAD_USERNAME;    
     }
-    else if (err.indexOf("Username must be letters, numbers, underscores, or dashes") > -1){
-        code = ERR_BAD_USERNAME;    
-    }
     else if (err.indexOf("Username cannot be blank") > -1){
         code = ERR_BAD_USERNAME;    
     }
