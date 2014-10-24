@@ -80,17 +80,12 @@ UserSchema
     return matches; 
   }, 'Username must be letters, numbers, underscores, or dashes');
 
-
-
 // Validate unhashed password length
 UserSchema.path('hashedPassword')
   .validate(function(v) {
   if (this._password) {
-    if (this._password.length < 5) {
-      this.invalidate('password', 'must be at least 5 characters.');
-    }
-    if (this._password.length > 39) {
-      this.invalidate('password', 'must be at most 39 characters.');
+    if (this._password.length < 5 || this._password.length > 39) {
+      this.invalidate('password', 'Password must be between 5 and 39 characters.');
     }
   }
     else{
