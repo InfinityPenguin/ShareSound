@@ -20,7 +20,7 @@ angular.module('shareSoundApp')
         var cb = callback || angular.noop;
         var deferred = $q.defer();
 
-        $http.post('/auth/local', {
+        $http.post('/api/users/login', {
           username: user.username,
           password: user.password
         }).

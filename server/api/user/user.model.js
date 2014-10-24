@@ -5,14 +5,21 @@ var Schema = mongoose.Schema;
 var crypto = require('crypto');
 var authTypes = ['github', 'twitter', 'facebook', 'google'];
 
+
 var UserSchema = new Schema({
-  username: String,
+  username: {
+      type: String,
+      default: ''
+  },
   //email: { type: String, lowercase: true },
   role: {
     type: String,
     default: 'user'
   },
-  hashedPassword: String,
+  hashedPassword: {
+      type: String,
+      default: ''
+  }, 
   provider: String,
   salt: String,
   facebook: {},
@@ -65,14 +72,38 @@ UserSchema
     return username.length;
   }, 'Username cannot be blank');
 
-// Validate empty password
+// Validate username length
+UserSchema
+  .path('username')
+  .validate(function(username) {
+    if (username.length >= 1 && username.length <= 39) return true;
+  }, 'Username must be between 1 to 39 characters');
+
+
+/* Validate empty password
 UserSchema
   .path('hashedPassword')
   .validate(function(hashedPassword) {
     if (authTypes.indexOf(this.provider) !== -1) return true;
     return hashedPassword.length;
-  }, 'Password cannot be blank');
+  }, 'Password cannot be blank');*/
 
+// Validate unhashed password length
+UserSchema.path('hashedPassword')
+  .validate(function(v) {
+  if (this._password) {
+    if (this._password.length < 5) {
+      this.invalidate('password', 'must be at least 5 characters.');
+    }
+    if (this._password.length > 39) {
+      this.invalidate('password', 'must be at most 39 characters.');
+    }
+  }
+    else{
+        this.invalidate('password', 'cannot be blank!!!!'); 
+        }
+  
+}, 'Password is INVALID' );
 
 // Validate username is not taken
 UserSchema

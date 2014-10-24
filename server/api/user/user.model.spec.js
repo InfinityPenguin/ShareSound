@@ -6,12 +6,7 @@ var User = require('./user.model');
 
 var user = new User({
   provider: 'local',
-<<<<<<< HEAD
   username: 'Fake User',
-=======
-  name: 'Fake User',
-  email: 'test@test.com',
->>>>>>> 3a86dfcddd64bad4ada2d9792688961559899944
   password: 'password'
 });
 
@@ -48,6 +43,14 @@ describe('User Model', function() {
 
   it('should fail when saving without a username', function(done) {
     user.username = '';
+    user.save(function(err) {
+      should.exist(err);
+      done();
+    });
+  });
+    
+ it('should fail when saving username with invalid characters (not numbers, letters, dashes, underscores)', function(done) {
+    user.username = 'this!is#````bad';
     user.save(function(err) {
       should.exist(err);
       done();
