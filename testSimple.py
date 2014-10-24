@@ -6,22 +6,22 @@ import unittest
 import os
 import testLib
 
-class TestUnit(testLib.RestTestCase):
-    # """Issue a REST API request to run the unit tests, and analyze the result"""
-    # def testUnit(self):
-    #     respData = self.makeRequest("/TESTAPI/unitTests", method="POST")
-    #     self.assertTrue('output' in respData)
-    #     print ("Unit tests output:\n"+
-    #            "\n***** ".join(respData['output'].split("\n")))
-    #     self.assertTrue('totalTests' in respData)
-    #     print "***** Reported "+str(respData['totalTests'])+" unit tests. nrFailed="+str(respData['nrFailed'])
-    #     # When we test the actual project, we require at least 10 unit tests
-    #     minimumTests = 10
-    #     if "SAMPLE_APP" in os.environ:
-    #         minimumTests = 4
-    #     self.assertTrue(respData['totalTests'] >= minimumTests,
-    #                     "at least "+str(minimumTests)+" unit tests. Found only "+str(respData['totalTests'])+". use SAMPLE_APP=1 if this is the sample app")
-    #     self.assertEquals(0, respData['nrFailed'])
+# class TestUnit(testLib.RestTestCase):
+#     # """Issue a REST API request to run the unit tests, and analyze the result"""
+#     # def testUnit(self):
+#     #     respData = self.makeRequest("/TESTAPI/unitTests", method="POST")
+#     #     self.assertTrue('output' in respData)
+#     #     print ("Unit tests output:\n"+
+#     #            "\n***** ".join(respData['output'].split("\n")))
+#     #     self.assertTrue('totalTests' in respData)
+#     #     print "***** Reported "+str(respData['totalTests'])+" unit tests. nrFailed="+str(respData['nrFailed'])
+#     #     # When we test the actual project, we require at least 10 unit tests
+#     #     minimumTests = 10
+#     #     if "SAMPLE_APP" in os.environ:
+#     #         minimumTests = 4
+#     #     self.assertTrue(respData['totalTests'] >= minimumTests,
+#     #                     "at least "+str(minimumTests)+" unit tests. Found only "+str(respData['totalTests'])+". use SAMPLE_APP=1 if this is the sample app")
+#     #     self.assertEquals(0, respData['nrFailed'])
 
 
         
@@ -39,6 +39,11 @@ class TestAddUser(testLib.RestTestCase):
     def testAdd1(self):
         respData = self.makeRequest("/api/users", method="POST", data = { 'username' : 'user1', 'password' : 'password'} )
         print respData
-        # self.assertResponse(respData, count = 1)
+        self.assertEqual(respData['status code'], 1)
 
+    def testAdd2(self):
+        respData = self.makeRequest("/api/users", method="POST", data = { 'username' : 'user1', 'password' : 'password'} )
+        respData = self.makeRequest("/api/users", method="POST", data = { 'username' : 'user1', 'password' : 'password'} )
+        # self.assertEqual(respData['status code'], 1)
+        print respData
     
