@@ -10,7 +10,8 @@
     <div class="col-sm-12">
       <form class="form" name="form" ng-submit="login(form)" novalidate>
 
-        <div class="form-group">
+        <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
+                                            'has-error': form.name.$invalid && submitted }">
           <label>Username</label>
 
           <input type="username" name="username" class="form-control" ng-model="user.username" 
