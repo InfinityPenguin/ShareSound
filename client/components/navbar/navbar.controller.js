@@ -20,4 +20,7 @@ angular.module('shareSoundApp')
     $scope.isActive = function(route) {
       return route === $location.path();
     };
+    $scope.showUser = function(){
+      $location.path('/user');
+    }
   });

@@ -4,7 +4,7 @@
 
 #banner {
     border-bottom: none;
-    margin-top: -20px;
+    padding-top: 5em;
 }
 
 #banner h1 {
@@ -25,15 +25,21 @@
 .footer {
     text-align: center;
     padding: 30px 0;
-    margin-top: 70px;
-    border-top: 1px solid #E5E5E5;
+    margin-top: 0px;
 }
-.colors{
 
-    color:#0CC8CF
+.content{
+    width: 90%;
+    margin: 0px auto;
+    background-color: rgba(0, 0, 0, 1);
+    padding-left: 3em;
+    padding-right: 3em;
+    }
 
-    
-}
 .logo{
     width: 40%;
+}
+.body{
+    
+    background:#F2F2F2;
 }
