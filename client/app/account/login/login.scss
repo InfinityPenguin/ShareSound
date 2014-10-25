@@ -18,3 +18,7 @@ $btnGithubBackgroundHighlight:      #ccc;
 .btn-github {
   @include button-variant($btnTextAlt, $btnGithubBackground, $btnGithubBackgroundHighlight);
 }
+//Placement
+.row{
+	padding-top: 5em;
+}

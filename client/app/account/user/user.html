@@ -1,0 +1,37 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class= "u-container">
+
+	<div class = "u-sidebar">
+		<div class = "userInfo">
+			<div class = "profile-picture">
+				<img class= "logo" src="assets/images/logo.png" alt="">
+			</div>
+	    </div>
+	</div>
+
+	<div class="u-content">
+		<div class = "banner">
+			<span class= "message">
+				<h1>Welcome back {{getCurrentUser().username }}</h1>
+			</span>
+		</div>
+		<div class = "track_list">
+			
+		</div>
+	</div>
+</div>
+
+
+<footer class="footer">
+  <div class="container">
+      <p>ShareSound v1.0.01 |
+        <a href="https://docs.google.com/document/d/1tUTI4T63f9idChekUUmv8y6Y_cVL2A8cztG496aIFgU/edit?usp=sharing">About</a> |
+         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a> |
+           <input type="file" id="files"/>
+           <form method="POST" action="/api/tracks">
+             <input type="submit" value="Update profile" />
+           </form>
+       </p>
+  </div>
+</footer>

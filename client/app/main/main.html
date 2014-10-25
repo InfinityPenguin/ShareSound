@@ -1,20 +1,22 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>Welcome to ShareSound</h1>
-    <p class="lead">Let's make music together ʕ •ᴥ•ʔ</p>
-    <img class= "logo" src="assets/images/logo.png" alt="I'm Yeoman">
-  </div>
-</header>
+<div class = "content">
+  <header class="hero-unit" id="banner">
+    <div class="container">
+      <h1>Welcome to ShareSound</h1>
+      <p class="lead">Let's make music together ʕ •ᴥ•ʔ</p>
+      <img class= "logo" src="assets/images/logo.png" alt="I'm ShareSound!">
+    </div>
+  </header>
 
-<div ng-hide = "true" class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}</a></li>
-      </ul>
+  <div ng-hide = "true" class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="page-header">Features:</h1>
+        <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
+          <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
