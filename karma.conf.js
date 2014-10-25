@@ -71,6 +71,22 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: ['PhantomJS'],
+      
+    // Code coverage report
+    reporters: ['progress', 'coverage'],  
+    preprocessors: {  
+    'app/scripts/**/*.js': ['coverage']
+    },
+    coverageReporter: {  
+    type: 'html',
+    dir: 'coverage'
+    },
+
+   // Don't forget to add 'karma-coverage' to your list of plugins
+   plugins: [  
+   'karma-jasmine',
+   'karma-coverage' // required for coverage
+   ], 
 
 
     // Continuous Integration mode

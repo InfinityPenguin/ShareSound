@@ -13,7 +13,8 @@ router.post('/', function(req, res, next) {
     if (!user) return res.json(404, {message: 'Something went wrong, please try again.'});
 
     var token = auth.signToken(user._id, user.role);
-    res.json({token: token});
+    //res.json({token: token});
+    res.json({"status code" : 1, token: token}); 
   })(req, res, next)
 });
 
