@@ -8,8 +8,8 @@
 module.exports = {
   DOMAIN: 'http://localhost:9000',
   SESSION_SECRET: "sharesound-secret",
-  AWS_ACCESS_KEY: 'AKIAJ2HMP2QTSJ65RVKA',
-  AWS_SECRET_KEY: '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',
+  AWS_ACCESS_KEY: 'AKIAIXJAGDGVBH26BFTQ',
+  AWS_SECRET_KEY: '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',
   FACEBOOK_ID: 'app-id',
   FACEBOOK_SECRET: 'secret',
   // Control debug level for modules using visionmedia/debug
