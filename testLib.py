@@ -67,17 +67,17 @@ class RestTestCase(unittest.TestCase):
                 for h, hv in resp.getheaders():
                     print "    "+h+"  =  "+hv
 
-            if resp.status == 200:
-                data_string = resp.read()
+            # if resp.status == 200 :
+            data_string = resp.read()
                 # The response must be a JSON request
                 # Note: Python (at least) nicely tacks UTF8 information on this,
                 #   we need to tease apart the two pieces.
-                self.assertTrue(resp.getheader('content-type') is not None, "content-type header must be present in the response")
-                self.assertTrue(resp.getheader('content-type').find('application/json') == 0, "content-type header must be application/json")
+            self.assertTrue(resp.getheader('content-type') is not None, "content-type header must be present in the response")
+            self.assertTrue(resp.getheader('content-type').find('application/json') == 0, "content-type header must be application/json")
 
 
-                data = json.loads(data_string)
-                return data
+            data = json.loads(data_string)
+            return data
             # else:
             #     self.assertEquals(200, resp.status)
         except:

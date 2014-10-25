@@ -59,8 +59,8 @@ class TestAddUser(testLib.RestTestCase):
         respData = self.makeRequest("/api/users", method="POST", data = { 'username' : 'user', 'password' : 'a'} )
         self.assertEqual(respData['status code'], -3)
     def testLogin(self):
-        respData = self.makeRequest("/api/users", method="POST", data = { 'username' : 'user', 'password' : 'pass'} )
-        respData = self.makeRequest("/api/users/login", method="POST", data = { 'username' : 'user', 'password' : 'pass'} )
+        respData = self.makeRequest("/api/users", method="POST", data = { 'username' : 'user', 'password' : 'password'} )
+        respData = self.makeRequest("/api/users/login", method="POST", data = { 'username' : 'user', 'password' : 'password'} )
         self.assertEqual(respData['status code'], 1)
     def testLogin2(self):
         respData = self.makeRequest("/api/users", method="POST", data = { 'username' : 'user', 'password' : 'pass'} )
