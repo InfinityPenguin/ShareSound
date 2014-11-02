@@ -15,9 +15,10 @@ angular.module('shareSoundApp')
         })
         .then( function() {
           // Logged in, redirect to home
-          $location.path('/user');
+          $location.path('user');
         })
         .catch( function(err) {
+          console.log(err);
           $scope.errors.other = err.message;
         });
       }

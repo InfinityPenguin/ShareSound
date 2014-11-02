@@ -33,12 +33,13 @@
 
 }
 .u-sidebar{
-	background-color:white;
-	position: fixed;
-	top: 50px;
-	bottom: 0px;
-	left: 5em;
-	width: 200px;
+background-color: #FFF;
+position: fixed;
+top: 50px;
+bottom: 0px;
+width: 200px;
+float: left;
+padding-left: 1em;
 } 
 .profile-picture{
 	padding-top:3.5em;
