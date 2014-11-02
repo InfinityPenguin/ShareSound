@@ -4,7 +4,11 @@ var _ = require('lodash');
 var Track = require('./track.model');
 
 var AWS = require('aws-sdk');
+var AWS_ACCESS_KEY = 1234567;
+var AWS_SECRET_KEY = 1234567;
 AWS.config.region = 'us-west-1';
+AWS.config.accessKeyId =  1234567;
+AWS.config.secretAccessKey = 1234567;
 var S3_BUCKET = 'sharesound';
 
 // Get list of tracks
@@ -72,6 +76,8 @@ exports.download = function(req, res) {
 
 
 exports.generateSignedURL = function(req, res) {
+  // console.log("hellooooo~~~~~~~~~~~~~~~~~~~~");
+  console.log(process.env);
   AWS.config.update({accessKeyId: process.env.AWS_ACCESS_KEY, secretAccessKey: process.env.AWS_SECRET_KEY});
   var s3 = new AWS.S3();
   var s3_params = {
