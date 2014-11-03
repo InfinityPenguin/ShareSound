@@ -14,7 +14,7 @@ angular.module('shareSoundApp')
           password: $scope.user.password
         })
         .then( function() {
-          // Logged in, redirect to home
+          // Logged in, redirect to dashboard
           $location.path('user');
         })
         .catch( function(err) {
