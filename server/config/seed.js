@@ -7,6 +7,8 @@
 
 var Thing = require('../api/thing/thing.model');
 var User = require('../api/user/user.model');
+var Track = require('../api/track/track.model');
+var mongoose = require('mongoose');
 
 Thing.find({}).remove(function() {
   Thing.create({
@@ -31,19 +33,25 @@ Thing.find({}).remove(function() {
 });
 
 User.find({}).remove(function() {
-  User.create({
-    provider: 'local',
-    name: 'Test User',
-    email: 'test@test.com',
-    password: 'test'
-  }, {
-    provider: 'local',
-    role: 'admin',
-    name: 'Admin',
-    email: 'admin@admin.com',
-    password: 'admin'
-  }, function() {
-      console.log('finished populating users');
+  var newUser = new User({username: "test", password: "123123"});
+  var id = mongoose.Types.ObjectId("DDDDDDDDDDDD");
+  newUser._id = id; 
+  newUser.save(function(err, user){
+
+  }); 
+});
+
+Track.find({}).remove(function() {
+    Track.create({
+        name: "Berlin - Moderat",
+        url: "https://dl-web.dropbox.com/get/tracks%20example/11%20Berlin.mp3?_subject_uid=106468574&w=AACfnwTzmBzLtNExQLcqSizfKJ_jrwZwam7KwXYhIhLlAg",
+        uploader_id: "444444444444444444444444", 
+    }, {
+        name: "Endlos - Kollektiv Turmstrasse",
+        url: "https://dl-web.dropbox.com/get/tracks%20example/Endlos.mp3?_subject_uid=106468574&w=AADQGY5UDoqKKDUwZlds_OJbbtrZ6bMeItcLqaA9tiMxTQ",
+        uploader_id: "444444444444444444444444"
     }
-  );
+                
+                
+    );
 });
