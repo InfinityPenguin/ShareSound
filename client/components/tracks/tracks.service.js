@@ -11,6 +11,7 @@ angular.module('shareSoundApp')
     service.getTracks = function(userId){
       return $http.get('/api/tracks/' + userId)
         .success(function (tracks){
+            console.log("the tracks for user " + userId + " are " + JSON.stringify(tracks)); 
             service.userTracks = tracks; 
             return tracks; 
       })
