@@ -63,6 +63,16 @@ exports.destroy = function(req, res) {
 };
 
 
+exports.getUserTracks = function(req, res){
+    Track.find({uploader_id : req.params.id}, function (err, track) {
+    if(err) { return handleError(res, err); }
+    if(!track) { return res.send(404); }
+    return res.json(track);
+  });
+}; 
+
+
+
 exports.download = function(req, res) {
   var s3 = new AWS.S3();
 
@@ -112,6 +122,9 @@ exports.upload = function(req, res) {
 exports.foo = function(req, res) {
   console.log("SUP FOO");
 };
+
+
+
 
 function handleError(res, err) {
   return res.send(500, err);

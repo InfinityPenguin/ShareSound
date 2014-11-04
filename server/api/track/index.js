@@ -10,7 +10,9 @@ router.get('/', controller.index);
 router.post('/upload_track', controller.create);
 router.post('/delete_track', controller.destroy);
 router.post('/download_track', controller.download);
-// TODO: router.get('/get_user_tracks', controller.getUserTracks);
+
+//TODO: get user tracks 
+router.get('/:id', controller.getUserTracks);
 router.get('/foo', controller.foo);
 
 router.get('/getUploadURL', controller.generateSignedURL);
