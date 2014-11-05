@@ -12,12 +12,20 @@
 
 	<div class="u-content">
 		<div class = "banner">
-			<span class= "message">
-				<h1>Welcome back {{getCurrentUser().username }}</h1>
+            
+         
+             <span  class= "message">
+				<h1>Welcome {{getCurrentUser().username }}</h1>
 			</span>
+            
+            
+            
+			
 		</div>
 		<div class = "track_list">
-			
+			<li ng-repeat ="track in tracks">
+                Track:  {{ track.name }}
+            </li>
 		</div>
 	</div>
 		<script>
