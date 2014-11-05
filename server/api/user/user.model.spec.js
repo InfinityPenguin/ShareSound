@@ -43,6 +43,14 @@ describe('User Model', function() {
     });
   });
 
+  it('should fail when saving with too short password', function(done) {
+    var userTemp = new User(user);
+    userTemp.password = '1234';
+    userTemp.save(function() {
+      done();
+    });
+  });
+
   it('should fail when saving without a username', function(done) {
     user.username = '';
     user.save(function(err) {
