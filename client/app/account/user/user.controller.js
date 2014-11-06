@@ -13,6 +13,7 @@ angular.module('shareSoundApp')
         .then( function() {
             
         $scope.tracks = Tracks.userTracks; 
+
         angular.forEach($scope.tracks, function(value, key){
             $scope.tracks[key].url = $sce.trustAsResourceUrl($scope.tracks[key].url); 
         }); 
@@ -92,6 +93,7 @@ angular.module('shareSoundApp')
            console.log("nope!!!!"); 
            $location.path('login'); 
        }
+
         
         
     });

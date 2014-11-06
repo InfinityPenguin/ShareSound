@@ -23,5 +23,6 @@ angular.module('shareSoundApp')
         url: '/user',
         templateUrl: 'app/account/user/user.html',
         controller: 'UserCtrl',
+        authenticate: true
       });
   });

@@ -14,11 +14,10 @@ angular.module('shareSoundApp')
           password: $scope.user.password
         })
         .then( function() {
-          // Logged in, redirect to dashboard
+          // Logged in, redirect to home
           $location.path('user');
         })
         .catch( function(err) {
-          console.log(err);
           $scope.errors.other = err.message;
         });
       }

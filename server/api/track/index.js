@@ -10,15 +10,42 @@ router.get('/', controller.index);
 router.post('/upload_track', controller.create);
 router.post('/delete_track', controller.destroy);
 router.post('/download_track', controller.download);
-
-//TODO: get user tracks 
-router.get('/:id', controller.getUserTracks);
+router.get('/getUploadURL', controller.generateSignedURL);
 router.get('/foo', controller.foo);
 
-router.get('/getUploadURL', controller.generateSignedURL);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+router.put('/', controller.upload);
+
+
+router.get('/:id', controller.getUserTracks);
 //router.put('/:id', controller.update);
 //router.patch('/:id', controller.update);
 //router.delete('/:id', controller.destroy);
-router.put('/', controller.upload);
-
 module.exports = router;
