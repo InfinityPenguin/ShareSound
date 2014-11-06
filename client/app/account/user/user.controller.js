@@ -20,10 +20,10 @@ angular.module('shareSoundApp')
         console.log("tracks..... " + JSON.stringify($scope.tracks)); 
         })
        }
-       else{
-           console.log("nope!!!!"); 
-           $location.path('login'); 
-       }
+       // else{
+       //     console.log("nope!!!!"); 
+       //     $location.path('login'); 
+       // }
         
         
     });
