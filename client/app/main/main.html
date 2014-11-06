@@ -1,50 +1,22 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>Welcome to ShareSound</h1>
-    <p class="lead">Let's make music together</p>
-    <img class= "logo" src="assets/images/logo.png" alt="I'm Yeoman">
-  </div>
-  <!--<script>
-    function s3_upload(){
-        var status_elem = document.getElementById("status");
-        var url_elem = document.getElementById("avatar_url");
-        var preview_elem = document.getElementById("preview");
-        var s3upload = new S3Upload({
-            file_dom_selector: 'files',
-            s3_sign_put_url: '/sign_s3',
-            onProgress: function(percent, message) {
-                status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
-            },
-            onFinishS3Put: function(public_url) {
-                status_elem.innerHTML = 'Upload completed. Uploaded to: '+ public_url;
-                url_elem.value = public_url;
-                preview_elem.innerHTML = '<img src="'+public_url+'" style="width:300px;" />';
-            },
-            onError: function(status) {
-                status_elem.innerHTML = 'Upload error: ' + status;
-            }
-        });
-    }
-    /*
-    * Listen for file selection:
-    */
-    (function() {
-        var input_element = document.getElementById("files");
-        input_element.onchange = s3_upload;
-    })();
-  </script>
- <script type="text/javascript" src="s3upload.js"></script>-->
-</header>
+<div class = "content">
+  <header class="hero-unit" id="banner">
+    <div class="container">
+      <h1>Welcome to ShareSound</h1>
+      <p class="lead">Let's make music together ʕ •ᴥ•ʔ</p>
+      <img class= "logo" src="assets/images/logo.png" alt="I'm ShareSound!">
+    </div>
+  </header>
 
-<div ng-hide = "true" class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}</a></li>
-      </ul>
+  <div ng-hide = "true" class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="page-header">Features:</h1>
+        <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
+          <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
@@ -53,17 +25,8 @@
   <div class="container">
       <p>ShareSound v1.0.01 |
         <a href="https://docs.google.com/document/d/1tUTI4T63f9idChekUUmv8y6Y_cVL2A8cztG496aIFgU/edit?usp=sharing">About</a> |
-         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a> |
-            <input type="file" id="files"/>
-            <p id="status">Please select a file</p>
-            <div style="border:1px solid gray;width:300px;"  id="preview"><img src="/images/default.png" style="width:300px;" /></div>
-
-            <form method="GET" action="/api/tracks">
-                <input type="hidden" id="avatar_url" name="avatar_url" value="/public/images/default.png" />
-                <input type="text" name="username" placeholder="Username" /><br />
-                <input type="text" name="full_name" placeholder="Full name" /><br /><br />
-                <input type="submit" value="Submit" />
-            </form>
+         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a> 
+          
        </p>
   </div>
-</footer>
+</footer>    

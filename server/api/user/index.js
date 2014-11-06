@@ -21,5 +21,4 @@ router.post('/resetFixture', function(req, res) {
 		return res.json({errCode: 1})
 	})
 })
-
 module.exports = router;

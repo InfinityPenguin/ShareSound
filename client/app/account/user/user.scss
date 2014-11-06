@@ -1,0 +1,50 @@
+.hero-unit {
+    position: relative;
+    padding: 30px 15px;
+    color: #F5F5F5;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    background-color: black;
+}
+.u-content{
+	background-color: #EFEFEF;
+	margin-left: 15%;
+	padding-top:5em
+}
+.banner{
+	background-color: #EFEFEF;
+	height: 40em;
+	.h1{
+		font-size: 50px;
+	}
+}
+.u-container:after {
+    clear: both;
+}
+.u-container:before, .u-container:after {
+    content: " ";
+    display: table;
+}
+*:before, *:after {
+    box-sizing: border-box;
+}
+.u-container{
+	width:100%;
+
+}
+.u-sidebar{
+background-color: #FFF;
+position: fixed;
+top: 50px;
+bottom: 0px;
+width: 200px;
+float: left;
+padding-left: 1em;
+} 
+.profile-picture{
+	padding-top:3.5em;
+}
+.message{
+	
+	text-align:center;
+}

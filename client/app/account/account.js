@@ -18,5 +18,10 @@ angular.module('shareSoundApp')
         templateUrl: 'app/account/settings/settings.html',
         controller: 'SettingsCtrl',
         authenticate: true
+      })
+      .state('user', {
+        url: '/user',
+        templateUrl: 'app/account/user/user.html',
+        controller: 'UserCtrl',
       });
   });

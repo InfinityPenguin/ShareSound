@@ -14,12 +14,14 @@ angular.module('shareSoundApp')
           password: $scope.user.password
         })
         .then( function() {
-          // Account created, redirect to home
-          $location.path('/');
+          // Account created, redirect to dashboard
+          $location.path('user');
         })
         .catch( function(err) {
           err = err.data;
           $scope.errors = {};
+          console.log(err);
+          $scope.errors.username = err;
 
           // Update validity of form fields that match the mongoose errors
           angular.forEach(err.errors, function(error, field) {

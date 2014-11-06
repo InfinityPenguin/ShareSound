@@ -38,12 +38,31 @@ class TestAddUser(testLib.RestTestCase):
 
     def testAdd1(self):
         respData = self.makeRequest("/api/users", method="POST", data = { 'username' : 'user1', 'password' : 'password'} )
-        print respData
         self.assertEqual(respData['status code'], 1)
 
     def testAdd2(self):
         respData = self.makeRequest("/api/users", method="POST", data = { 'username' : 'user1', 'password' : 'password'} )
         respData = self.makeRequest("/api/users", method="POST", data = { 'username' : 'user1', 'password' : 'password'} )
-        # self.assertEqual(respData['status code'], 1)
-        print respData
+        self.assertEqual(respData['status code'], -1)
     
+    def testAdd3(self):
+        respData = self.makeRequest("/api/users", method="POST", data = { 'username' : '', 'password' : 'password'} )
+        self.assertEqual(respData['status code'], -2)
+        respData2 = self.makeRequest("/api/users", method="POST", data = { 'username' : ' ', 'password' : 'password'} )
+        self.assertEqual(respData2['status code'], -2)
+
+    def testAdd4(self):
+        respData = self.makeRequest("/api/users", method="POST", data = { 'username' : 'user', 'password' : ' '} )
+        self.assertEqual(respData['status code'], -3)
+        respData = self.makeRequest("/api/users", method="POST", data = { 'username' : 'user', 'password' : 'a'} )
+        self.assertEqual(respData['status code'], -3)
+        respData = self.makeRequest("/api/users", method="POST", data = { 'username' : 'user', 'password' : 'a'} )
+        self.assertEqual(respData['status code'], -3)
+    def testLogin(self):
+        respData = self.makeRequest("/api/users", method="POST", data = { 'username' : 'user', 'password' : 'password'} )
+        respData = self.makeRequest("/api/users/login", method="POST", data = { 'username' : 'user', 'password' : 'password'} )
+        self.assertEqual(respData['status code'], 1)
+    def testLogin2(self):
+        respData = self.makeRequest("/api/users", method="POST", data = { 'username' : 'user', 'password' : 'pass'} )
+        respData = self.makeRequest("/api/users/login", method="POST", data = { 'username' : 'user', 'password' : 'wrong'} )
+        self.assertEqual(respData['status code'], -1)

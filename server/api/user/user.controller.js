@@ -14,27 +14,26 @@ var ERR_MISC = -1;
 var SUCCESS = 1; 
 
 var validationError = function(res, err) {
-    err = String(err); 
+    var errmsg = String(err); 
     var code = ERR_MISC; 
-    if (err.indexOf("Username cannot be blank") > -1){
+    if (errmsg.indexOf("Username cannot be blank") > -1){
         code = ERR_BAD_USERNAME; 
     }
-    else if (err.indexOf("The specified username is already in use") > -1 ){
+    else if (errmsg.indexOf("The specified username is already in use") > -1 ){
         code = ERR_USER_EXISTS;    
     }
-    else if (err.indexOf("Password must be between 5 and 39 characters") > -1){
+    else if (errmsg.indexOf("Password must be between 5 and 39 characters") > -1){
         code = ERR_BAD_PASSWORD; 
     }
-    else if (err.indexOf("Username must be letters, numbers, underscores, or dashes") > -1){
+    else if (errmsg.indexOf("Username must be letters, numbers, underscores, or dashes") > -1){
         code = ERR_BAD_USERNAME;    
     }
-    else if (err.indexOf("Username must be letters, numbers, underscores, or dashes") > -1){
+    else if (errmsg.indexOf("Username cannot be blank") > -1){
         code = ERR_BAD_USERNAME;    
     }
-    else if (err.indexOf("Username cannot be blank") > -1){
-        code = ERR_BAD_USERNAME;    
-    }
-    return res.json({"status code" : code}); 
+    err['status code'] = code;
+    return res.json(422, err);
+    // return res.json({"status code" : code}); 
     
 };
 

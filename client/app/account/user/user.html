@@ -1,0 +1,43 @@
+
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class= "u-container">
+
+	<div class = "u-sidebar">
+		<div class = "userInfo">
+			<div class = "profile-picture">
+				<img class= "logo" src="assets/images/logo.png" alt="">
+			</div>
+	    </div>
+	</div>
+
+	<div class="u-content">
+		<div class = "banner">
+             <span  class= "message">
+				<h1>Welcome {{getCurrentUser().username }}</h1>
+			</span>
+		</div>
+<!--  			<div id = "waveform">
+			</div> -->
+		<div class = "track_list">
+			<button onclick = "playAll()" type = "button">Play All</button>
+			<button ng-click = "showtracks()" type = "button">Show</button>
+
+			<li ng-repeat ="track in tracks">
+                Track:  {{ track.name }}
+<!--                 <div id = "waveform"> 
+                	waveform{{$index}}</div> -->
+<!--                 <audio controls id = '{{ track.name }}'>
+                	<source src = "{{track.url}}" type = "audio/mp3">
+                </audio> -->
+            </li>
+		</div>
+	</div>
+		<script>
+		function hello() {
+			console.log("hello!");
+		}
+	</script>
+	<button onclick="hello()">HELLO</button>
+	<p>hello</p>
+</div>
