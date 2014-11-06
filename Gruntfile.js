@@ -434,11 +434,22 @@ module.exports = function (grunt) {
     },
 
     mochaTest: {
+      test: {
       options: {
-        reporter: 'spec'
+        reporter: 'spec',
+        require: 'coverage/blanket'
       },
       src: ['server/**/*.spec.js']
     },
+    coverage: {
+      options: {
+        reporter: 'html-cov',
+        quiet: true,
+        captureFile: 'coverage.html'
+      },
+      src: ['server/**/*.spec.js']
+    },
+  },
 
     protractor: {
       options: {

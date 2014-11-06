@@ -43,8 +43,8 @@ User.find({}).remove(function() {
 
 Track.find({}).remove(function() {
     Track.create({
-        name: "Berlin - Moderat",
-        url: "https://dl-web.dropbox.com/get/tracks%20example/11%20Berlin.mp3?_subject_uid=106468574&w=AACfnwTzmBzLtNExQLcqSizfKJ_jrwZwam7KwXYhIhLlAg",
+        name: "Prefontaine",
+        url: "http://helenhan.me/Prefontaine.mp3",
         uploader_id: "444444444444444444444444", 
     }, {
         name: "Endlos - Kollektiv Turmstrasse",

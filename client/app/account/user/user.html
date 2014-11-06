@@ -1,3 +1,4 @@
+
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <div class= "u-container">
@@ -12,19 +13,23 @@
 
 	<div class="u-content">
 		<div class = "banner">
-            
-         
              <span  class= "message">
 				<h1>Welcome {{getCurrentUser().username }}</h1>
 			</span>
-            
-            
-            
-			
 		</div>
+<!--  			<div id = "waveform">
+			</div> -->
 		<div class = "track_list">
+			<button onclick = "playAll()" type = "button">Play All</button>
+			<button ng-click = "showtracks()" type = "button">Show</button>
+
 			<li ng-repeat ="track in tracks">
                 Track:  {{ track.name }}
+<!--                 <div id = "waveform"> 
+                	waveform{{$index}}</div> -->
+<!--                 <audio controls id = '{{ track.name }}'>
+                	<source src = "{{track.url}}" type = "audio/mp3">
+                </audio> -->
             </li>
 		</div>
 	</div>
