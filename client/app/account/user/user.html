@@ -20,40 +20,42 @@
 <!--  			<div id = "waveform">
 			</div> -->
 		<div class = "track_list">
-			<button onclick = "playAll()" type = "button">Play All</button>
-			<button ng-click = "showtracks()" type = "button">Show</button>
+<!-- 			<button onclick = "playAll()" type = "button">Play All</button>
+ -->			<button ng-click = "showtracks()" type = "button">Show/Hide</button>
 
 			<li ng-repeat ="track in tracks">
-                {{ track.name }}
-                <p class = "url" ng-hide = "true">{{track.url}}<p>
+				{{ track.name }}
+				<div class = "wavesurfers" ng-show = "show">
+					<p class = "url" ng-hide = "true">{{track.url}}<p>
 <!--                 <div id = "waveform"> 
-                	waveform{{$index}}</div> -->
+	waveform{{$index}}</div> -->
 <!--                 <audio controls id = '{{ track.name }}'>
                 	<source src = "{{track.url}}" type = "audio/mp3">
-                </audio> -->
-                <div class="controls">
-                    <button class="btn btn-primary" data-action="back">
-                        <i class="glyphicon glyphicon-step-backward"></i>
-                        Backward
-                    </button>
+                	</audio> -->
+                	<div id = "{{track.name}}" class="controls" ng-show = "show">
+                		<button class="btn btn-primary" data-action="back">
+                			<i class="glyphicon glyphicon-step-backward"></i>
+                			Backward
+                		</button>
 
-                    <button class="btn btn-primary" data-action="play">
-                        <i class="glyphicon glyphicon-play"></i>
-                        Play
-                        /
-                        <i class="glyphicon glyphicon-pause"></i>
-                        Pause
-                    </button>
+                		<button class="btn btn-primary" data-action="play">
+                			<i class="glyphicon glyphicon-play"></i>
+                			Play
+                			/
+                			<i class="glyphicon glyphicon-pause"></i>
+                			Pause
+                		</button>
 
-                    <button class="btn btn-primary" data-action="forth">
-                        <i class="glyphicon glyphicon-step-forward"></i>
-                        Forward
-                    </button>
+                		<button class="btn btn-primary" data-action="forth">
+                			<i class="glyphicon glyphicon-step-forward"></i>
+                			Forward
+                		</button>
 
-                    <button class="btn btn-primary" data-action="toggle-mute">
-                        <i class="glyphicon glyphicon-volume-off"></i>
-                        Toggle Mute
-                    </button>
+                		<button class="btn btn-primary" data-action="toggle-mute">
+                			<i class="glyphicon glyphicon-volume-off"></i>
+                			Toggle Mute
+                		</button>
+                	</div>
                 </div>
             </li>
 		</div>

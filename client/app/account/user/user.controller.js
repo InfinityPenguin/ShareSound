@@ -4,6 +4,8 @@ angular.module('shareSoundApp')
  $scope.getCurrentUser = Auth.getCurrentUser;
  $scope.getToken = Auth.getToken; 
  $scope.isLoggedIn = Auth.isLoggedIn;
+ $scope.show = false;
+ $scope.tracksinit = false;
 
  Auth.isLoggedInAsync(function(response){
    if(response){
@@ -28,89 +30,104 @@ angular.module('shareSoundApp')
 // }
  // angular.element(document).ready(function() {
 $scope.showtracks = function() {
+  if (!$scope.show){
+    $scope.show = true;
+    if (!$scope.tracksinit){
 
-  var wavesurfers = [].map.call(document.querySelectorAll(".track_list li"), function(element) {
-    console.log(element);
-    var trackurl = element.getElementsByClassName("url")[0].textContent;
-    console.log("url: " + trackurl);
-     // Create an instance
-    var wavesurfer = Object.create(WaveSurfer);
-    console.log("made wavesurfer");
+      $scope.tracksinit = true;
+      var wavesurfers = [].map.call(document.querySelectorAll(".track_list li .wavesurfers"), function(element) {
+        console.log(element);
+        var trackurl = element.getElementsByClassName("url")[0].textContent;
+        console.log(element.getElementsByClassName("url")[0]);
+        var trackid = element.getElementsByClassName("controls")[0].getAttribute("id");
+        console.log("url: " + trackurl);
+        console.log("trackid: " + trackid);
+         // Create an instance
+        var wavesurfer = Object.create(WaveSurfer);
+        console.log("made wavesurfer");
 
-     // Init & load audio file
-     var qstring = '#waveform'
-     console.log("q: "+qstring);
-    var options = {
-       container     : element,
-       waveColor     : 'violet',
-       progressColor : 'purple',
-       loaderColor   : 'purple',
-       cursorColor   : 'navy'
-     };
+         // Init & load audio file
+         var qstring = '#waveform'
+         console.log("q: "+qstring);
+        var options = {
+           container     : element,
+           waveColor     : 'violet',
+           progressColor : 'purple',
+           loaderColor   : 'purple',
+           cursorColor   : 'navy'
+         };
 
-     if (location.search.match('scroll')) {
-       options.minPxPerSec = 100;
-       options.scrollParent = true;
-     };
+         if (location.search.match('scroll')) {
+           options.minPxPerSec = 100;
+           options.scrollParent = true;
+         };
 
-     if (location.search.match('normalize')) {
-       options.normalize = true;
-     };
+         if (location.search.match('normalize')) {
+           options.normalize = true;
+         };
 
-         // Init
-    wavesurfer.init(options);
-         // Load audio from URL
-    wavesurfer.load('/assets/media/samp.mp3');
-    // wavesurfer.load("helenhan.me/Prefontaine.mp3");
-         // Regions
-    if (wavesurfer.enableDragSelection) {
-           wavesurfer.enableDragSelection({
-             color: 'rgba(0, 255, 0, 0.1)'
-           });
-         }
-     // Play at once when ready
-     // Won't work on iOS until you touch the page
-     wavesurfer.on('ready', function () {
-       //wavesurfer.play();
-     });
-
-     // Report errors
-     wavesurfer.on('error', function (err) {
-       console.error(err);
-     });
-
-     // Do something when the clip is over
-     wavesurfer.on('finish', function () {
-       console.log('Finished playing');
-     });
-     var GLOBAL_ACTIONS = {
-         'play': function () {
-             wavesurfer.playPause();
-         },
-
-         'back': function () {
-             wavesurfer.skipBackward();
-         },
-
-         'forth': function () {
-             wavesurfer.skipForward();
-         },
-
-         'toggle-mute': function () {
-             wavesurfer.toggleMute();
-         }
-     };
-     [].forEach.call(document.querySelectorAll('[data-action]'), function (el) {
-         el.addEventListener('click', function (e) {
-             var action = e.currentTarget.dataset.action;
-             if (action in GLOBAL_ACTIONS) {
-                 e.preventDefault();
-                 GLOBAL_ACTIONS[action](e);
+             // Init
+        wavesurfer.init(options);
+             // Load audio from URL
+        // wavesurfer.load('/assets/media/samp.mp3');
+        wavesurfer.load(trackurl);
+             // Regions
+        if (wavesurfer.enableDragSelection) {
+               wavesurfer.enableDragSelection({
+                 color: 'rgba(0, 255, 0, 0.1)'
+               });
              }
+         // Play at once when ready
+         // Won't work on iOS until you touch the page
+         wavesurfer.on('ready', function () {
+           //wavesurfer.play();
          });
-     });
-     return wavesurfer;
-  });
+
+         // Report errors
+         wavesurfer.on('error', function (err) {
+           console.error(err);
+         });
+
+         // Do something when the clip is over
+         wavesurfer.on('finish', function () {
+           console.log('Finished playing');
+         });
+         var GLOBAL_ACTIONS = {
+             'play': function () {
+                 wavesurfer.playPause();
+             },
+
+             'back': function () {
+                 wavesurfer.skipBackward();
+             },
+
+             'forth': function () {
+                 wavesurfer.skipForward();
+             },
+
+             'toggle-mute': function () {
+                 wavesurfer.toggleMute();
+             }
+         };
+         var controlselstr = trackid;
+         console.log("selstr: " + controlselstr);
+         var controlele = document.getElementById(controlselstr);
+         [].forEach.call(controlele.querySelectorAll('[data-action]'), function (el) {
+             el.addEventListener('click', function (e) {
+                 var action = e.currentTarget.dataset.action;
+                 if (action in GLOBAL_ACTIONS) {
+                     e.preventDefault();
+                     GLOBAL_ACTIONS[action](e);
+                 }
+             });
+         });
+         return wavesurfer;
+      });
+    };
+  } else {
+    $scope.show = false;
+  }
+
   // angular.forEach($scope.tracks, function(track, key) {
 
        // });

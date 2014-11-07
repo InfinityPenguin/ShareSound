@@ -44,11 +44,13 @@ User.find({}).remove(function() {
 Track.find({}).remove(function() {
     Track.create({
         name: "Prefontaine",
-        url: "http://helenhan.me/Prefontaine.mp3",
+        // url: "http://helenhan.me/Prefontaine.mp3",
+        url: '/assets/media/samp.mp3',
         uploader_id: "444444444444444444444444", 
     }, {
         name: "Endlos - Kollektiv Turmstrasse",
-        url: "https://dl-web.dropbox.com/get/tracks%20example/Endlos.mp3?_subject_uid=106468574&w=AADQGY5UDoqKKDUwZlds_OJbbtrZ6bMeItcLqaA9tiMxTQ",
+        // url: "https://dl-web.dropbox.com/get/tracks%20example/Endlos.mp3?_subject_uid=106468574&w=AADQGY5UDoqKKDUwZlds_OJbbtrZ6bMeItcLqaA9tiMxTQ",
+        url: '/assets/media/tool.mp3',
         uploader_id: "444444444444444444444444"
     }
                 
