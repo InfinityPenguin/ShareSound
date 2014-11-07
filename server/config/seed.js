@@ -43,29 +43,36 @@ User.find({}).remove(function() {
 
 Track.find({}).remove(function() {
     Track.create({
-<<<<<<< HEAD
-        name: "Prefontaine",
+
+        name: "Wareru9",
         // url: "http://helenhan.me/Prefontaine.mp3",
-        url: '/assets/media/samp.mp3',
+        url: 'https://sharesound.s3.amazonaws.com/wareru9.mp3',
         uploader_id: "444444444444444444444444", 
     }, {
-        name: "Endlos - Kollektiv Turmstrasse",
+        name: "Wind Dark",
         // url: "https://dl-web.dropbox.com/get/tracks%20example/Endlos.mp3?_subject_uid=106468574&w=AADQGY5UDoqKKDUwZlds_OJbbtrZ6bMeItcLqaA9tiMxTQ",
-        url: '/assets/media/tool.mp3',
-=======
-        name: "Endlessly",
-        url: "http://helenhan.me/Endlessly.mp3",
-        uploader_id: "444444444444444444444444", 
-    }, {
-        name: "Prefontaine",
-        url: "http://helenhan.me/Prefontaine.mp3",
+        url: 'https://sharesound.s3.amazonaws.com/wind_dark.mp3',
         uploader_id: "444444444444444444444444"
     },
-        {name: "The Page",
-        url: "http://helenhan.me/04%20-%20The%20Page.mp3",
->>>>>>> 2332c630533b83045fa891443cdecd8e810b1f90
+    {
+        name: "Horror Gyaku",
+        // url: "https://dl-web.dropbox.com/get/tracks%20example/Endlos.mp3?_subject_uid=106468574&w=AADQGY5UDoqKKDUwZlds_OJbbtrZ6bMeItcLqaA9tiMxTQ",
+        url: 'https://sharesound.s3.amazonaws.com/horror2_gyaku3.wav',
+        uploader_id: "444444444444444444444444"
+    },
+    {
+        name: "Lost Chair",
+        // url: "https://dl-web.dropbox.com/get/tracks%20example/Endlos.mp3?_subject_uid=106468574&w=AADQGY5UDoqKKDUwZlds_OJbbtrZ6bMeItcLqaA9tiMxTQ",
+        url: 'https://sharesound.s3.amazonaws.com/Lost_Chair.mp3',
+        uploader_id: "444444444444444444444444"
+    },
+     {
+        name: "Rumor",
+        // url: "https://dl-web.dropbox.com/get/tracks%20example/Endlos.mp3?_subject_uid=106468574&w=AADQGY5UDoqKKDUwZlds_OJbbtrZ6bMeItcLqaA9tiMxTQ",
+        url: 'https://sharesound.s3.amazonaws.com/Rumor.ogg',
         uploader_id: "444444444444444444444444"
     }
+       
             
                 
                 

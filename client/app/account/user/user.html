@@ -15,15 +15,14 @@
 		<div class = "banner">
              <span  class= "message">
 				<h1>Welcome {{getCurrentUser().username }}</h1>
+                <h2>Your tracks: </h2>
 			</span>
-		</div>
-
-		<div class = "track_list">
+            <div class = "track_list">
 <!-- 			<button onclick = "playAll()" type = "button">Play All</button>
  -->			<button ng-click = "showtracks()" type = "button">Show/Hide</button>
 
 			<li ng-repeat ="track in tracks">
-				{{ track.name }}
+                <h3> {{ track.name }} </h3>
 				<div class = "wavesurfers" ng-show = "show">
 					<p class = "url" ng-hide = "true">{{track.url}}<p>
 <!--                 <div id = "waveform"> 
@@ -54,9 +53,19 @@
                 			<i class="glyphicon glyphicon-volume-off"></i>
                 			Toggle Mute
                 		</button>
+                        
+                        <a href={{track.url}} download={{track.url}}>
+                        <button class="btn btn-primary">
+                			<i class="glyphicon glyphicon-download"></i>
+                			Download
+                		</button>
+                        </a>
                 	</div>
                 </div>
             </li>
 		</div>
+		</div>
+
+		
 	</div>
 </div>
