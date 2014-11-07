@@ -98,13 +98,12 @@ exports.create = function(req, res, callback) {
 			supertrackid = track._id.toString();
 			track.url = 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+track._id;
 			callback();
-			console.log(JSON.stringify(track));
 		});
 	}
 };
 
 exports.getUploadURL = function(req, res) {
-	console.log("OVER 9000 EXPIRATION!!!!! :-)");
+	console.log('getUploadURL' + JSON.stringify(req.query));
 	var trackId;
 	exports.create(req, res, function() {
 		trackId = supertrackid;
