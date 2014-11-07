@@ -356,6 +356,19 @@ module.exports = function (grunt) {
             'assets/images/{,*/}*.{webp}',
             'assets/fonts/**/*',
             'index.html'
+            
+            //'app/account/login/login.controller.js',
+            //'app/account/account.js',
+            //'app/account/s3upload.js',
+            //'app/account/settings/settings.controller.js',
+            //'app/admin/admin.controller.js',
+            //'app/admin/admin.js',
+            //'app/main/main.controller.js',
+            //'app/main/main.js',
+            
+            //'components/auth/auth.service.js',
+            //'components/auth/user.service.js'
+
           ]
         }, {
           expand: true,

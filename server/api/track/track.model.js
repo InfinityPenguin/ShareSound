@@ -9,4 +9,10 @@ var TrackSchema = new Schema({
   uploader_id: String
 });
 
+TrackSchema.statics.isValidTrack = function (name, callback) {
+	var extension = name.split('.').pop();
+	return ((name.indexOf('.') !== -1) && (extension === 'mp3' || extension === 'wav' || extension === 'ogg'));
+};
+
+
 module.exports = mongoose.model('Track', TrackSchema);
