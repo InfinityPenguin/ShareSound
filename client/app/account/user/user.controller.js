@@ -28,8 +28,11 @@ angular.module('shareSoundApp')
 // }
  // angular.element(document).ready(function() {
 $scope.showtracks = function() {
+
   var wavesurfers = [].map.call(document.querySelectorAll(".track_list li"), function(element) {
     console.log(element);
+    var trackurl = element.getElementsByClassName("url")[0].textContent;
+    console.log("url: " + trackurl);
      // Create an instance
     var wavesurfer = Object.create(WaveSurfer);
     console.log("made wavesurfer");
@@ -58,7 +61,7 @@ $scope.showtracks = function() {
     wavesurfer.init(options);
          // Load audio from URL
     wavesurfer.load('/assets/media/samp.mp3');
-
+    // wavesurfer.load("helenhan.me/Prefontaine.mp3");
          // Regions
     if (wavesurfer.enableDragSelection) {
            wavesurfer.enableDragSelection({
@@ -68,7 +71,7 @@ $scope.showtracks = function() {
      // Play at once when ready
      // Won't work on iOS until you touch the page
      wavesurfer.on('ready', function () {
-       wavesurfer.play();
+       //wavesurfer.play();
      });
 
      // Report errors
@@ -80,12 +83,39 @@ $scope.showtracks = function() {
      wavesurfer.on('finish', function () {
        console.log('Finished playing');
      });
+     var GLOBAL_ACTIONS = {
+         'play': function () {
+             wavesurfer.playPause();
+         },
+
+         'back': function () {
+             wavesurfer.skipBackward();
+         },
+
+         'forth': function () {
+             wavesurfer.skipForward();
+         },
+
+         'toggle-mute': function () {
+             wavesurfer.toggleMute();
+         }
+     };
+     [].forEach.call(document.querySelectorAll('[data-action]'), function (el) {
+         el.addEventListener('click', function (e) {
+             var action = e.currentTarget.dataset.action;
+             if (action in GLOBAL_ACTIONS) {
+                 e.preventDefault();
+                 GLOBAL_ACTIONS[action](e);
+             }
+         });
+     });
      return wavesurfer;
   });
   // angular.forEach($scope.tracks, function(track, key) {
 
        // });
     // });
+
 }
 });
 

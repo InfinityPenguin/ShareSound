@@ -24,12 +24,37 @@
 			<button ng-click = "showtracks()" type = "button">Show</button>
 
 			<li ng-repeat ="track in tracks">
-                Track:  {{ track.name }}
+                {{ track.name }}
+                <p class = "url" ng-hide = "true">{{track.url}}<p>
 <!--                 <div id = "waveform"> 
                 	waveform{{$index}}</div> -->
 <!--                 <audio controls id = '{{ track.name }}'>
                 	<source src = "{{track.url}}" type = "audio/mp3">
                 </audio> -->
+                <div class="controls">
+                    <button class="btn btn-primary" data-action="back">
+                        <i class="glyphicon glyphicon-step-backward"></i>
+                        Backward
+                    </button>
+
+                    <button class="btn btn-primary" data-action="play">
+                        <i class="glyphicon glyphicon-play"></i>
+                        Play
+                        /
+                        <i class="glyphicon glyphicon-pause"></i>
+                        Pause
+                    </button>
+
+                    <button class="btn btn-primary" data-action="forth">
+                        <i class="glyphicon glyphicon-step-forward"></i>
+                        Forward
+                    </button>
+
+                    <button class="btn btn-primary" data-action="toggle-mute">
+                        <i class="glyphicon glyphicon-volume-off"></i>
+                        Toggle Mute
+                    </button>
+                </div>
             </li>
 		</div>
 	</div>
