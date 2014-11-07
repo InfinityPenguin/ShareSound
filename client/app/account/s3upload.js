@@ -70,6 +70,7 @@
 					}
 					return callback(result.signed_request, result.url);
 				} else if (this.readyState === 4 && this.status !== 200) {
+					if (this.status === 324) return this_s3upload.onError('Invalid track name.');
 					return this_s3upload.onError('Could not contact request signing server. Status = ' + this.status);
 				}
 			};

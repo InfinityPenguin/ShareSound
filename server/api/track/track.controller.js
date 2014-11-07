@@ -7,6 +7,10 @@ var AWS = require('aws-sdk');
 AWS.config.region = 'us-west-1';
 var S3_BUCKET = 'sharesound';
 
+var FAILURE = -1;
+var SUCCESS = 1;
+var supertrackid = "";
+
 // Get list of tracks
 exports.index = function(req, res) {
 	Track.find(function (err, tracks) {
@@ -22,22 +26,6 @@ exports.show = function(req, res) {
 		if(!track) { return res.send(404); }
 		return res.json(track);
 	});
-};
-
-// Creates a new track in the DB.
-exports.create = function(req, res) {
-	var userID = req.query.user;
-	var name = req.query.s3_object_name;
-	if (!Track.isValidTrack(name)) { 
-		console.log("Invalid track name.");
-		return res.send(404);
-	} else {
-		req.body = { name: name, uploader_id: userID };
-		Track.create(req.body, function(err, track) {
-			//if(err) { return handleError(res, err); }
-			//return res.json(201, track);
-		});
-	}
 };
 
 // Updates an existing track in the DB.
@@ -91,32 +79,58 @@ exports.download = function(req, res) {
 		.createReadStream().pipe(res);
 };
 
+// Creates a new track in the DB.
+exports.create = function(req, res, callback) {
+	var userID = req.query.user;
+	var name = req.query.s3_object_name;
+	if (!Track.isValidTrack(name)) { 
+		console.log("Invalid track name.");
+		supertrackid = null;
+	} else {
+		req.body = { 
+			name: name,
+			uploader_id: userID
+		};
+		console.log('Created track for user: ' + userID);
+		Track.create(req.body, function(err, track) {
+			//if(err) { return handleError(res, err); }
+			//return res.json(201, track);
+			supertrackid = track._id.toString();
+			track.url = 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+track._id;
+			callback();
+			console.log(JSON.stringify(track));
+		});
+	}
+};
 
 exports.getUploadURL = function(req, res) {
 	console.log("OVER 9000 EXPIRATION!!!!! :-)");
-	exports.create(req, res);
-	AWS.config.update({accessKeyId: process.env.AWS_ACCESS_KEY, secretAccessKey: process.env.AWS_SECRET_KEY});
-	var s3 = new AWS.S3();
-	var s3_params = {
-		Bucket: S3_BUCKET,
-		Key: req.query.s3_object_name,
+	var trackId;
+	exports.create(req, res, function() {
+		trackId = supertrackid;
+		if (!trackId) { return res.json(324, {'status code': FAILURE});}
+
+		AWS.config.update({accessKeyId: process.env.AWS_ACCESS_KEY, secretAccessKey: process.env.AWS_SECRET_KEY});
+		var s3 = new AWS.S3();
+		var s3_params = {
+			Bucket: S3_BUCKET,
+		Key: trackId,
 		Expires: 9001,
 		ContentType: req.query.s3_object_type,
 		ACL: 'public-read-write'
-	};
+		};
 
-	s3.getSignedUrl('putObject', s3_params, function(err, data){
-		if(err){
-			console.log(err);
-		}
-		else{
-			var return_data = {
-				signed_request: data,
-		url: 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+s3_params.Key
-			};
-			res.write(JSON.stringify(return_data));
-			res.end();
-		}
+		s3.getSignedUrl('putObject', s3_params, function(err, data){
+			if(err){ console.log(err); }
+			else{
+				var return_data = {
+					signed_request: data,
+			url: 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+s3_params.Key
+				};
+				res.write(JSON.stringify(return_data));
+				res.end();
+			}
+		});
 	});
 };
 

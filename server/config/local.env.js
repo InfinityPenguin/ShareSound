@@ -6,14 +6,14 @@
 // You will need to set these on the server you deploy to.
 
 module.exports = {
-  DOMAIN: 'http://localhost:9000',
-  SESSION_SECRET: "sharesound-secret",
+	DOMAIN: 'http://localhost:9001',
+	SESSION_SECRET: "sharesound-secret",
 
-  AWS_ACCESS_KEY: 'AKIAIPYHO4CHEDLF54VQ',
-  AWS_SECRET_KEY: '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',
+	AWS_ACCESS_KEY: 'AKIAJBIUEPGJVAX3KSFA',
+	AWS_SECRET_KEY: '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',
 
-  FACEBOOK_ID: 'app-id',
-  FACEBOOK_SECRET: 'secret',
-  // Control debug level for modules using visionmedia/debug
-  DEBUG: ''
+	FACEBOOK_ID: 'app-id',
+	FACEBOOK_SECRET: 'secret',
+	// Control debug level for modules using visionmedia/debug
+	DEBUG: ''
 };
