@@ -1,5 +1,5 @@
+/*
 function s3_upload(){
-    console.log("Hey, whatever");
     var status_elem = document.getElementById("status");
     var url_elem = document.getElementById("avatar_url");
     // var preview_elem = document.getElementById("preview");
@@ -19,7 +19,6 @@ function s3_upload(){
         }
     });
 }
-/*
     <input type="file" id="files"/>
     <p id="status">Please select a file</p>
 

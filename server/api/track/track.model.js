@@ -1,12 +1,12 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+	Schema = mongoose.Schema;
 
 var TrackSchema = new Schema({
-  name: String,
-  url: String,
-  uploader_id: String
+	name: String,
+	url: String,
+	uploader_id: String
 });
 
 TrackSchema.statics.isValidTrack = function (name, callback) {

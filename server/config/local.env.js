@@ -9,8 +9,8 @@ module.exports = {
   DOMAIN: 'http://localhost:9000',
   SESSION_SECRET: "sharesound-secret",
 
-  AWS_ACCESS_KEY: 'AKIAJLKT27B3S2I43ZGQ',
-  AWS_SECRET_KEY: '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',
+  AWS_ACCESS_KEY: 'AKIAIPYHO4CHEDLF54VQ',
+  AWS_SECRET_KEY: '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',
 
   FACEBOOK_ID: 'app-id',
   FACEBOOK_SECRET: 'secret',
