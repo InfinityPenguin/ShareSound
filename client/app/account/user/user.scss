@@ -1,3 +1,4 @@
+
 .hero-unit {
     position: relative;
     padding: 30px 15px;
@@ -7,13 +8,17 @@
     background-color: black;
 }
 .u-content{
-	background-color: #EFEFEF;
-	margin-left: 15%;
-	padding-top:5em
+	background-color: white;
+	margin-left: 200px;
+	padding-top:3.5em;
+	display: grid;
+	display: -moz-grid;
+	width: 84%;
 }
 .banner{
-	background-color: #EFEFEF;
+	background-color: white;
 	height: 40em;
+	margin-left: 1em;
 	.h1{
 		font-size: 50px;
 	}
@@ -39,8 +44,29 @@ top: 50px;
 bottom: 0px;
 width: 200px;
 float: left;
-padding-left: 1em;
-} 
+z-index: 5;
+border: 1px solid rgba(236, 234, 234, 1);
+	.logo{
+		width: 80%;
+	}
+	.userOptions{
+		width: 100%;
+		border-bottom:1px solid black;
+
+	} 
+	ul{
+		padding-left: 0;
+		li{
+			text-align: center;
+			padding-top: 1em;
+			cursor: hand;
+		}
+		li:hover {
+    	cursor: pointer;
+		}
+	}
+}
+
 .profile-picture{
 	padding-top:3.5em;
 }
@@ -48,3 +74,10 @@ padding-left: 1em;
 	
 	text-align:center;
 }
+.tracks{
+	padding: 1em;
+}
+li{
+	 list-style-type: none;
+}
+

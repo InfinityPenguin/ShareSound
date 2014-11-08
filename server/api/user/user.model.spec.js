@@ -96,7 +96,6 @@ it('should fail saving password that is too short)', function(done) {
     api.post('/api/users')
       .send({ username: 'cooluser', password: '123123'})
       .end(function(e,res){
-        console.log(res.body)
         expect(e).to.eql(null)
         expect(res.body['status code']).to.eql(1)
         done()
@@ -107,7 +106,6 @@ it('should fail saving password that is too short)', function(done) {
     api.post('/api/users')
       .send({ username: '', password: '123123'})
       .end(function(e,res){
-        console.log(res.body)
         expect(e).to.eql(null)
         expect(res.body['status code']).to.eql(-2)
         done()
@@ -121,7 +119,6 @@ it('should fail saving password that is too short)', function(done) {
           api.post('/api/users')
           .send({ username: 'notspecial', password: '123123'})
             .end(function(e,res){
-            console.log(res.body)
             expect(e).to.eql(null)
             expect(res.body['status code']).to.eql(-1)
             done(); 
@@ -135,7 +132,6 @@ it('should fail saving password that is too short)', function(done) {
     api.post('/api/users')
       .send({ username: 'tooshort', password: '123'})
       .end(function(e,res){
-        console.log(res.body)
         expect(e).to.eql(null)
         expect(res.body['status code']).to.eql(-3)
         done()
@@ -146,17 +142,38 @@ it('should fail saving password that is too short)', function(done) {
     api.post('/api/users')
       .send({ username: 'John Doe!', password: '123123'})
       .end(function(e,res){
-        console.log(res.body)
         expect(e).to.eql(null)
         expect(res.body['status code']).to.eql(-2)
         done()
       }); 
    });
+
+    it('should log in correctly', function(done) {
+      api.post('/api/users')
+        .send({username: 'username1', password: '123123'})
+        .end(function(e,res){
+          expect(e).to.eql(null)
+          api.post('/api/users/login')
+            .send({username: 'username1', password: '123123'})
+            .end(function(e, res) {
+              expect(res.body['status code']).to.eql(1);
+              done()
+            })
+        })
+    })
     
-  
-    
-    
-    
-    
+    it('should log in correctly', function(done) {
+      api.post('/api/users')
+        .send({username: 'username1', password: '123123'})
+        .end(function(e,res){
+          expect(e).to.eql(null)
+          api.post('/api/users/login')
+            .send({username: 'baddy', password: '123123'})
+            .end(function(e, res) {
+              expect(res.body['status code']).to.eql(-1);
+              done()
+            })
+        })
+    })
 });
 
