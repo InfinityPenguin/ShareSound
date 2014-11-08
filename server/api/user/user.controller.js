@@ -28,9 +28,7 @@ var validationError = function(res, err) {
     else if (errmsg.indexOf("Username must be letters, numbers, underscores, or dashes") > -1){
         code = ERR_BAD_USERNAME;    
     }
-    else if (errmsg.indexOf("Username cannot be blank") > -1){
-        code = ERR_BAD_USERNAME;    
-    }
+    
     err['status code'] = code;
     return res.json(422, err);
     // return res.json({"status code" : code}); 
@@ -81,17 +79,17 @@ exports.show = function (req, res, next) {
 /**
  * Deletes a user
  * restriction: 'admin'
- */
+ 
 exports.destroy = function(req, res) {
   User.findByIdAndRemove(req.params.id, function(err, user) {
     if(err) return res.send(500, err);
     return res.send(204);
   });
-};
+};*/
 
 /**
  * Change a users password
- */
+ 
 exports.changePassword = function(req, res, next) {
   var userId = req.user._id;
   var oldPass = String(req.body.oldPassword);
@@ -108,7 +106,7 @@ exports.changePassword = function(req, res, next) {
       res.send(403);
     }
   });
-};
+}; */
 
 /**
  * Get my info

@@ -15,7 +15,7 @@ angular.module('shareSoundApp')
 		var s3upload = new S3Upload({
 			user: Auth.getCurrentUser(),
 			file_dom_selector: 'files',
-			s3_sign_put_url: '/api/tracks/getUploadURL',
+			s3_sign_put_url: '/api/tracks/uploadTrack',
 			onProgress: function(percent, message) {
 				status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
 			},

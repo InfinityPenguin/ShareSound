@@ -37,7 +37,6 @@ User.find({}).remove(function() {
   var id = mongoose.Types.ObjectId("DDDDDDDDDDDD");
   newUser._id = id; 
   newUser.save(function(err, user){
-
   }); 
 });
 

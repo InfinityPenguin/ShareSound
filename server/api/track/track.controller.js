@@ -2,6 +2,10 @@
 
 var _ = require('lodash');
 var Track = require('./track.model');
+var User = require('../user/user.model');
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema,
+	    ObjectId = Schema.ObjectId;
 
 var AWS = require('aws-sdk');
 AWS.config.region = 'us-west-1';
@@ -9,7 +13,7 @@ var S3_BUCKET = 'sharesound';
 
 var FAILURE = -1;
 var SUCCESS = 1;
-var supertrackid = "";
+var uploadTrackID = "";
 
 // Get list of tracks
 exports.index = function(req, res) {
@@ -79,36 +83,50 @@ exports.download = function(req, res) {
 		.createReadStream().pipe(res);
 };
 
-// Creates a new track in the DB.
+// Creates a new track in the DB. Sets uploadTrackID to null if the request is not valid.
 exports.create = function(req, res, callback) {
-	var userID = req.query.user;
+	var userId = req.query.user;
 	var name = req.query.s3_object_name;
-	if (!Track.isValidTrack(name)) { 
-		console.log("Invalid track name.");
-		supertrackid = null;
-	} else {
-		req.body = { 
-			name: name,
-			uploader_id: userID
-		};
-		console.log('Created track for user: ' + userID);
-		Track.create(req.body, function(err, track) {
-			//if(err) { return handleError(res, err); }
-			//return res.json(201, track);
-			supertrackid = track._id.toString();
-			track.url = 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+track._id;
+	User.findOne({_id: userId}, function(err, user) {
+		if (!user) {
+			console.log('UserId ' + userId + ' doesn\'t exist.');
+			uploadTrackID = null;
 			callback();
-			console.log(JSON.stringify(track));
-		});
-	}
+			return;
+		}
+		if (!Track.isValidTrack(name)) { 
+			console.log("Invalid track name.");
+			uploadTrackID = null;
+			callback();
+			return;
+		} else {
+			req.body = { 
+				name: name,
+		uploader_id: userId
+			};
+			console.log('Created track for user: ' + userId);
+			Track.create(req.body, function(err, track) {
+				//if(err) { return handleError(res, err); }
+				//return res.json(201, track);
+				uploadTrackID = track._id.toString();
+				track.url = 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+track._id;
+				callback();
+				return;
+			});
+		}
+	});
 };
 
+/* Returns a signed url back to the client to upload with. Calls exports.create and expects it to handle invalid track upload requests. Returns an error if exports.create returns null */
 exports.getUploadURL = function(req, res) {
-	console.log("OVER 9000 EXPIRATION!!!!! :-)");
+	console.log('getUploadURL with query: ' + JSON.stringify(req.query));
 	var trackId;
 	exports.create(req, res, function() {
-		trackId = supertrackid;
-		if (!trackId) { return res.json(324, {'status code': FAILURE});}
+		trackId = uploadTrackID;
+		if (trackId === null) { 
+			console.log('Invalid track upload request.'); 
+			return res.json(400, {'status code': FAILURE});
+		}
 
 		AWS.config.update({accessKeyId: process.env.AWS_ACCESS_KEY, secretAccessKey: process.env.AWS_SECRET_KEY});
 		var s3 = new AWS.S3();
@@ -132,12 +150,6 @@ exports.getUploadURL = function(req, res) {
 			}
 		});
 	});
-};
-
-exports.upload = function(req, res) {
-	var file = req.files.toUpload;
-	var options = {
-	};
 };
 
 exports.foo = function(req, res) {
