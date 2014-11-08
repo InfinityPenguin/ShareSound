@@ -80,4 +80,32 @@ border: 1px solid rgba(236, 234, 234, 1);
 li{
 	 list-style-type: none;
 }
-
+.popUp {
+        position: fixed;
+        top: 45%;
+		left: 33%;
+		width: 34%;
+        padding-left: 1%;
+		padding-right: 1%;        
+		border: 1px solid black;
+        background-color: white;
+        z-index:1002;
+        overflow: auto;
+        text-align:center;
+        
+        .alertMessage{
+        	padding-top:1em;
+        }
+}
+.black_overlay{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index:1001;
+    -moz-opacity: 0.8;
+    opacity:.60;
+    filter: alpha(opacity=80);
+}

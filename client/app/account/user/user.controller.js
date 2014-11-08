@@ -6,6 +6,20 @@ angular.module('shareSoundApp')
 	$scope.isLoggedIn = Auth.isLoggedIn;
 	$scope.show = false;
 	$scope.tracksinit = false;
+	$scope.uploadPage = false;
+
+	$scope.uploadTrack = function(){
+
+		$scope.uploadPage = true;
+
+	}
+
+	$scope.Close = function(){
+
+		$scope.uploadPage = false;
+
+	}
+
 
 	$scope.s3_upload = function (){
 		console.log("s3_upload");
@@ -28,7 +42,9 @@ angular.module('shareSoundApp')
 				status_elem.innerHTML = 'Upload error: ' + status;
 			}
 		});
+		$scope.uploadPage = false;
 	}
+
 
 	Auth.isLoggedInAsync(function(response){
 		if(response){
