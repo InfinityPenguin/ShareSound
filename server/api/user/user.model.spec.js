@@ -6,6 +6,7 @@ var User = require('./user.model');
 var supertest = require('supertest');
 var api = supertest('http://localhost:9000');
 var expect = require('expect.js');
+var mongoose = require('mongoose');
 
 var user = new User({
   provider: 'local',
@@ -27,6 +28,18 @@ describe('User Model', function() {
       done();
     });
   });
+    
+//need to put back test user 
+  after(function(done){
+      User.find({}).remove(function() {
+    var newUser = new User({username: "test", password: "123123"});
+    var id = mongoose.Types.ObjectId("DDDDDDDDDDDD");
+    newUser._id = id; 
+    newUser.save(function(err, user){
+    }); 
+      });
+    done();   
+  }); 
 
   it('should begin with no users', function(done) {
     User.find({}, function(err, users) {
