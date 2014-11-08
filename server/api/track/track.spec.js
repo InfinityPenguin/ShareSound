@@ -5,6 +5,7 @@ var app = require('../../app');
 var request = require('supertest');
 var assert = require('assert');
 var Track = require('./track.model');
+var expect = require('expect.js'); 
 
 describe('GET /api/tracks', function() {
 
@@ -41,5 +42,21 @@ describe('.isValidTrack', function () {
     assert.equal(Track.isValidTrack('.mp3'), true);
     assert.equal(Track.isValidTrack('happy.feet.mp3'), true);
     done();
+  });
+});
+
+describe('GET /api/tracks/user_id', function() {
+
+  it('should respond with JSON array of the tracks owned by test user', function(done) {
+    request(app)
+      .get('/api/tracks/444444444444444444444444')
+      .expect(200)
+      .expect('Content-Type', /json/)
+      .end(function(err, res) {
+        if (err) return done(err);
+        res.body.should.be.instanceof(Array);
+        expect(res.body.length).to.eql(5); 
+        done();
+      });
   });
 });
