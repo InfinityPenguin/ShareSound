@@ -13,36 +13,6 @@ router.post('/downloadTrack', controller.download);
 router.get('/foo', controller.foo);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-router.put('/', controller.upload);
-
-
 router.get('/:id', controller.getUserTracks);
 //router.get('/:id', controller.show);
 //router.put('/:id', controller.update);

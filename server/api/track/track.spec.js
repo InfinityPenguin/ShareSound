@@ -43,4 +43,3 @@ describe('.isValidTrack', function () {
     done();
   });
 });
-
