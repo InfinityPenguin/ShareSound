@@ -46,6 +46,27 @@ describe('.isValidTrack', function () {
 });
 
 describe('GET /api/tracks/user_id', function() {
+  after(function(done){
+    User.find({}).remove(function() {
+    var newUser = new User({username: "test", password: "123123"});
+    var id = mongoose.Types.ObjectId("DDDDDDDDDDDD");
+    newUser._id = id; 
+    newUser.save(function(err, user){
+    }); 
+      });
+    done();   
+  }); 
+
+  before(function(done){
+    User.find({}).remove(function() {
+    var newUser = new User({username: "test", password: "123123"});
+    var id = mongoose.Types.ObjectId("DDDDDDDDDDDD");
+    newUser._id = id; 
+    newUser.save(function(err, user){
+    }); 
+      });
+    done();   
+  }); 
 
   it('should respond with JSON array of the tracks owned by test user', function(done) {
     request(app)
