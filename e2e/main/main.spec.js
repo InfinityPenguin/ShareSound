@@ -49,7 +49,7 @@ it('should expect track names before button click', function() {
 
 it('should expect track names after button click', function() {
     browser.waitForAngular();
-    element(by.buttonText('Show/Hide')).click();
+    element(by.cssContainingText('.userOptions', 'Show')).click();
     browser.waitForAngular(); 
     
     expect(element.all(by.repeater('track in tracks').column('track.name')).getText()).

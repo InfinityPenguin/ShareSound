@@ -1,0 +1,148 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'protractor' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.32
+4 warn package.json karma-ng-html2js-preprocessor@0.1.1 No README data
+5 warn package.json karma-coffee-preprocessor@0.2.1 No README data
+6 warn package.json karma-chrome-launcher@0.1.5 No README data
+7 warn package.json karma-phantomjs-launcher@0.1.4 No README data
+8 warn package.json passport-local@0.1.6 No README data
+9 verbose readDependencies using package.json deps
+10 verbose cache add [ 'protractor', null ]
+11 verbose cache add name=undefined spec="protractor" args=["protractor",null]
+12 verbose parsed url { protocol: null,
+12 verbose parsed url   slashes: null,
+12 verbose parsed url   auth: null,
+12 verbose parsed url   host: null,
+12 verbose parsed url   port: null,
+12 verbose parsed url   hostname: null,
+12 verbose parsed url   hash: null,
+12 verbose parsed url   search: null,
+12 verbose parsed url   query: null,
+12 verbose parsed url   pathname: 'protractor',
+12 verbose parsed url   path: 'protractor',
+12 verbose parsed url   href: 'protractor' }
+13 silly lockFile 4f4f4858-protractor protractor
+14 verbose lock protractor /Users/Ian/.npm/4f4f4858-protractor.lock
+15 silly lockFile 4f4f4858-protractor protractor
+16 silly lockFile 4f4f4858-protractor protractor
+17 verbose addNamed [ 'protractor', '' ]
+18 verbose addNamed [ null, '*' ]
+19 silly lockFile 80d5ca5a-protractor protractor@
+20 verbose lock protractor@ /Users/Ian/.npm/80d5ca5a-protractor.lock
+21 silly addNameRange { name: 'protractor', range: '*', hasData: false }
+22 verbose request where is /protractor
+23 verbose request registry https://registry.npmjs.org/
+24 verbose request id adc3d9232fef3de6
+25 verbose url raw /protractor
+26 verbose url resolving [ 'https://registry.npmjs.org/', './protractor' ]
+27 verbose url resolved https://registry.npmjs.org/protractor
+28 verbose request where is https://registry.npmjs.org/protractor
+29 info trying registry request attempt 1 at 17:24:08
+30 verbose etag "CDA1HMR27J11SJF2DBOX1SHBH"
+31 http GET https://registry.npmjs.org/protractor
+32 http 200 https://registry.npmjs.org/protractor
+33 silly registry.get cb [ 200,
+33 silly registry.get   { date: 'Tue, 11 Nov 2014 01:24:05 GMT',
+33 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+33 silly registry.get     etag: '"AIN8UOLOR1540O20WQDZOU416"',
+33 silly registry.get     'content-type': 'application/json',
+33 silly registry.get     'cache-control': 'max-age=60',
+33 silly registry.get     'content-length': '75159',
+33 silly registry.get     'accept-ranges': 'bytes',
+33 silly registry.get     via: '1.1 varnish',
+33 silly registry.get     age: '0',
+33 silly registry.get     'x-served-by': 'cache-dfw1832-DFW',
+33 silly registry.get     'x-cache': 'HIT',
+33 silly registry.get     'x-cache-hits': '1',
+33 silly registry.get     'x-timer': 'S1415669045.244776,VS0,VE42',
+33 silly registry.get     vary: 'Accept',
+33 silly registry.get     'keep-alive': 'timeout=10, max=50',
+33 silly registry.get     connection: 'Keep-Alive' } ]
+34 silly addNameRange number 2 { name: 'protractor', range: '*', hasData: true }
+35 silly addNameRange versions [ 'protractor',
+35 silly addNameRange   [ '0.1.0',
+35 silly addNameRange     '0.1.1',
+35 silly addNameRange     '0.1.2',
+35 silly addNameRange     '0.1.3',
+35 silly addNameRange     '0.2.0',
+35 silly addNameRange     '0.2.1',
+35 silly addNameRange     '0.3.0',
+35 silly addNameRange     '0.4.0',
+35 silly addNameRange     '0.4.1',
+35 silly addNameRange     '0.5.0',
+35 silly addNameRange     '0.6.1',
+35 silly addNameRange     '0.7.0',
+35 silly addNameRange     '0.8.0',
+35 silly addNameRange     '0.9.0',
+35 silly addNameRange     '0.10.0',
+35 silly addNameRange     '0.11.0',
+35 silly addNameRange     '0.12.0',
+35 silly addNameRange     '0.12.1',
+35 silly addNameRange     '0.13.0',
+35 silly addNameRange     '0.14.0',
+35 silly addNameRange     '0.15.0',
+35 silly addNameRange     '0.16.0',
+35 silly addNameRange     '0.16.1',
+35 silly addNameRange     '0.17.0',
+35 silly addNameRange     '0.18.0',
+35 silly addNameRange     '0.18.1',
+35 silly addNameRange     '0.19.0',
+35 silly addNameRange     '0.20.0',
+35 silly addNameRange     '0.20.1',
+35 silly addNameRange     '0.21.0',
+35 silly addNameRange     '0.22.0',
+35 silly addNameRange     '0.23.0',
+35 silly addNameRange     '0.23.1',
+35 silly addNameRange     '0.24.0',
+35 silly addNameRange     '0.24.1',
+35 silly addNameRange     '0.24.2',
+35 silly addNameRange     '1.0.0-rc1',
+35 silly addNameRange     '1.0.0-rc2',
+35 silly addNameRange     '1.0.0-rc3',
+35 silly addNameRange     '1.0.0-rc4',
+35 silly addNameRange     '1.0.0-rc5',
+35 silly addNameRange     '1.0.0-rc6',
+35 silly addNameRange     '1.0.0',
+35 silly addNameRange     '1.1.0',
+35 silly addNameRange     '1.1.1',
+35 silly addNameRange     '1.2.0-beta1',
+35 silly addNameRange     '1.2.0',
+35 silly addNameRange     '1.3.0',
+35 silly addNameRange     '1.3.1',
+35 silly addNameRange     '1.4.0' ] ]
+36 verbose addNamed [ 'protractor', '1.4.0' ]
+37 verbose addNamed [ '1.4.0', '1.4.0' ]
+38 silly lockFile b469314e-protractor-1-4-0 protractor@1.4.0
+39 verbose lock protractor@1.4.0 /Users/Ian/.npm/b469314e-protractor-1-4-0.lock
+40 silly lockFile 8d5480d1--protractor-protractor-1-4-0-tgz https://registry.npmjs.org/protractor/-/protractor-1.4.0.tgz
+41 verbose lock https://registry.npmjs.org/protractor/-/protractor-1.4.0.tgz /Users/Ian/.npm/8d5480d1--protractor-protractor-1-4-0-tgz.lock
+42 verbose addRemoteTarball [ 'https://registry.npmjs.org/protractor/-/protractor-1.4.0.tgz',
+42 verbose addRemoteTarball   '090b11d671a3a4f0a5945f3e3d048c18efbd3435' ]
+43 info retry fetch attempt 1 at 17:24:09
+44 verbose fetch to= /var/folders/fg/s38hqfvx33jbtsy_z67j_zfc0000gn/T/npm-33342-kQ0eXfLi/registry.npmjs.org/protractor/-/protractor-1.4.0.tgz
+45 http GET https://registry.npmjs.org/protractor/-/protractor-1.4.0.tgz
+46 http 200 https://registry.npmjs.org/protractor/-/protractor-1.4.0.tgz
+47 silly lockFile 8d5480d1--protractor-protractor-1-4-0-tgz https://registry.npmjs.org/protractor/-/protractor-1.4.0.tgz
+48 silly lockFile 8d5480d1--protractor-protractor-1-4-0-tgz https://registry.npmjs.org/protractor/-/protractor-1.4.0.tgz
+49 silly lockFile b469314e-protractor-1-4-0 protractor@1.4.0
+50 silly lockFile b469314e-protractor-1-4-0 protractor@1.4.0
+51 silly lockFile 80d5ca5a-protractor protractor@
+52 silly lockFile 80d5ca5a-protractor protractor@
+53 error Error: EACCES, mkdir '/Users/Ian/.npm/protractor/1.4.0'
+53 error  { [Error: EACCES, mkdir '/Users/Ian/.npm/protractor/1.4.0']
+53 error   errno: 3,
+53 error   code: 'EACCES',
+53 error   path: '/Users/Ian/.npm/protractor/1.4.0',
+53 error   parent: 'share-sound' }
+54 error Please try running this command again as root/Administrator.
+55 error System Darwin 12.5.0
+56 error command "node" "/usr/local/bin/npm" "install" "protractor"
+57 error cwd /Users/Ian/cs169/group/ShareSound
+58 error node -v v0.10.32
+59 error npm -v 1.4.28
+60 error path /Users/Ian/.npm/protractor/1.4.0
+61 error code EACCES
+62 error errno 3
+63 error stack Error: EACCES, mkdir '/Users/Ian/.npm/protractor/1.4.0'
+64 verbose exit [ 3, true ]

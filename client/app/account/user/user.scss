@@ -97,6 +97,10 @@ li{
         	padding-top:1em;
         }
 }
+.wavesurfers{
+	border-bottom: 1px solid rgba(230, 230, 230, 1);
+	padding-bottom: 1em;
+}
 .black_overlay{
     position: absolute;
     top: 0%;
@@ -108,4 +112,7 @@ li{
     -moz-opacity: 0.8;
     opacity:.60;
     filter: alpha(opacity=80);
+}
+.btn{
+	margin-bottom: 0.2em;
 }
