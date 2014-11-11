@@ -13,3 +13,13 @@ $ grunt serve
 If there are any modules that you need to install, just run:
 
 npm install <module_name>
+
+
+For UI testing:
+
+protractor protractor.conf.js 
+
+For unit and functinonal test (also generates converage report) :
+
+grunt mochaTest
+

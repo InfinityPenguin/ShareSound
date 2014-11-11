@@ -35,16 +35,8 @@ describe('Dashboard', function() {
  
  
 it('should expect track names before button click', function() {
-    expect(element(by.repeater('track in tracks').row(0)).getText()).
-           toEqual("Wareru9");
-    expect(element(by.repeater('track in tracks').row(1)).getText()).
-           toEqual("Wind Dark");
-    expect(element(by.repeater('track in tracks').row(2)).getText()).
-           toEqual("Horror Gyaku");
-    expect(element(by.repeater('track in tracks').row(3)).getText()).
-           toEqual("Lost Chair");
-    expect(element(by.repeater('track in tracks').row(4)).getText()).
-           toEqual("Rumor");
+    expect(element.all(by.repeater('track in tracks').column('track.name')).getText()).
+           toEqual([ 'Wareru9', 'Wind Dark', 'Horror Gyaku', 'Lost Chair', 'Rumor' ]);
   }); 
 
 it('should expect track names after button click', function() {
