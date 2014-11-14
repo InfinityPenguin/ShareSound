@@ -5,7 +5,7 @@ var Track = require('./track.model');
 var User = require('../user/user.model');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema,
-	    ObjectId = Schema.ObjectId;
+	ObjectId = Schema.ObjectId;
 
 var AWS = require('aws-sdk');
 AWS.config.region = 'us-west-1';
@@ -87,7 +87,7 @@ exports.download = function(req, res) {
 exports.create = function(req, res, callback) {
 	var userId = req.query.user;
 	var name = req.query.s3_object_name;
-	User.findOne({_id: userId}, function(err, user) {
+	User.findById(userId, function(err, user) {
 		if (!user) {
 			console.log('UserId ' + userId + ' doesn\'t exist.');
 			uploadTrackID = null;
@@ -102,16 +102,21 @@ exports.create = function(req, res, callback) {
 		} else {
 			req.body = { 
 				name: name,
-		uploader_id: userId
+				uploader_id: userId,
 			};
 			console.log('Created track for user: ' + userId);
 			Track.create(req.body, function(err, track) {
-				//if(err) { return handleError(res, err); }
-				//return res.json(201, track);
 				uploadTrackID = track._id.toString();
-				track.url = 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+track._id;
-				callback();
-				return;
+				req.body.url = 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+track._id;
+				//console.log('req body: ' + JSON.stringify(req.body));
+
+				Track.findById(uploadTrackID, function(err, track) {
+					var updated = _.merge(track, req.body);
+					console.log('updated: ' + JSON.stringify(updated));
+					updated.save(function (err) { });
+					callback();
+					return;
+				});
 			});
 		}
 	});
