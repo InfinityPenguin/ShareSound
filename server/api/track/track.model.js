@@ -6,7 +6,9 @@ var mongoose = require('mongoose'),
 var TrackSchema = new Schema({
 	name: String,
 	url: String,
-	uploader_id: String
+	uploader_id: String,
+    description: String,
+    tags: [String]
 });
 
 TrackSchema.statics.isValidTrack = function (name, callback) {

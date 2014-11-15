@@ -90,10 +90,12 @@ angular.module('shareSoundApp')
 					console.log("q: "+qstring);
 				var options = {
 					container     : element,
-					waveColor     : 'violet',
-					progressColor : 'purple',
-					loaderColor   : 'purple',
-					cursorColor   : 'navy'
+					waveColor     : 'silver',
+					progressColor : 'gold',
+					loaderColor   : 'gold',
+					cursorColor   : 'red',
+                    normalize: true,
+                    height: 100
 				};
 
 				if (location.search.match('scroll')) {
