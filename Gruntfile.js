@@ -52,7 +52,7 @@ module.exports = function (grunt) {
     open: {
       server: {
         url: 'http://localhost:<%= express.options.port %>',
-		app: 'google-chrome'
+		app: 'firefox'
       }
     },
     watch: {

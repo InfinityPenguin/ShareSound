@@ -14,11 +14,23 @@ angular.module('shareSoundApp')
 
 	}
 
+
 	$scope.Close = function(){
 
 		$scope.uploadPage = false;
 
 	}
+	$scope.submit = function() {
+      $scope.submitted = true;
+
+      console.log($scope.track.project)
+ 
+      console.log($scope.track.tags)
+      var tagArray = $scope.track.tags.split(" ")
+      console.log(tagArray)
+      $scope.tagArray = tagArray;
+        
+    };
 
 
 	$scope.s3_upload = function (){

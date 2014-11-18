@@ -1,8 +1,6 @@
 
 <div ng-include="'components/navbar/navbar.html'"></div>
-
 <div class= "u-container">
-
 	<div class = "u-sidebar">
 		<div class = "userInfo">
 			<div class = "profile-picture">
@@ -23,7 +21,6 @@
 			</ul>
 		</div>
 	</div>
-
 	<div class="u-content">
 		<div class = "banner">
 			<span  class= "message">
@@ -32,23 +29,27 @@
 				</span>
 
 				<div class= "tracks" ng-include src="'app/account/user/templates/user.tracks.html'"></div>
-
-
-			
 			</div>
-
-
 	</div>
 </div>
 <div class = "popUp" ng-show = "uploadPage">
-		
 		<h1 id="status">Please select a file to upload</h1>
+		
+		<form class="form" name="form" ng-submit="submit()" novalidate>
+			<div class="uploadLabel">
+				<label for="Tags">Tags:</label><input type="tags" id="tags" placeholder="tags" required="required" ng-model="track.tags"  />
+			</div>
+			<div class="uploadLabel">
+				<label for="Project">Project:</label><input type="project" id="project" placeholder="Project" required="required" ng-model="track.project" />
+			</div>
+  			<input type="submit" id="submit" value="Submit" />		</form>
+
 		<input type="file" id="files"/>
 		<button ng-click="s3_upload()">Upload me, son</button>
 		<button ng-click="Close()" class="closeButton button">Close</button>
 </div>
-<div ng-show= "uploadPage" id="fade" class="black_overlay"></div>
-
+<!-- <div ng-show= "uploadPage" id="fade" class="black_overlay"></div>
+ -->
 
 
 
