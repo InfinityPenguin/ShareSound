@@ -5,7 +5,10 @@ var mongoose = require('mongoose'),
 
 var ProjectSchema = new Schema({
   name: String,
-  info: String,
+  owner: String,
+  tracks: [String],
+  tags: [String],
+  id: String,
   active: Boolean
 });
 
