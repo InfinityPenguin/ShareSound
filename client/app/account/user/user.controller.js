@@ -47,6 +47,8 @@ angular.module('shareSoundApp')
         //add tags and project 
         var tagEncode = encodeURIComponent($scope.track.tags);
         var projectEncode = encodeURIComponent($scope.track.project);
+        var descriptionEncode = encodeURIComponent($scope.track.description); 
+        
         console.log("The encoded tags is : " + tagEncode);
         console.log("The encoded project is : " + projectEncode); 
         
@@ -54,7 +56,7 @@ angular.module('shareSoundApp')
 		var s3upload = new S3Upload({
 			user: Auth.getCurrentUser(),
 			file_dom_selector: 'files',
-			s3_sign_put_url: '/api/tracks/uploadTrack/'+tagEncode+'/'+projectEncode,
+			s3_sign_put_url: '/api/tracks/uploadTrack/'+tagEncode+'/'+projectEncode+'/'+descriptionEncode,
 			onProgress: function(percent, message) {
 				status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
 			},

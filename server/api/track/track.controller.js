@@ -98,8 +98,10 @@ exports.download = function(req, res) {
 exports.create = function(req, res, callback) {
 	var userId = req.query.user;
 	var name = req.query.s3_object_name;
+    //var name = decodeURIComponent(req.params.name); 
     var tags = decodeURIComponent(req.params.tags);
     var project = decodeURIComponent(req.params.project);
+    var description = decodeURIComponent(req.params.description); 
     
 	User.findById(userId, function(err, user) {
 		if (!user) {
@@ -118,7 +120,8 @@ exports.create = function(req, res, callback) {
 				name: name,
 				uploader_id: userId,
                 tags: tags.split(" "),
-                project : project 
+                project : project,
+                description: description
 			};
 			console.log('Created track for user: ' + userId);
 			Track.create(req.body, function(err, track) {
