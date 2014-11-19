@@ -87,6 +87,9 @@ exports.download = function(req, res) {
 exports.create = function(req, res, callback) {
 	var userId = req.query.user;
 	var name = req.query.s3_object_name;
+    var tags = decodeURIComponent(req.params.tags);
+    var project = decodeURIComponent(req.params.project);
+    
 	User.findById(userId, function(err, user) {
 		if (!user) {
 			console.log('UserId ' + userId + ' doesn\'t exist.');
@@ -103,6 +106,8 @@ exports.create = function(req, res, callback) {
 			req.body = { 
 				name: name,
 				uploader_id: userId,
+                tags: tags.split(" "),
+                project : project 
 			};
 			console.log('Created track for user: ' + userId);
 			Track.create(req.body, function(err, track) {
@@ -125,6 +130,10 @@ exports.create = function(req, res, callback) {
 /* Returns a signed url back to the client to upload with. Calls exports.create and expects it to handle invalid track upload requests. Returns an error if exports.create returns null */
 exports.getUploadURL = function(req, res) {
 	console.log('getUploadURL with query: ' + JSON.stringify(req.query));
+ 
+  
+ 
+    
 	var trackId;
 	exports.create(req, res, function() {
 		trackId = uploadTrackID;
