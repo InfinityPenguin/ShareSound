@@ -84,9 +84,23 @@ angular.module('shareSoundApp')
 		};
 	});
 
-	// $scope.playAll = function() {
-	//   var songs = 
-	// }
+	$scope.doAll = function(action) {
+		if (action == 'play') {
+			$scope.wavesurfers.map(function(ws) {
+				return ws.play();
+			});
+		};
+		if (action == 'pause') {
+			$scope.wavesurfers.map(function(ws) {
+				return ws.pause();
+			});
+		};
+		if (action == 'stop') {
+			$scope.wavesurfers.map(function(ws) {
+				return ws.stop();
+			});
+		};
+	};
 	// angular.element(document).ready(function() {
 	$scope.showtracks = function() {
 		if (!$scope.show){
@@ -94,7 +108,7 @@ angular.module('shareSoundApp')
 			if (!$scope.tracksinit){
 
 				$scope.tracksinit = true;
-				var wavesurfers = [].map.call(document.querySelectorAll(".track_list li .wavesurfers"), function(element) {
+				$scope.wavesurfers = [].map.call(document.querySelectorAll(".track_list li .wavesurfers"), function(element) {
 					console.log(element);
 					var trackurl = element.getElementsByClassName("url")[0].textContent;
 					console.log(element.getElementsByClassName("url")[0]);
