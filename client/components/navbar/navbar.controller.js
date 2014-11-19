@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('shareSoundApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth) {
+  .controller('NavbarCtrl', function ($scope, $location, Auth, Tracks) {
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
@@ -16,7 +16,12 @@ angular.module('shareSoundApp')
     $scope.search = function(){
       console.log("SEARCHINGGGG"); 
       console.log($scope.query); 
-        
+      Tracks.searchTracks($scope.query)
+      .then( function() {
+			$scope.searchResults = Tracks.resultTracks; 
+			console.log("found tracks..... " + JSON.stringify($scope.searchResults));
+		})
+    
     };
 
     $scope.logout = function() {

@@ -12,6 +12,7 @@ router.post('/deleteTrack', controller.destroy);
 router.post('/downloadTrack', controller.download);
 router.get('/foo', controller.foo);
 
+router.get('/search/:tags', controller.search); 
 
 router.get('/:id', controller.getUserTracks);
 

@@ -7,6 +7,7 @@ angular.module('shareSoundApp')
 
     var service = {}; 
     service.userTracks = []; 
+    service.resultTracks = []; 
 
     service.getTracks = function(userId){
       return $http.get('/api/tracks/' + userId)
@@ -14,13 +15,20 @@ angular.module('shareSoundApp')
             console.log("the tracks for user " + userId + " are " + JSON.stringify(tracks)); 
             service.userTracks = tracks; 
             return tracks; 
-      })
-        
+      });
     };
-    
-   
+      
+    service.searchTracks = function(query){
+        return $http.get('/api/tracks/search/' + query)
+        .success(function (tracks){
+            
+            console.log("the tracks for query " + query + " are " + JSON.stringify(tracks)); 
+            service.resultTracks = tracks; 
+            return tracks; 
+    });
+    };
     return service;   
-  });
+  }); 
 
 /*
 client/app/pokemonService/pokemonService.js

@@ -70,6 +70,17 @@ exports.getUserTracks = function(req, res){
 	});
 }; 
 
+exports.search = function(req, res){
+  console.log("searching tracks for .... " + req.params.tags); 
+    Track.find({tags : req.params.tags}, function (err, track){
+       if(err) { return handleError(res, err);}
+       if(!track) { return res.send(404); }
+
+		console.log("Found tracks: " + JSON.stringify(track));     
+		return res.json(track);
+        
+    });
+};
 
 
 exports.download = function(req, res) {
