@@ -8,6 +8,11 @@ angular.module('shareSoundApp')
 	$scope.tracksinit = false;
 	$scope.uploadPage = false;
 
+	$scope.createProject = function(){
+
+
+	}
+
 	$scope.uploadTrack = function(){
 
 		$scope.uploadPage = true;
