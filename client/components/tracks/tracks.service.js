@@ -8,6 +8,7 @@ angular.module('shareSoundApp')
     var service = {}; 
     service.userTracks = []; 
     service.resultTracks = []; 
+    service.query = "";
 
     service.getTracks = function(userId){
       return $http.get('/api/tracks/' + userId)
@@ -24,6 +25,7 @@ angular.module('shareSoundApp')
             
             console.log("the tracks for query " + query + " are " + JSON.stringify(tracks)); 
             service.resultTracks = tracks; 
+            service.query = query; 
             return tracks; 
     });
     };

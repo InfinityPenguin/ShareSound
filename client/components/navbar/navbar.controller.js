@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('shareSoundApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth, Tracks) {
+  .controller('NavbarCtrl', function ($scope, $location, Auth, Tracks, $state, $stateParams) {
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
@@ -20,7 +20,13 @@ angular.module('shareSoundApp')
       .then( function() {
 			$scope.searchResults = Tracks.resultTracks; 
 			console.log("found tracks..... " + JSON.stringify($scope.searchResults));
-            $location.path('search'); 
+            //$location.path('search'); 
+            //this is better than location.path because refresh page if current page 
+            $state.transitionTo('search' , $stateParams, {
+                reload: true,
+                inherit: false,
+                notify: true
+            });
 		})
     
     };
