@@ -71,8 +71,10 @@ exports.getUserTracks = function(req, res){
 }; 
 
 exports.search = function(req, res){
+  var tagArray = req.params.tags.split(" "); 
   console.log("searching tracks for .... " + req.params.tags); 
-    Track.find({tags : req.params.tags}, function (err, track){
+    //( { field : { $in : array } } )
+    Track.find({tags : { $all: tagArray}}, function (err, track){
        if(err) { return handleError(res, err);}
        if(!track) { return res.send(404); }
 
