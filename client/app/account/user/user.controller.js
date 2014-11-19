@@ -1,6 +1,6 @@
 'use strict';
 angular.module('shareSoundApp')
-.controller('UserCtrl', function ($scope, Auth, Tracks, $location, $window, $sce) {
+.controller('UserCtrl', function ($scope, Auth, Tracks, $location, $window, $sce, $state, $stateParams) {
 	$scope.getCurrentUser = Auth.getCurrentUser;
 	$scope.getToken = Auth.getToken; 
 	$scope.isLoggedIn = Auth.isLoggedIn;
@@ -54,15 +54,24 @@ angular.module('shareSoundApp')
 				status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
 			},
 			onFinishS3Put: function(public_url) {
-				status_elem.innerHTML = 'Upload completed. Uploaded to: '+ public_url;
-				url_elem.value = public_url;
-				preview_elem.innerHTML = '<img src="'+public_url+'" style="width:300px;" />';
+				//status_elem.innerHTML = 'Upload completed. Uploaded to: '+ public_url;
+				//url_elem.value = public_url;
+				//preview_elem.innerHTML = '<img src="'+public_url+'" style="width:300px;" />';
+            
+                console.log("reloading"); 
+              
+                $state.transitionTo($state.current, $stateParams, {
+                    reload: true,
+                    inherit: false,
+                    notify: true
+                });
 			},
 			onError: function(status) {
 				status_elem.innerHTML = 'Upload error: ' + status;
 			}
 		});
 		$scope.uploadPage = false;
+    
 	}
 
 

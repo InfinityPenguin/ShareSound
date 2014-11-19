@@ -20,6 +20,7 @@ angular.module('shareSoundApp')
       .then( function() {
 			$scope.searchResults = Tracks.resultTracks; 
 			console.log("found tracks..... " + JSON.stringify($scope.searchResults));
+            $location.path('search'); 
 		})
     
     };
