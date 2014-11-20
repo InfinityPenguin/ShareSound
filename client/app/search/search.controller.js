@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('shareSoundApp')
-  .controller('SearchCtrl', function ($scope, Tracks) {
+  .controller('SearchCtrl', function ($scope, Tracks, $state, $stateParams) {
     $scope.message = 'Hello';
     $scope.tracks = Tracks.resultTracks; 
     $scope.query = Tracks.query; 
@@ -108,5 +108,23 @@ angular.module('shareSoundApp')
 		} else {
 			$scope.show = false;
 		}
+    };
+    
+    $scope.searchTag = function(query){
+      console.log("SEARCHINGGGG"); 
+      console.log(query); 
+      Tracks.searchTracks(query)
+      .then( function() {
+			$scope.searchResults = Tracks.resultTracks; 
+			console.log("found tracks..... " + JSON.stringify($scope.searchResults));
+            //$location.path('search'); 
+            //this is better than location.path because refresh page if current page 
+            $state.transitionTo('search' , $stateParams, {
+                reload: true,
+                inherit: false,
+                notify: true
+            });
+		})
+    
     };
   });

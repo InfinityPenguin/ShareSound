@@ -36,6 +36,24 @@ angular.module('shareSoundApp')
       $scope.tagArray = tagArray;
         
     };
+    
+    $scope.searchTag = function(query){
+      console.log("SEARCHINGGGG"); 
+      console.log(query); 
+      Tracks.searchTracks(query)
+      .then( function() {
+			$scope.searchResults = Tracks.resultTracks; 
+			console.log("found tracks..... " + JSON.stringify($scope.searchResults));
+            //$location.path('search'); 
+            //this is better than location.path because refresh page if current page 
+            $state.transitionTo('search' , $stateParams, {
+                reload: true,
+                inherit: false,
+                notify: true
+            });
+		})
+    
+    };
 
 
 	$scope.s3_upload = function (){

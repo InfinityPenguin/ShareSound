@@ -20,7 +20,7 @@
 	       
 		 <h3> {{ track.name }} </h3> 
          <div ng-repeat="tag in track.tags" >
-                <button type="button" class="btn btn-default btn-sm" style="float:left">
+                <button type="button" class="btn btn-default btn-sm" style="float:left" ng-click="searchTag(tag)">
                   {{tag}} 
                 </button>
             </div>
