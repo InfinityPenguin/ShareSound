@@ -54,6 +54,75 @@ exports.destroy = function(req, res) {
   });
 };
 
+exports.getUserProjects = function(req, res){
+  console.log("getting projects for ..... " + req.params.id); 
+  Project.find({owner : req.params.id}, function (err, project) {
+    if(err) { return handleError(res, err); }
+    if(!project) { return res.send(404); }
+
+    console.log("Found projects: " + JSON.stringify(project));     
+    return res.json(project);
+  });
+};
+
+exports.search = function(req, res){
+  console.log("searching projects for .... " + req.params.tags); 
+    Track.find({tags : req.params.tags}, function (err, project){
+       if(err) { return handleError(res, err);}
+       if(!project) { return res.send(404); }
+
+    console.log("Found projects: " + JSON.stringify(project));     
+    return res.json(project);
+        
+    });
+};
+// Creates a new project in the DB. 
+exports.create = function(req, res, callback) {
+  var userId = req.query.user;
+  var name = req.query.name;
+  var tags = decodeURIComponent(req.params.tags);
+  // var project = decodeURIComponent(req.params.project);
+    
+  User.findById(userId, function(err, user) {
+    if (!user) {
+      console.log('UserId ' + userId + ' doesn\'t exist.');
+      uploadTrackID = null;
+      callback();
+      return;
+    }
+    if (!Project.isValidProject(name)) { 
+      console.log("Invalid project name.");
+      uploadTrackID = null;
+      callback();
+      return;
+    } else {
+      req.body = { 
+        name: name,
+        uploader_id: userId,
+                tags: tags.split(" "),
+                project : project 
+      };
+      console.log('Created track for user: ' + userId);
+      Track.create(req.body, function(err, track) {
+        uploadTrackID = track._id.toString();
+        req.body.url = 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+track._id;
+        //console.log('req body: ' + JSON.stringify(req.body));
+
+        Track.findById(uploadTrackID, function(err, track) {
+          var updated = _.merge(track, req.body);
+          console.log('updated: ' + JSON.stringify(updated));
+          updated.save(function (err) { });
+          callback();
+          return;
+        });
+      });
+    }
+  });
+};
+
+
+
+
 function handleError(res, err) {
   return res.send(500, err);
 }

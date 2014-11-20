@@ -12,4 +12,5 @@ var ProjectSchema = new Schema({
   active: Boolean
 });
 
+
 module.exports = mongoose.model('Project', ProjectSchema);
