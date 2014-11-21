@@ -13,6 +13,8 @@ router.post('/downloadTrack', controller.download);
 router.get('/foo', controller.foo);
 
 router.get('/search/:tags', controller.search); 
+router.get('/tags/add/:id/:tags', controller.addTags); 
+router.get('/tags/delete/:id/:tag', controller.deleteTag); 
 
 router.get('/:id', controller.getUserTracks);
 

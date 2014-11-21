@@ -21,9 +21,16 @@
 		 <h3> {{ track.name }} </h3> 
          <div ng-repeat="tag in track.tags" >
                 <button type="button" class="btn btn-default btn-sm" style="float:left" ng-click="searchTag(tag)">
-                  {{tag}} 
+                  {{tag}}  
+                </button>
+                <button type="button" class="btn btn-default btn-sm" style="float:left" ng-click="deleteTag(track._id, tag)">
+                    <i class="glyphicon glyphicon-remove"></i>
                 </button>
             </div>
+            <button type="button" class="btn btn-default btn-sm" style="float:left" ng-click="showAddTag(track._id)">
+                <i class="glyphicon glyphicon-plus"></i>
+                  Add tag...
+            </button>
                                                       
         <p>
             <br><br>

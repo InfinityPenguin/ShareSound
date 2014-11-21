@@ -39,6 +39,22 @@
 			</div>
 	</div>
 </div>
+
+<div class = "popUp" ng-show = "addTagPage">		
+		<form class="form" name="form" ng-submit="addTag()" novalidate>
+			<div class="newTag">
+				<label for="Tags">Add space separated tags:</label><input type="tags" id="tags" placeholder="tags" required="required" ng-model="track.tags"  />
+                <button class="btn btn-inverse btn-sm" type="submit">
+                    Add
+                </button>
+			</div>
+  		</form>
+		<button ng-click="Close()" class="closeButton button">Close</button>
+</div>
+
+
+
+
 <div class = "popUp" ng-show = "uploadPage">
 		<h1 id="status">Please select a file to upload</h1>
 		

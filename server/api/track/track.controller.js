@@ -84,6 +84,41 @@ exports.search = function(req, res){
     });
 };
 
+exports.addTags = function(req, res){
+  var tagArray = req.params.tags.split(" "); 
+  var trackToChange = req.params.id; 
+    
+  console.log("adding tags " + req.params.tags + " for " + trackToChange); 
+  tagArray.forEach(function(tag){
+      Track.update({_id: trackToChange},{$addToSet: {tags:tag}},{upsert:false},function(err){
+        if(err){
+                console.log(err);
+        }else{
+                console.log("Successfully added");
+        }
+      });
+  })
+};
+
+exports.deleteTag = function(req, res){
+  var tag = req.params.tag;  
+  var trackToChange = req.params.id; 
+  console.log("DELETING......"+tag);     
+    
+    
+  Track.update(
+  { _id: trackToChange },
+  { $pull: {tags: tag } },
+      function(err){
+        if(err){
+                console.log(err);
+        }else{
+                console.log("Removed");
+        }
+          
+      }); 
+};
+
 
 exports.download = function(req, res) {
 	var s3 = new AWS.S3();

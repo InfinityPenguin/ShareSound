@@ -7,6 +7,8 @@ angular.module('shareSoundApp')
 	$scope.show = false;
 	$scope.tracksinit = false;
 	$scope.uploadPage = false;
+    $scope.addTagPage = false; 
+
 
 	$scope.createProject = function(){
 
@@ -19,12 +21,43 @@ angular.module('shareSoundApp')
 
 	}
 
+    
+    $scope.showAddTag = function(track){
+        $scope.addTagPage = true;   
+        $scope.trackToChange = track; 
+    }
 
 	$scope.Close = function(){
 
 		$scope.uploadPage = false;
 
 	}
+    
+    $scope.addTag = function(){
+        console.log("submitted......"); 
+        console.log($scope.track.tags); 
+    
+        Tracks.addTags($scope.trackToChange, $scope.track.tags); 
+        $scope.showAddTag = false; 
+        $state.transitionTo($state.current, $stateParams, {
+                    reload: true,
+                    inherit: false,
+                    notify: true
+        });
+    } 
+    
+    $scope.deleteTag = function(id, tag){
+        console.log("deleting " + tag + " for " + id); 
+        Tracks.deleteTag(id, tag);
+        /*$state.transitionTo($state.current, $stateParams, {
+                    reload: true,
+                    inherit: false,
+                    notify: true
+    
+        }); */
+        
+    }
+    
 	$scope.submit = function() {
       $scope.submitted = true;
 
