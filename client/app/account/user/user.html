@@ -21,7 +21,7 @@
 				<li class = "userOptions" ng-click = "showProjects()">
 					Show Projects
 				</li>
-				<li class = "userOptions" ng-click = "createProjects()">
+				<li class = "userOptions" ng-click = "createProjectPopUp()">
 					Create Project
 				</li>
 
@@ -39,7 +39,7 @@
 			</div>
 	</div>
 </div>
-<div class = "popUp" ng-show = "uploadPage">
+<div class = "popUp" ng-show = "uploadPageTrack">
 		<h1 id="status">Please select a file to upload</h1>
 		
 		<form class="form" name="form" ng-submit="submit()" novalidate>
@@ -49,12 +49,18 @@
 			<div class="uploadLabel">
 				<label for="Project">Project:</label><input type="project" id="project" placeholder="Project" required="required" ng-model="track.project" />
 			</div>
+            <div class="uploadLabel">
+				<label for="Description">Description:</label><input type="description" id="description" placeholder="Briefly describe this track." required="required" ng-model="track.description" />
+			</div>
   			</form>
 
 		<input type="file" id="files"/>
 		<button ng-click="s3_upload()">Upload me, son</button>
 		<button ng-click="Close()" class="closeButton button">Close</button>
 </div>
+<div class = "popUp" ng-show = "createProjectPage" ng-include src="'app/account/user/templates/user.projects.create.html'"></div>
+
+
 <!-- <div ng-show= "uploadPage" id="fade" class="black_overlay"></div>
  -->
 

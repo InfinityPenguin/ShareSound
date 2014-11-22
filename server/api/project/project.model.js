@@ -9,6 +9,7 @@ var ProjectSchema = new Schema({
   tracks: [String],
   tags: [String],
   id: String,
+  description: String,
   active: Boolean
 });
 

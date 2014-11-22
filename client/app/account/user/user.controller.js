@@ -1,30 +1,36 @@
 'use strict';
 angular.module('shareSoundApp')
-.controller('UserCtrl', function ($scope, Auth, Tracks, $location, $window, $sce) {
+.controller('UserCtrl', function ($scope, Auth, projects, Tracks, $location, $window, $sce, $state, $stateParams) {
 	$scope.getCurrentUser = Auth.getCurrentUser;
 	$scope.getToken = Auth.getToken; 
 	$scope.isLoggedIn = Auth.isLoggedIn;
 	$scope.show = false;
 	$scope.tracksinit = false;
-	$scope.uploadPage = false;
+	$scope.uploadTrackPage = false;
+	$scope.createProjectPage = false;
+	$scope.project = {};
 
-	$scope.createProject = function(){
 
-
+	$scope.createProjectPopUp = function(){
+		
+		console.log("createProject")
+		$scope.createProjectPage = true;
 	}
 
 	$scope.uploadTrack = function(){
 
-		$scope.uploadPage = true;
+		$scope.uploadTrackPage = true;
 
 	}
 
 
 	$scope.Close = function(){
 
-		$scope.uploadPage = false;
+		$scope.uploadTrackPage = false;
+		$scope.createProjectPage = false;
 
 	}
+
 	$scope.submit = function() {
       $scope.submitted = true;
 
@@ -47,6 +53,8 @@ angular.module('shareSoundApp')
         //add tags and project 
         var tagEncode = encodeURIComponent($scope.track.tags);
         var projectEncode = encodeURIComponent($scope.track.project);
+        var descriptionEncode = encodeURIComponent($scope.track.description); 
+        
         console.log("The encoded tags is : " + tagEncode);
         console.log("The encoded project is : " + projectEncode); 
         
@@ -54,21 +62,56 @@ angular.module('shareSoundApp')
 		var s3upload = new S3Upload({
 			user: Auth.getCurrentUser(),
 			file_dom_selector: 'files',
-			s3_sign_put_url: '/api/tracks/uploadTrack/'+tagEncode+'/'+projectEncode,
+			s3_sign_put_url: '/api/tracks/uploadTrack/'+tagEncode+'/'+projectEncode+'/'+descriptionEncode,
 			onProgress: function(percent, message) {
 				status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
 			},
 			onFinishS3Put: function(public_url) {
-				status_elem.innerHTML = 'Upload completed. Uploaded to: '+ public_url;
-				url_elem.value = public_url;
-				preview_elem.innerHTML = '<img src="'+public_url+'" style="width:300px;" />';
+				//status_elem.innerHTML = 'Upload completed. Uploaded to: '+ public_url;
+				//url_elem.value = public_url;
+				//preview_elem.innerHTML = '<img src="'+public_url+'" style="width:300px;" />';
+            
+                console.log("reloading"); 
+              
+                $state.transitionTo($state.current, $stateParams, {
+                    reload: true,
+                    inherit: false,
+                    notify: true
+                });
 			},
 			onError: function(status) {
 				status_elem.innerHTML = 'Upload error: ' + status;
 			}
 		});
 		$scope.uploadPage = false;
+    
 	}
+
+	$scope.createProject = function(){
+		$scope.user = {};
+    	$scope.errors = {};
+	  
+        projects.createProject({
+
+        	owner: $scope.getCurrentUser,
+        	name: $scope.project.name,
+        	description: $scope.project.description,
+        	tags: $scope.project.tags
+
+
+        }).then(function(){
+			$scope.createProjectPage = false;
+        })
+        .catch( function(err) {
+          err = err.data;
+          $scope.errors = {};
+          console.log(err);
+          $scope.errors.username = err;
+          });
+
+
+
+	};
 
 
 	Auth.isLoggedInAsync(function(response){

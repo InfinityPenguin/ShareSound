@@ -22,6 +22,7 @@ exports.show = function(req, res) {
 
 // Creates a new project in the DB.
 exports.create = function(req, res) {
+  console.log(req.body);
   Project.create(req.body, function(err, project) {
     if(err) { return handleError(res, err); }
     return res.json(201, project);
@@ -76,49 +77,49 @@ exports.search = function(req, res){
         
     });
 };
-// Creates a new project in the DB. 
-exports.create = function(req, res, callback) {
-  var userId = req.query.user;
-  var name = req.query.name;
-  var tags = decodeURIComponent(req.params.tags);
-  // var project = decodeURIComponent(req.params.project);
+// // Creates a new project in the DB. 
+// exports.create = function(req, res, callback) {
+//   var userId = req.query.user;
+//   var name = req.query.name;
+//   var tags = decodeURIComponent(req.params.tags);
+//   // var project = decodeURIComponent(req.params.project);
     
-  User.findById(userId, function(err, user) {
-    if (!user) {
-      console.log('UserId ' + userId + ' doesn\'t exist.');
-      uploadTrackID = null;
-      callback();
-      return;
-    }
-    if (!Project.isValidProject(name)) { 
-      console.log("Invalid project name.");
-      uploadTrackID = null;
-      callback();
-      return;
-    } else {
-      req.body = { 
-        name: name,
-        uploader_id: userId,
-                tags: tags.split(" "),
-                project : project 
-      };
-      console.log('Created track for user: ' + userId);
-      Track.create(req.body, function(err, track) {
-        uploadTrackID = track._id.toString();
-        req.body.url = 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+track._id;
-        //console.log('req body: ' + JSON.stringify(req.body));
+//   User.findById(userId, function(err, user) {
+//     if (!user) {
+//       console.log('UserId ' + userId + ' doesn\'t exist.');
+//       uploadTrackID = null;
+//       callback();
+//       return;
+//     }
+//     if (!Project.isValidProject(name)) { 
+//       console.log("Invalid project name.");
+//       uploadTrackID = null;
+//       callback();
+//       return;
+//     } else {
+//       req.body = { 
+//         name: name,
+//         uploader_id: userId,
+//                 tags: tags.split(" "),
+//                 project : project 
+//       };
+//       console.log('Created track for user: ' + userId);
+//       Track.create(req.body, function(err, track) {
+//         uploadTrackID = track._id.toString();
+//         req.body.url = 'https://'+S3_BUCKET+'.s3.amazonaws.com/'+track._id;
+//         //console.log('req body: ' + JSON.stringify(req.body));
 
-        Track.findById(uploadTrackID, function(err, track) {
-          var updated = _.merge(track, req.body);
-          console.log('updated: ' + JSON.stringify(updated));
-          updated.save(function (err) { });
-          callback();
-          return;
-        });
-      });
-    }
-  });
-};
+//         Track.findById(uploadTrackID, function(err, track) {
+//           var updated = _.merge(track, req.body);
+//           console.log('updated: ' + JSON.stringify(updated));
+//           updated.save(function (err) { });
+//           callback();
+//           return;
+//         });
+//       });
+//     }
+//   });
+// };
 
 
 
