@@ -8,7 +8,7 @@ angular.module('shareSoundApp')
 	$scope.tracksinit = false;
 	$scope.uploadPage = false;
     $scope.addTagPage = false; 
-
+    $scope.isOnUserPage = true; //allows the tag add/delete buttonns to not be displayed by search 
 
 	$scope.createProject = function(){
 
@@ -16,11 +16,8 @@ angular.module('shareSoundApp')
 	}
 
 	$scope.uploadTrack = function(){
-
 		$scope.uploadPage = true;
-
 	}
-
     
     $scope.showAddTag = function(track){
         $scope.addTagPage = true;   
@@ -49,12 +46,12 @@ angular.module('shareSoundApp')
     $scope.deleteTag = function(id, tag){
         console.log("deleting " + tag + " for " + id); 
         Tracks.deleteTag(id, tag);
-        /*$state.transitionTo($state.current, $stateParams, {
+        $state.transitionTo($state.current, $stateParams, {
                     reload: true,
                     inherit: false,
                     notify: true
     
-        }); */
+        }); 
         
     }
     

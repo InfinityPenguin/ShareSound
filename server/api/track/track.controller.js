@@ -83,7 +83,7 @@ exports.search = function(req, res){
         
     });
 };
-
+ 
 exports.addTags = function(req, res){
   var tagArray = req.params.tags.split(" "); 
   var trackToChange = req.params.id; 
@@ -95,14 +95,15 @@ exports.addTags = function(req, res){
                 console.log(err);
         }else{
                 console.log("Successfully added");
+                return res.json(tagArray); 
         }
       });
   })
 };
 
 exports.deleteTag = function(req, res){
-  var tag = req.params.tag;  
-  var trackToChange = req.params.id; 
+  var tag = decodeURIComponent(req.params.tag);  
+  var trackToChange = decodeURIComponent(req.params.id); 
   console.log("DELETING......"+tag);     
     
     
@@ -114,6 +115,7 @@ exports.deleteTag = function(req, res){
                 console.log(err);
         }else{
                 console.log("Removed");
+                return res.json(tag); 
         }
           
       }); 
