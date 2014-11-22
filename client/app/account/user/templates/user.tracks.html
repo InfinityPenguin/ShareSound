@@ -17,24 +17,35 @@
 
 		<li ng-repeat ="track in tracks">
 
-	       
+	      <div class="well"> 
 		 <h3> {{ track.name }} </h3> 
          <div ng-repeat="tag in track.tags" >
-                <button type="button" class="btn btn-default btn-sm" style="float:left">
-                  {{tag}} 
+             <div class="btn-group" style="float:left">
+                <button type="button" class="btn btn-default btn-sm" style="float:left" ng-click="searchTag(tag)">
+                  {{tag}}  
                 </button>
+                <button type="button" class="btn btn-default btn-sm" style="float:left" ng-click="deleteTag(track._id, tag)" ng-show="isOnUserPage">
+                    <i class="glyphicon glyphicon-remove"></i>
+                </button>
+             </div>
+                
             </div>
+            <button type="button" class="btn btn-default btn-sm" style="float:left" ng-click="showAddTag(track._id)" ng-show="isOnUserPage">
+                <i class="glyphicon glyphicon-plus"></i>
+                  Add tag...
+            </button>
                                                       
         <p>
             <br><br>
         {{track.description}} 
         </p> 
+            
         
         
         
           
 		<div class = "wavesurfers" ng-show = "show">
-
+            
 
 			<p class = "url" ng-hide = "true">{{track.url}}<p>
 			<!--                 <div id = "waveform"> 
@@ -75,5 +86,6 @@
 				</a>
 			</div>
 		</div>
+            </div>
 	</li>
 </div>

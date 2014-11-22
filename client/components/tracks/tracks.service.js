@@ -19,6 +19,24 @@ angular.module('shareSoundApp')
       });
     };
       
+    
+    service.addTags = function(id, tags){
+      return $http.get('/api/tracks/tags/add/' + encodeURIComponent(id)  + '/' + encodeURIComponent(tags))
+        .success(function (tracks){
+            console.log("send add tags..."); 
+
+      });
+    };
+    
+    service.deleteTag = function(id, tag){
+      return $http.get('/api/tracks/tags/delete/' + encodeURIComponent(id)  + '/' + encodeURIComponent(tag))
+        .success(function (tracks){
+            console.log("send remove tags..."); 
+
+      });
+    };
+    
+    
     service.searchTracks = function(query){
         return $http.get('/api/tracks/search/' + query)
         .success(function (tracks){

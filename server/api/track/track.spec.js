@@ -85,4 +85,54 @@ describe('Track Model', function() {
 			done();
 		});
 	});
+    
+    //expect([1,2,3]).to.have.length(3)
+    
+
+    it('should search sample tracks for a tag', function(done) {
+		request(app)
+		.get('/api/tracks/search/sound')
+		.expect(200)
+		.end(function(err, res) {
+            expect(res.body).to.have.length(3)
+			if (err) return done(err);
+			done();
+		});
+	}); 
+    
+    it('should return tracks uploaded by sample user', function(done) {
+		request(app)
+		.get('/api/tracks/444444444444444444444444')
+		.expect(200)
+		.end(function(err, res) {
+            expect(res.body).to.have.length(5)
+			if (err) return done(err);
+			done();
+		});
+	}); 
+    
+    it('should add tag to a track', function(done) {
+		request(app)
+		.get('/api/tracks/tags/add/444444444444444444444444/cool')
+		.expect(200)
+		.end(function(err, res) {
+            expect(res.body[0]).to.equal('cool'); 
+			if (err) return done(err);
+			done();
+		});
+	}); 
+    
+     it('should remove tag from a track', function(done) {
+		request(app)
+		.get('/api/tracks/tags/delete/444444444444444444444444/cool')
+		.expect(200)
+		.end(function(err, res) {
+            expect(res.body).to.equal('cool'); 
+			if (err) return done(err);
+			done();
+		});
+	}); 
+    
+    
+    
 });

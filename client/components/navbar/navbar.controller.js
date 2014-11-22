@@ -30,7 +30,7 @@ angular.module('shareSoundApp')
 		})
     
     };
-
+    
     $scope.logout = function() {
       Auth.logout();
       $location.path('/login');

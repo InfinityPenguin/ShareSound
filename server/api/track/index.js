@@ -8,11 +8,14 @@ var router = express.Router();
 
 router.get('/', controller.index);
 router.get('/uploadTrack/:tags/:project/:description', controller.getUploadURL);
+router.get('/uploadTrack', controller.getUploadURL); 
 router.post('/deleteTrack', controller.destroy);
 router.post('/downloadTrack', controller.download);
 router.get('/foo', controller.foo);
 
 router.get('/search/:tags', controller.search); 
+router.get('/tags/add/:id/:tags', controller.addTags); 
+router.get('/tags/delete/:id/:tag', controller.deleteTag); 
 
 router.get('/:id', controller.getUserTracks);
 

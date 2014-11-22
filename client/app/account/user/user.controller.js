@@ -1,14 +1,20 @@
 'use strict';
 angular.module('shareSoundApp')
+
 .controller('UserCtrl', function ($scope, Auth, projects, Tracks, $location, $window, $sce, $state, $stateParams) {
+
 	$scope.getCurrentUser = Auth.getCurrentUser;
 	$scope.getToken = Auth.getToken; 
 	$scope.isLoggedIn = Auth.isLoggedIn;
 	$scope.show = false;
 	$scope.tracksinit = false;
+
 	$scope.uploadTrackPage = false;
 	$scope.createProjectPage = false;
 	$scope.project = {};
+	$scope.isOnUserPage = true; //allows the tag add/delete buttonns to not be displayed by search 
+
+
 
 
 	$scope.createProjectPopUp = function(){
@@ -19,10 +25,16 @@ angular.module('shareSoundApp')
 
 	$scope.uploadTrack = function(){
 
+
 		$scope.uploadTrackPage = true;
 
-	}
 
+	}
+    
+    $scope.showAddTag = function(track){
+        $scope.addTagPage = true;   
+        $scope.trackToChange = track; 
+    }
 
 	$scope.Close = function(){
 
@@ -30,6 +42,32 @@ angular.module('shareSoundApp')
 		$scope.createProjectPage = false;
 
 	}
+    
+    $scope.addTag = function(){
+        console.log("submitted......"); 
+        console.log($scope.track.tags); 
+    
+        Tracks.addTags($scope.trackToChange, $scope.track.tags); 
+        $scope.showAddTag = false; 
+        $state.transitionTo($state.current, $stateParams, {
+                    reload: true,
+                    inherit: false,
+                    notify: true
+        });
+    } 
+    
+    $scope.deleteTag = function(id, tag){
+        console.log("deleting " + tag + " for " + id); 
+        Tracks.deleteTag(id, tag);
+        $state.transitionTo($state.current, $stateParams, {
+                    reload: true,
+                    inherit: false,
+                    notify: true
+    
+        }); 
+        
+    }
+    
 
 	$scope.submit = function() {
       $scope.submitted = true;
@@ -41,6 +79,24 @@ angular.module('shareSoundApp')
       console.log("The tag array is : " + tagArray)
       $scope.tagArray = tagArray;
         
+    };
+    
+    $scope.searchTag = function(query){
+      console.log("SEARCHINGGGG"); 
+      console.log(query); 
+      Tracks.searchTracks(query)
+      .then( function() {
+			$scope.searchResults = Tracks.resultTracks; 
+			console.log("found tracks..... " + JSON.stringify($scope.searchResults));
+            //$location.path('search'); 
+            //this is better than location.path because refresh page if current page 
+            $state.transitionTo('search' , $stateParams, {
+                reload: true,
+                inherit: false,
+                notify: true
+            });
+		})
+    
     };
 
 

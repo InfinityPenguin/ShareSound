@@ -83,6 +83,43 @@ exports.search = function(req, res){
         
     });
 };
+ 
+exports.addTags = function(req, res){
+  var tagArray = req.params.tags.split(" "); 
+  var trackToChange = req.params.id; 
+    
+  console.log("adding tags " + req.params.tags + " for " + trackToChange); 
+  tagArray.forEach(function(tag){
+      Track.update({_id: trackToChange},{$addToSet: {tags:tag}},{upsert:false},function(err){
+        if(err){
+                console.log(err);
+        }else{
+                console.log("Successfully added");
+                return res.json(tagArray); 
+        }
+      });
+  })
+};
+
+exports.deleteTag = function(req, res){
+  var tag = decodeURIComponent(req.params.tag);  
+  var trackToChange = decodeURIComponent(req.params.id); 
+  console.log("DELETING......"+tag);     
+    
+    
+  Track.update(
+  { _id: trackToChange },
+  { $pull: {tags: tag } },
+      function(err){
+        if(err){
+                console.log(err);
+        }else{
+                console.log("Removed");
+                return res.json(tag); 
+        }
+          
+      }); 
+};
 
 
 exports.download = function(req, res) {
