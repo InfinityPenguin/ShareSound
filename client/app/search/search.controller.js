@@ -109,8 +109,6 @@ angular.module('shareSoundApp')
 			$scope.show = false;
 		}
     };
-<<<<<<< HEAD
-=======
     
     $scope.searchTag = function(query){
       console.log("SEARCHINGGGG"); 
@@ -129,5 +127,4 @@ angular.module('shareSoundApp')
 		})
     
     };
->>>>>>> ce252415ba13c67118848cac50f7eaa173c34390
   });
