@@ -70,19 +70,6 @@ exports.getUserTracks = function(req, res){
 	});
 }; 
 
-exports.getTracksByUsername = function(req, res){
-	console.log("getting tracks for ..... " + req.params.username); 
-	User.findOne({username : req.params.username}, function(err, user) {
-		var userid = user._id
-		Track.find({uploader_id : userid}, function (err, track) {
-			if(err) { return handleError(res, err); }
-			if(!track) { return res.send(404); }
-			console.log("Found tracks: " + JSON.stringify(track));     
-			return res.json(track);
-		});
-	});
-}; 
-
 exports.search = function(req, res){
   var tagArray = req.params.tags.split(" "); 
   console.log("searching tracks for .... " + req.params.tags); 

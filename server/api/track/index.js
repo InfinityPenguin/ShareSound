@@ -18,7 +18,6 @@ router.get('/tags/add/:id/:tags', controller.addTags);
 router.get('/tags/delete/:id/:tag', controller.deleteTag); 
 
 router.get('/:id', controller.getUserTracks);
-router.get('/getbyusername/:username', controller.getTracksByUsername);
 
 //router.get('/:id', controller.show);
 //router.put('/:id', controller.update);
