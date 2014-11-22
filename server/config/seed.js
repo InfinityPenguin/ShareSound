@@ -48,7 +48,8 @@ Track.find({}).remove(function() {
         url: 'https://sharesound.s3.amazonaws.com/wareru9.mp3',
         uploader_id: "444444444444444444444444", 
         description: "The sound of glass breaking",
-        tags: ["sound", "effects", "dramatic"]
+        tags: ["sound", "effects", "dramatic"],
+        _id : mongoose.Types.ObjectId("DDDDDDDDDDDD")
         
         
     }, {
