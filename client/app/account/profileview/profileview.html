@@ -1,0 +1,82 @@
+
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class= "u-container">
+	<div class = "u-sidebar">
+		<div class = "userInfo">
+			<div class = "profile-picture">
+				<img class= "logo" src="assets/images/logo.png" alt="">
+			</div>
+		</div>
+		<div  class = "buttonList">	
+			<ul class = "bList">
+				<li ng-hide= "show" class = "userOptions showTrack" ng-click = "showtracks()" >
+					Show Tracks
+				</li>
+				<li ng-show = "show"  class = "userOptions hideTrack" ng-click = "showtracks()" >
+					Hide Tracks
+				</li>
+				<li class = "userOptions" ng-click = "uploadTrack()">
+					Upload Track
+				</li>
+				<li class = "userOptions" ng-click = "showProjects()">
+					Show Projects
+				</li>
+				<li class = "userOptions" ng-click = "createProjects()">
+					Create Project
+				</li>
+
+			</ul>
+		</div>
+	</div>
+	<div class="u-content">
+		<div class = "banner">
+			<span  class= "message">
+				<h1>Welcome to {{profileusername}}'s page</h1>
+				<h2>{{profileusername}} tracks: </h2>
+				</span>
+
+				<div class= "tracks" ng-include src="'app/account/user/templates/user.tracks.html'"></div>
+			</div>
+	</div>
+</div>
+
+<div class = "popUp" ng-show = "addTagPage">		
+		<form class="form" name="form" ng-submit="addTag()" novalidate>
+			<div class="newTag">
+				<label for="Tags">Add space separated tags:</label><input type="tags" id="tags" placeholder="tags" required="required" ng-model="track.tags"  />
+                <button class="btn btn-inverse btn-sm" type="submit">
+                    Add
+                </button>
+			</div>
+  		</form>
+		<button ng-click="Close()" class="closeButton button">Close</button>
+</div>
+
+
+
+
+<div class = "popUp" ng-show = "uploadPage">
+		<h1 id="status">Please select a file to upload</h1>
+		
+		<form class="form" name="form" ng-submit="submit()" novalidate>
+			<div class="uploadLabel">
+				<label for="Tags">Tags:</label><input type="tags" id="tags" placeholder="tags" required="required" ng-model="track.tags"  />
+			</div>
+			<div class="uploadLabel">
+				<label for="Project">Project:</label><input type="project" id="project" placeholder="Project" required="required" ng-model="track.project" />
+			</div>
+            <div class="uploadLabel">
+				<label for="Description">Description:</label><input type="description" id="description" placeholder="Briefly describe this track." required="required" ng-model="track.description" />
+			</div>
+  			</form>
+
+		<input type="file" id="files"/>
+		<button ng-click="s3_upload()">Upload me, son</button>
+		<button ng-click="Close()" class="closeButton button">Close</button>
+</div>
+<!-- <div ng-show= "uploadPage" id="fade" class="black_overlay"></div>
+ -->
+
+
+
+

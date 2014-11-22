@@ -18,13 +18,20 @@ angular.module('shareSoundApp')
             return tracks; 
       });
     };
-      
+
+    service.getTracksByUsername = function(username){
+      return $http.get('/api/tracks/getbyusername/' + username)
+        .success(function (tracks){
+            console.log("the tracks for user " + username + " are " + JSON.stringify(tracks)); 
+            service.userTracks = tracks; 
+            return tracks; 
+      });
+    };  
     
     service.addTags = function(id, tags){
       return $http.get('/api/tracks/tags/add/' + encodeURIComponent(id)  + '/' + encodeURIComponent(tags))
         .success(function (tracks){
-            console.log("send add tags..."); 
-
+            console.log("send add tags...");
       });
     };
     
