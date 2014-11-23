@@ -19,7 +19,9 @@ angular.module('shareSoundApp')
     };
 
     service.getUserProjects = function(userId){
-      return $http.get('/api/projects/' + userId)
+      console.log("getting projects") 
+
+      return $http.get('/api/projects/user/' + userId)
         .success(function (projects){
             console.log("the projects for user " + userId + " are " + JSON.stringify(projects)); 
             service.userProjects = projects; 
