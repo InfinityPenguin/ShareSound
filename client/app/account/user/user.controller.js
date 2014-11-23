@@ -146,10 +146,10 @@ angular.module('shareSoundApp')
 	$scope.createProject = function(){
 		$scope.user = {};
     	$scope.errors = {};
-	  
-        projects.createProject({
+	  	console.log(Auth.getCurrentUser());
 
-        	owner: $scope.getCurrentUser,
+        projects.createProject({
+        	owner: Auth.getCurrentUser()._id,
         	name: $scope.project.name,
         	description: $scope.project.description,
         	tags: $scope.project.tags
@@ -170,7 +170,7 @@ angular.module('shareSoundApp')
 	};
 
 
-	Auth.isLoggedInAsync(function(response){
+	Auth.isLoggedInAsync(function(response){ 
 		if(response){
 			console.log("is logged in!!!!!!!!");
 			console.log(Auth.getCurrentUser());
@@ -187,6 +187,19 @@ angular.module('shareSoundApp')
 			$location.path('login'); 
 		};
 	});
+
+	$scope.findProjects = function(){
+
+		projects.getUserProjects(Auth.getCurrentUser()._id)
+		.then( function() {
+			$scope.projects = projects.userProjects;
+			console.log("projects..... " + JSON.stringify($scope.projects));
+		})
+
+
+	}
+
+
 
 	$scope.doAll = function(action) {
 		if (action == 'play') {
