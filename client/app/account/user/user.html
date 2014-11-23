@@ -18,7 +18,7 @@
 				<li class = "userOptions" ng-click = "uploadTrack()">
 					Upload Track
 				</li>
-				<li class = "userOptions" ng-click = "findProjects()">
+				<li class = "userOptions" ng-click = "showProjectView()">
 					Show Projects
 				</li>
 				<li class = "userOptions" ng-click = "createProjectPopUp()">
@@ -32,10 +32,12 @@
 		<div class = "banner">
 			<span  class= "message">
 				<h1>Welcome {{getCurrentUser().username }}</h1>
-				<h2>Your tracks: </h2>
+				<h2>Your projects: </h2>
 				</span>
 
-				<div class= "tracks" ng-include src="'app/account/user/templates/user.tracks.html'"></div>
+				<div class= "tracks" ng-hide = "projectView" ng-include src="'app/account/user/templates/user.tracks.html'"></div>
+				<div class= "projects" ng-show = "projectView" ng-include src="'app/account/user/templates/user.projects.html'"></div>
+
 			</div>
 	</div>
 </div>

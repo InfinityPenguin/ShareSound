@@ -1,0 +1,23 @@
+<div class = "project_List">
+
+	<li ng-repeat = "project in projects">
+
+		<div class = "well">
+			<h3>{{project.name}}</h3>
+				<div ng-repeat="tag in project.tags" >
+		             <div class="btn-group" style="float:left">
+		                <button type="button" class="btn btn-default btn-sm" style="float:left" ng-click="searchTag(tag)">
+		                  {{tag}}  
+		                </button>
+		                <button type="button" class="btn btn-default btn-sm" style="float:left" ng-click="deleteTag(project._id, tag)" ng-show="isOnUserPage">
+		                    <i class="glyphicon glyphicon-remove"></i>
+		                </button>
+	             </div>
+			</div>
+			<p>
+		            <br><br>
+		        {{project.description}} 
+	        </p> 
+		</div>
+	</li>
+</div>

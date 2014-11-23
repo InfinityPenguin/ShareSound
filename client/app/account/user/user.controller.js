@@ -8,7 +8,7 @@ angular.module('shareSoundApp')
 	$scope.isLoggedIn = Auth.isLoggedIn;
 	$scope.show = false;
 	$scope.tracksinit = false;
-
+	$scope.projectView = true;
 	$scope.uploadTrackPage = false;
 	$scope.createProjectPage = false;
 	$scope.project = {};
@@ -24,7 +24,11 @@ angular.module('shareSoundApp')
 			});
         
       });
-    
+    $scope.showProjectView = function(){
+
+    	$scope.projectView = !$scope.projectView;
+
+    }
 	$scope.createProjectPopUp = function(){
 		
 		console.log("createProject")
@@ -194,6 +198,12 @@ angular.module('shareSoundApp')
 			console.log("nope!!!!"); 
 			$location.path('login'); 
 		};
+		projects.getUserProjects(Auth.getCurrentUser()._id)
+		.then( function() {
+			$scope.projects = projects.userProjects;
+			console.log("projects..... " + JSON.stringify($scope.projects));
+		})
+
 	});
 
 	$scope.findProjects = function(){
