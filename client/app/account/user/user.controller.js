@@ -15,8 +15,16 @@ angular.module('shareSoundApp')
 	$scope.isOnUserPage = true; //allows the tag add/delete buttonns to not be displayed by search 
 
 
-
-
+    $scope.$on('$destroy', function(event) {
+        console.log("leaving page..."); 
+        $scope.wavesurfers.map(function(ws) {
+                if (!ws.backend.isPaused()){
+                    return ws.pause();    
+                }
+			});
+        
+      });
+    
 	$scope.createProjectPopUp = function(){
 		
 		console.log("createProject")
