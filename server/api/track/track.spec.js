@@ -134,11 +134,19 @@ describe('Track Model', function() {
 	}); 
     
     it('should find all tracks by username', function(done) {
+    	var newUser = new User({username: "findtracktestuser", password: "123123"});
+    	var id = mongoose.Types.ObjectId("111111111111111111111111");
+    	newUser._id = id; 
+    	newUser.save(function(err, user){
+    	});
+    	var testtrack = new Track({name: "testtrack", uploader_id : "111111111111111111111111"})
+    	testtrack.save(function(err,user){
+    	});
     	request(app)
-    	.get('/api/tracks/getbyusername/test')
+    	.get('/api/tracks/getbyusername/findtracktestuser')
     	.expect(200)
     	.end(function(err, res) {
-    		expect(res.body).to.have.length(5)
+    		expect(res.body).to.have.length(1)
     		if (err) return done(err);
     		done();
     	});
@@ -148,5 +156,9 @@ describe('Track Model', function() {
     	request(app)
     	.get('/api/tracks/getbyusername/badname')
     	.expect(404)
+    	.end(function(err,res){
+    		if (err) return done(err);
+    		done();
+    	})
     }); 
 });
