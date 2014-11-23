@@ -209,6 +209,7 @@ angular.module('shareSoundApp')
 	$scope.showtracks = function() {
 		if (!$scope.show){
 			$scope.show = true;
+			$scope.showplayall = true;
 			if (!$scope.tracksinit){
 
 				$scope.tracksinit = true;
@@ -305,6 +306,7 @@ angular.module('shareSoundApp')
 			};
 		} else {
 			$scope.show = false;
+			$scope.showplayall = false;
 		}
 
 		// angular.forEach($scope.tracks, function(track, key) {
