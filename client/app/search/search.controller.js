@@ -7,6 +7,15 @@ angular.module('shareSoundApp')
     $scope.query = Tracks.query; 
    
     console.log("search knows: " + JSON.stringify($scope.tracks)); 
+      $scope.$on('$destroy', function(event) {
+        console.log("leaving page..."); 
+        $scope.wavesurfers.map(function(ws) {
+                if (!ws.backend.isPaused()){
+                    return ws.pause();    
+                }
+			});
+        
+      });
     
     $scope.showtracks = function() {
 		if (!$scope.show){
