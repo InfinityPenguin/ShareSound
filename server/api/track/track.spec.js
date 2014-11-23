@@ -122,7 +122,7 @@ describe('Track Model', function() {
 		});
 	}); 
     
-     it('should remove tag from a track', function(done) {
+    it('should remove tag from a track', function(done) {
 		request(app)
 		.get('/api/tracks/tags/delete/444444444444444444444444/cool')
 		.expect(200)
@@ -133,6 +133,20 @@ describe('Track Model', function() {
 		});
 	}); 
     
-    
-    
+    it('should find all tracks by username', function(done) {
+    	request(app)
+    	.get('/api/tracks/getbyusername/test')
+    	.expect(200)
+    	.end(function(err, res) {
+    		expect(res.body).to.have.length(5)
+    		if (err) return done(err);
+    		done();
+    	});
+    }); 
+
+    it('should error when finding tracks with bad username', function(done) {
+    	request(app)
+    	.get('/api/tracks/getbyusername/badname')
+    	.expect(404)
+    }); 
 });
