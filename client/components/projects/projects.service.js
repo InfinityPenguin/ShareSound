@@ -31,6 +31,17 @@ angular.module('shareSoundApp')
       });
     };
 
+    service.getUserProjectsByUsername = function(username){
+      console.log("getting projects by username") 
+
+      return $http.get('/api/projects/getprojectsbyusername/' + username)
+        .success(function (projects){
+            console.log("the projects for user " + username + " are " + JSON.stringify(projects)); 
+            service.userProjects = projects; 
+            return projects; 
+      });
+    };
+
     service.getProject = function(projectId){
 
       return $http.get('/api/projects/' + projectId)

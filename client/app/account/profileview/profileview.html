@@ -28,10 +28,11 @@
 		<div class = "banner">
 			<span  class= "message">
 				<h1>Welcome to {{profileusername}}'s page</h1>
-				<h2>{{profileusername}} tracks: </h2>
+				<h2>{{profileusername}}'s Projects: </h2>
 				</span>
 
-				<div class= "tracks" ng-include src="'app/account/user/templates/user.tracks.html'"></div>
+				<div class= "tracks" ng-hide = "projectView" ng-include src="'app/account/user/templates/user.tracks.html'"></div>
+				<div class= "projects" ng-show = "projectView" ng-include src="'app/account/user/templates/user.projects.html'"></div>
 			</div>
 	</div>
 </div>

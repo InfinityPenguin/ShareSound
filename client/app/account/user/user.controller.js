@@ -240,19 +240,18 @@ angular.module('shareSoundApp')
 			console.log("projects..... " + JSON.stringify($scope.projects));
 		})
 
-
 	});
 
-	$scope.findProjects = function(){
+	// $scope.findProjects = function(){
 
-		projects.getUserProjects(Auth.getCurrentUser()._id)
-		.then( function() {
-			$scope.projects = projects.userProjects;
-			console.log("projects..... " + JSON.stringify($scope.projects));
-		})
+	// 	projects.getUserProjects(Auth.getCurrentUser()._id)
+	// 	.then( function() {
+	// 		$scope.projects = projects.userProjects;
+	// 		console.log("projects..... " + JSON.stringify($scope.projects));
+	// 	})
 
 
-	}
+	// }
 
 
 
