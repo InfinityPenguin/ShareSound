@@ -25,6 +25,12 @@ angular.module('shareSoundApp')
         controller: 'UserCtrl',
         authenticate: true,
       })
+      .state('project', {
+        url: '/user/:projectID',
+        templateUrl: 'app/account/user/templates/user.project.html',
+        controller: 'UserCtrl',
+        authenticate: true,
+      })
       .state('profileview', {
         url: '/user/:username',
         templateUrl: 'app/account/profileview/profileview.html',

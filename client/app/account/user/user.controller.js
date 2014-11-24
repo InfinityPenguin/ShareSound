@@ -8,12 +8,12 @@ angular.module('shareSoundApp')
 	$scope.isLoggedIn = Auth.isLoggedIn;
 	$scope.show = false;
 	$scope.tracksinit = false;
-
+	$scope.projectView = true;
 	$scope.uploadTrackPage = false;
 	$scope.createProjectPage = false;
 	$scope.project = {};
 	$scope.isOnUserPage = true; //allows the tag add/delete buttonns to not be displayed by search 
-
+	// $scope.currentProject;
 
     $scope.$on('$destroy', function(event) {
         console.log("leaving page..."); 
@@ -24,7 +24,12 @@ angular.module('shareSoundApp')
 			});
         
       });
-    
+    $scope.showProjectView = function(){
+
+    	$location.path("/user");
+
+
+    }
 	$scope.createProjectPopUp = function(){
 		
 		console.log("createProject")
@@ -177,6 +182,26 @@ angular.module('shareSoundApp')
 
 	};
 
+	$scope.viewProject = function(projectID){
+
+
+		$location.path("/user/" + projectID)
+		// $scope.projectView = false;
+
+		// Tracks.getTracks(projectID)
+		// .then( function() {
+		// 	$scope.tracks = Tracks.userTracks;
+		// 	console.log("tracks..... " + JSON.stringify($scope.tracks));
+		// })
+		
+	}
+	$scope.getProject = function(){
+
+		projects.getProject($stateParams.projectID);
+
+
+	}
+
 
 	Auth.isLoggedInAsync(function(response){ 
 		if(response){
@@ -184,16 +209,27 @@ angular.module('shareSoundApp')
 			console.log(Auth.getCurrentUser());
 			console.log(Auth.getCurrentUser()._id); 
 
-			Tracks.getTracks(Auth.getCurrentUser()._id)
+		Tracks.getTracks(Auth.getCurrentUser()._id)
 		.then( function() {
 			$scope.tracks = Tracks.userTracks;
 			console.log("tracks..... " + JSON.stringify($scope.tracks));
 		})
+		// if($stateParams.projectID){
+
+		// 	$scope.currentProject = projects.getProject($stateParams.projectID);
+		// 	console.log("name of project" +$scope.currentProject.name);
+		// }
 		}
 		else{
 			console.log("nope!!!!"); 
 			$location.path('login'); 
 		};
+		projects.getUserProjects(Auth.getCurrentUser()._id)
+		.then( function() {
+			$scope.projects = projects.userProjects;
+			console.log("projects..... " + JSON.stringify($scope.projects));
+		})
+
 	});
 
 	$scope.findProjects = function(){

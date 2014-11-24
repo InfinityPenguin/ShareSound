@@ -9,7 +9,8 @@ var TrackSchema = new Schema({
 	uploader_id: String,
     description: String,
     tags: [String],
-    project: String
+    project: String,
+    project_id: String 
 });
 
 TrackSchema.statics.isValidTrack = function (name, callback) {
