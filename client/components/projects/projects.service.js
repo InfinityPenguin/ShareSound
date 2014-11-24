@@ -8,7 +8,8 @@ angular.module('shareSoundApp')
     // Public API here
     var service = {}; 
     service.userProjects = []; 
-    service.currProjects = {}; 
+    service.currProjects = {};
+    service.currProjectTracks = [];
     service.query = "";
 
     service.createProject = function (projectObj) {
@@ -39,6 +40,15 @@ angular.module('shareSoundApp')
       });
     };
 
+    service.getProjectTracks = function(projectId){
+
+      return $http.get('/api/tracks/project/' + projectId)
+      .success(function(tracks){
+        console.log("current project is " +JSON.stringify(project));
+        service.currProjectTracks = tracks;
+        return tracks;
+      });
+    };
 
     return service;   
   });

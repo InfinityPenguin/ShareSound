@@ -8,6 +8,8 @@
 var Thing = require('../api/thing/thing.model');
 var User = require('../api/user/user.model');
 var Track = require('../api/track/track.model');
+var Project = require('../api/project/project.model');
+
 var mongoose = require('mongoose');
 
 Thing.find({}).remove(function() {
@@ -41,6 +43,13 @@ User.find({}).remove(function() {
 });
 
 Track.find({}).remove(function() {
+    var testproject = new Project({
+        name: "test project",
+        owner: "444444444444444444444444",
+        tags: ["test", "project"],
+        description: 'This is description of test project'
+    })
+    testproject.save();
     Track.create({
 
         name: "Wareru9",
@@ -49,7 +58,8 @@ Track.find({}).remove(function() {
         uploader_id: "444444444444444444444444", 
         description: "The sound of glass breaking",
         tags: ["sound", "effects", "dramatic"],
-        _id : mongoose.Types.ObjectId("DDDDDDDDDDDD")
+        _id : mongoose.Types.ObjectId("DDDDDDDDDDDD"),
+        project_id : testproject._id
         
         
     }, {
