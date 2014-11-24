@@ -230,6 +230,7 @@ angular.module('shareSoundApp')
 				console.log("holy mother of god" +projects.currProjects)
 				$scope.currentProject = projects.currProjects;
 			})
+			projects.getProjectTracks($stateParams.projectID)
 
 		}
 
@@ -238,6 +239,7 @@ angular.module('shareSoundApp')
 			$scope.projects = projects.userProjects;
 			console.log("projects..... " + JSON.stringify($scope.projects));
 		})
+
 
 	});
 
