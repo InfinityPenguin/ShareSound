@@ -89,11 +89,13 @@ li{
 		width: 34%;
         padding-left: 1%;
 		padding-right: 1%;        
-		border: 1px solid black;
+		border: 1px solid white;
         background-color: white;
         z-index:1002;
-        overflow: auto;
-        text-align:center;
+        
+        box-shadow: 5px 5px 50px 5px #aaaaaa;
+        
+        border-radius: 25px;
         
         .alertMessage{
         	padding-top:1em;
