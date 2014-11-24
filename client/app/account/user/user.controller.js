@@ -122,7 +122,7 @@ angular.module('shareSoundApp')
         
         //add tags and project 
         var tagEncode = encodeURIComponent($scope.track.tags);
-        var projectEncode = encodeURIComponent($scope.track.project);
+        var projectEncode = encodeURIComponent($scope.currentProject._id);
         var descriptionEncode = encodeURIComponent($scope.track.description); 
         
         console.log("The encoded tags is : " + tagEncode);
@@ -191,15 +191,6 @@ angular.module('shareSoundApp')
 
 		
 	}
-	$scope.getProject = function(){
-
-		projects.getProject($stateParams.projectID);
-		projects.getProjectTracks($stateParams.projectID)
-		.then(function () {
-			console.log('Project tracks:..' + projects.currProjectTracks);
-			$scope.tracks = projects.currProjectTracks;
-		});
-	}
 
 
 	Auth.isLoggedInAsync(function(response){ 
@@ -227,8 +218,13 @@ angular.module('shareSoundApp')
 		if($stateParams.projectID!=undefined){
 			console.log("not undefined")
 			projects.getProject($stateParams.projectID).then(function(){
-				console.log("holy mother of god" +projects.currProjects)
+				// console.log("holy mother of god" +projects.currProjects)
 				$scope.currentProject = projects.currProjects;
+				projects.getProjectTracks($stateParams.projectID)
+					.then(function () {
+						console.log('Project tracks:..' + projects.currProjectTracks);
+						$scope.tracks = projects.currProjectTracks;
+					});
 			})
 
 		}
@@ -236,7 +232,9 @@ angular.module('shareSoundApp')
 		projects.getUserProjects(Auth.getCurrentUser()._id)
 		.then( function() {
 			$scope.projects = projects.userProjects;
-			console.log("projects..... " + JSON.stringify($scope.projects));
+
+
+			// console.log("projects..... " + JSON.stringify($scope.projects));
 		})
 
 	});

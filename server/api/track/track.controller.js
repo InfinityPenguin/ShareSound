@@ -165,7 +165,7 @@ exports.create = function(req, res, callback) {
 	var name = req.query.s3_object_name;
     //var name = decodeURIComponent(req.params.name); 
     var tags = decodeURIComponent(req.params.tags);
-    var project = decodeURIComponent(req.params.project);
+    var project_id = decodeURIComponent(req.params.project);
     var description = decodeURIComponent(req.params.description); 
     
 	User.findById(userId, function(err, user) {
