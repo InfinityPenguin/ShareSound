@@ -122,7 +122,7 @@ angular.module('shareSoundApp')
         
         //add tags and project 
         var tagEncode = encodeURIComponent($scope.track.tags);
-        var projectEncode = encodeURIComponent($scope.track.project);
+        var projectEncode = encodeURIComponent($scope.currentProject._id);
         var descriptionEncode = encodeURIComponent($scope.track.description); 
         
         console.log("The encoded tags is : " + tagEncode);

@@ -45,7 +45,7 @@ angular.module('shareSoundApp')
 
       return $http.get('/api/tracks/project/' + projectId)
       .success(function(tracks){
-        console.log("current project is " +JSON.stringify(project));
+        console.log("current tracks are: " +JSON.stringify(tracks));
         service.currProjectTracks = tracks;
         return tracks;
       });
