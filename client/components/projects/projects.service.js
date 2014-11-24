@@ -31,7 +31,7 @@ angular.module('shareSoundApp')
 
     service.getProject = function(projectId){
 
-      return $http.get('/api/projects/' + projectId);
+      return $http.get('/api/projects/' + projectId)
       .success(function(project){
         console.log("current project is " +JSON.stringify(project));
         service.currProjects = project;
