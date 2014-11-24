@@ -224,6 +224,15 @@ angular.module('shareSoundApp')
 		// 	console.log("nope!!!!"); 
 		// 	$location.path('login'); 
 		// };
+		if($stateParams.projectID!=undefined){
+			console.log("not undefined")
+			projects.getProject($stateParams.projectID).then(function(){
+				console.log("holy mother of god" +projects.currProjects)
+				$scope.currentProject = projects.currProjects;
+			})
+
+		}
+
 		projects.getUserProjects(Auth.getCurrentUser()._id)
 		.then( function() {
 			$scope.projects = projects.userProjects;
