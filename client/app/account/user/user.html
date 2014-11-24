@@ -9,19 +9,25 @@
 		</div>
 		<div  class = "buttonList">	
 			<ul class = "bList">
+				
+				<span ng-hide = "projectView">
 				<li ng-hide= "show" class = "userOptions showTrack" ng-click = "showtracks()" >
 					Show Tracks
 				</li>
 				<li ng-show = "show"  class = "userOptions hideTrack" ng-click = "showtracks()" >
 					Hide Tracks
 				</li>
+				
 				<li class = "userOptions" ng-click = "uploadTrack()">
 					Upload Track
 				</li>
-				<li class = "userOptions" ng-click = "showProjectView()">
+				</span>
+
+				<li class = "userOptions" ng-hide = "projectView" ng-click = "showProjectView()">
 					Show Projects
 				</li>
-				<li class = "userOptions" ng-click = "createProjectPopUp()">
+
+				<li class = "userOptions" ng-show = "projectView" ng-click = "createProjectPopUp()">
 					Create Project
 				</li>
 
