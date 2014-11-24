@@ -2,6 +2,9 @@
 
 var _ = require('lodash');
 var Project = require('./project.model');
+var User = require('../user/user.model');
+var Track = require('../track/track.model');
+
 
 // Get list of projects
 exports.index = function(req, res) {
@@ -63,6 +66,21 @@ exports.getUserProjects = function(req, res){
 
     console.log("Found projects: " + JSON.stringify(project));     
     return res.json(project);
+  });
+};
+
+exports.getUserProjectsByUsername = function(req, res){
+  console.log("getting projects by name for ..... " + req.params.id); 
+  User.findOne({username : req.params.username}, function(err, user) {
+    if(err) { return handleError(res, err); }
+    if(!user) { return res.send(404); }
+    var userid = user._id
+    Project.find({owner : userid}, function (err, project) {
+      if(err) { return handleError(res, err); }
+      if(!project) { return res.send(404); }
+      console.log("Found projects: " + JSON.stringify(project));     
+      return res.json(project);
+    });
   });
 };
 

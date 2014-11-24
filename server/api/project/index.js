@@ -8,6 +8,7 @@ var router = express.Router();
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.get('/user/:id', controller.getUserProjects);
+router.get('/getprojectsbyusername/:username', controller.getUserProjectsByUsername);
 router.post('/', controller.create);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
