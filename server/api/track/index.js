@@ -7,7 +7,7 @@ var auth = require('../../auth/auth.service');
 var router = express.Router();
 
 router.get('/', controller.index);
-router.get('/uploadTrack/:tags/:project/:description', controller.getUploadURL);
+router.get('/uploadTrack/:tags/:project_id/:description', controller.getUploadURL);
 router.get('/uploadTrack', controller.getUploadURL); 
 router.post('/deleteTrack', controller.destroy);
 router.post('/downloadTrack', controller.download);
