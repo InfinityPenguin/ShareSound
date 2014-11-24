@@ -199,7 +199,6 @@ angular.module('shareSoundApp')
 
 		projects.getProject($stateParams.projectID);
 
-
 	}
 
 
@@ -208,17 +207,20 @@ angular.module('shareSoundApp')
 			console.log("is logged in!!!!!!!!");
 			console.log(Auth.getCurrentUser());
 			console.log(Auth.getCurrentUser()._id); 
+		console.log("the id is "+ $stateParams.projectID)
+		// Tracks.getTracks(Auth.getCurrentUser()._id)
+		// .then( function() {
+		// 	$scope.tracks = Tracks.userTracks;
+		// 	console.log("tracks..... " + JSON.stringify($scope.tracks));
+		// })
+		if($stateParams.projectID != undefined){
 
-		Tracks.getTracks(Auth.getCurrentUser()._id)
-		.then( function() {
-			$scope.tracks = Tracks.userTracks;
-			console.log("tracks..... " + JSON.stringify($scope.tracks));
-		})
-		// if($stateParams.projectID){
+			projects.getProject($stateParams.projectID).then( function(){
 
-		// 	$scope.currentProject = projects.getProject($stateParams.projectID);
-		// 	console.log("name of project" +$scope.currentProject.name);
-		// }
+				$scope.currentProject = projects.currProject;
+				console.log("name of project " + $scope.currentProject.name);
+			})
+		}
 		}
 		else{
 			console.log("nope!!!!"); 

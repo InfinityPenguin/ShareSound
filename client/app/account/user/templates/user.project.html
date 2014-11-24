@@ -33,8 +33,8 @@
 	<div class="u-content">
 		<div class = "banner">
 			<span  class= "message">
-				<h1>Welcome {{getCurrentUser().username }}</h1>
-				<h2>Your projects: </h2>
+				<h1>{{currentProject.name }}</h1>
+				<h2>{{currentProject.description }} </h2>
 				</span>
 
 				<div class= "tracks" ng-include src="'app/account/user/templates/user.tracks.html'"></div>
