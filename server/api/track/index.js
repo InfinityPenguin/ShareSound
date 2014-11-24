@@ -17,6 +17,8 @@ router.get('/search/:tags', controller.search);
 router.get('/tags/add/:id/:tags', controller.addTags); 
 router.get('/tags/delete/:id/:tag', controller.deleteTag); 
 
+router.get('/project/:id', controller.getProjectTracks); 
+
 router.get('/:id', controller.getUserTracks);
 router.get('/getbyusername/:username', controller.getTracksByUsername);
 

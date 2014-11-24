@@ -58,6 +58,17 @@ exports.destroy = function(req, res) {
 	});
 };
 
+exports.getProjectTracks = function(req, res){
+    console.log("getting tracks for ..... " + req.params.id); 
+	Track.find({project_id : req.params.id}, function (err, track) {
+		if(err) { return handleError(res, err); }
+		if(!track) { return res.send(404); }
+
+		console.log("Found tracks: " + JSON.stringify(track));     
+		return res.json(track);
+	});
+    
+}; 
 
 exports.getUserTracks = function(req, res){
 	console.log("getting tracks for ..... " + req.params.id); 
