@@ -188,10 +188,6 @@ angular.module('shareSoundApp')
 		$location.path("/user/" + projectID)
 		projects.getProject(projectID);
 		projects.getProjectTracks(projectID)
-		.then(function () {
-			console.log('Project tracks:..' + JSON.stringify(projects.currProjectTracks));
-			$scope.tracks = projects.currProjectTracks;
-		});
 
 		
 	}
