@@ -105,7 +105,7 @@ describe('Track Model', function() {
 		.get('/api/tracks/444444444444444444444444')
 		.expect(200)
 		.end(function(err, res) {
-            expect(res.body).to.have.length(5)
+            expect(res.body).to.have.length(6);
 			if (err) return done(err);
 			done();
 		});
