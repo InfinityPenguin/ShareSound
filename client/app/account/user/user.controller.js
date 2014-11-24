@@ -218,8 +218,9 @@ angular.module('shareSoundApp')
 		if($stateParams.projectID!=undefined){
 			console.log("not undefined")
 			projects.getProject($stateParams.projectID).then(function(){
-				console.log("holy mother of god" +projects.currProjects)
+				// console.log("holy mother of god" +projects.currProjects)
 				$scope.currentProject = projects.currProjects;
+
 			})
 			projects.getProjectTracks($stateParams.projectID)
 
@@ -228,7 +229,9 @@ angular.module('shareSoundApp')
 		projects.getUserProjects(Auth.getCurrentUser()._id)
 		.then( function() {
 			$scope.projects = projects.userProjects;
-			console.log("projects..... " + JSON.stringify($scope.projects));
+
+
+			// console.log("projects..... " + JSON.stringify($scope.projects));
 		})
 
 	});
