@@ -35,13 +35,14 @@ Thing.find({}).remove(function() {
 });
 
 User.find({}).remove(function() {
-  var newUser = new User({username: "test", password: "123123"});
-  var id = mongoose.Types.ObjectId("DDDDDDDDDDDD");
-  newUser._id = id; 
-  newUser.save(function(err, user){
-  }); 
+  Project.find({name: "test project", owner: "444444444444444444444444"}).remove(function() {
+    var newUser = new User({username: "test", password: "123123"});
+    var id = mongoose.Types.ObjectId("DDDDDDDDDDDD");
+    newUser._id = id; 
+    newUser.save(function(err, user){
+    }); 
+  });
 });
-
 Track.find({}).remove(function() {
     var testproject = new Project({
         name: "test project",
