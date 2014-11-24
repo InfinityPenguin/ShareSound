@@ -13,7 +13,7 @@ angular.module('shareSoundApp')
 	$scope.createProjectPage = false;
 	$scope.project = {};
 	$scope.isOnUserPage = true; //allows the tag add/delete buttonns to not be displayed by search 
-
+	// $scope.currentProject;
 
     $scope.$on('$destroy', function(event) {
         console.log("leaving page..."); 
@@ -26,7 +26,8 @@ angular.module('shareSoundApp')
       });
     $scope.showProjectView = function(){
 
-    	$scope.projectView = !$scope.projectView;
+    	$location.path("/user");
+
 
     }
 	$scope.createProjectPopUp = function(){
@@ -181,6 +182,21 @@ angular.module('shareSoundApp')
 
 	};
 
+	$scope.viewProject = function(projectID){
+
+
+		$location.path("/user/" + projectID)
+		// $scope.projectView = false;
+
+		// Tracks.getTracks(projectID)
+		// .then( function() {
+		// 	$scope.tracks = Tracks.userTracks;
+		// 	console.log("tracks..... " + JSON.stringify($scope.tracks));
+		// })
+		
+
+	}
+
 
 	Auth.isLoggedInAsync(function(response){ 
 		if(response){
@@ -188,7 +204,7 @@ angular.module('shareSoundApp')
 			console.log(Auth.getCurrentUser());
 			console.log(Auth.getCurrentUser()._id); 
 
-			Tracks.getTracks(Auth.getCurrentUser()._id)
+		Tracks.getTracks(Auth.getCurrentUser()._id)
 		.then( function() {
 			$scope.tracks = Tracks.userTracks;
 			console.log("tracks..... " + JSON.stringify($scope.tracks));
