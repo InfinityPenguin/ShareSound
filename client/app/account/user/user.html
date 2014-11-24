@@ -48,6 +48,10 @@
 	</div>
 </div>
 
+
+
+
+
 <div class = "popUp" ng-show = "addTagPage">		
 		<form class="form" name="form" ng-submit="addTag()" novalidate>
 			<div class="newTag">
@@ -62,9 +66,14 @@
 
 
 
-<div class = "popUp" ng-show = "uploadTrackPage">
-		<h1 id="status">Please select a file to upload</h1>
+<div class = "modal fade" ng-show = "uploadTrackPage">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+		  <h1 class="modal-title" id="status">Please select a file to upload</h1>
+        </div>
 		
+        <div class="modal-body">
 		<form class="form" name="form" ng-submit="submit()" novalidate>
 			<div class="uploadLabel">
 				<label for="Tags">Tags:</label><input type="tags" id="tags" placeholder="tags" required="required" ng-model="track.tags"  />
@@ -76,10 +85,14 @@
 				<label for="Description">Description:</label><input type="description" id="description" placeholder="Briefly describe this track." required="required" ng-model="track.description" />
 			</div>
   			</form>
-
+            </div>
+            <div class="modal-footer">
 		<input type="file" id="files"/>
 		<button ng-click="s3_upload()">Upload me, son</button>
 		<button ng-click="Close()" class="closeButton button">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 <div class = "popUp" ng-show = "createProjectPage" ng-include src="'app/account/user/templates/user.projects.create.html'"></div>
 
