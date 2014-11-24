@@ -1,0 +1,91 @@
+<div class = "track_list">
+	
+	<div id = "allControl" class = "controls" ng-show = "showplayall">
+		<button class="btn btn-primary" ng-click="doAll('play')">
+			<i class="glyphicon glyphicon-play"></i>
+			Play All
+		</button>
+		<button class="btn btn-primary" ng-click="doAll('pause')">
+			<i class="glyphicon glyphicon-pause"></i>
+			Pause All
+		</button>
+		<button class="btn btn-primary" ng-click="doAll('stop')">
+			<i class="glyphicon glyphicon-stop"></i>
+			Stop All
+		</button>
+		</div>
+
+		<li ng-repeat ="track in tracks">
+
+	      <div class="well"> 
+		 <h3> {{ track.name }} </h3> 
+         <div ng-repeat="tag in track.tags" >
+             <div class="btn-group" style="float:left">
+                <button type="button" class="btn btn-default btn-sm" style="float:left" ng-click="searchTag(tag)">
+                  {{tag}}  
+                </button>
+                <button type="button" class="btn btn-default btn-sm" style="float:left" ng-click="deleteTag(track._id, tag)" ng-show="isOnUserPage">
+                    <i class="glyphicon glyphicon-remove"></i>
+                </button>
+             </div>
+                
+            </div>
+            <button type="button" class="btn btn-default btn-sm" style="float:left" ng-click="showAddTag(track._id)" ng-show="isOnUserPage">
+                <i class="glyphicon glyphicon-plus"></i>
+                  Add tag...
+            </button>
+                                                      
+        <p>
+            <br><br>
+        {{track.description}} 
+        </p> 
+            
+        
+        
+        
+          
+		<div class = "wavesurfers" ng-show = "show">
+            
+
+			<p class = "url" ng-hide = "true">{{track.url}}<p>
+			<!--                 <div id = "waveform"> 
+	waveform{{$index}}</div> -->
+			<!--                 <audio controls id = '{{ track.name }}'>
+		<source src = "{{track.url}}" type = "audio/mp3">
+		</audio> -->
+
+			<div id = "{{track.name}}" class="controls" ng-show = "show">
+				<button class="btn btn-primary" data-action="back">
+					<i class="glyphicon glyphicon-step-backward"></i>
+					Backward
+				</button>
+
+				<button class="btn btn-primary" data-action="play">
+					<i class="glyphicon glyphicon-play"></i>
+					Play
+					/
+					<i class="glyphicon glyphicon-pause"></i>
+					Pause
+				</button>
+
+				<button class="btn btn-primary" data-action="forth">
+					<i class="glyphicon glyphicon-step-forward"></i>
+					Forward
+				</button>
+
+				<button class="btn btn-primary" data-action="toggle-mute">
+					<i class="glyphicon glyphicon-volume-off"></i>
+					Toggle Mute
+				</button>
+
+				<a href={{track.url}} download={{track.url}}>
+					<button class="btn btn-primary">
+						<i class="glyphicon glyphicon-download"></i>
+						Download
+					</button>
+				</a>
+			</div>
+		</div>
+            </div>
+	</li>
+</div>

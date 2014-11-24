@@ -191,15 +191,6 @@ angular.module('shareSoundApp')
 
 		
 	}
-	$scope.getProject = function(){
-
-		projects.getProject($stateParams.projectID);
-		projects.getProjectTracks($stateParams.projectID)
-		.then(function () {
-			console.log('Project tracks:..' + projects.currProjectTracks);
-			$scope.tracks = projects.currProjectTracks;
-		});
-	}
 
 
 	Auth.isLoggedInAsync(function(response){ 
