@@ -11,6 +11,7 @@ angular.module('shareSoundApp')
 	$scope.projectView = true;
 	$scope.uploadTrackPage = false;
 	$scope.createProjectPage = false;
+	$scope.deleteProjectPage = false;
 	$scope.project = {};
 	$scope.isOnUserPage = true; //allows the tag add/delete buttonns to not be displayed by search 
 	// $scope.currentProject;
@@ -31,9 +32,25 @@ angular.module('shareSoundApp')
 
 
     }
+    $scope.deleteProjectPopUp = function(){
+    	$scope.deleteProjectPage = true;
+    }
+    
+    $scope.removeProject = function(projectID){
+    	console.log('deleteProject yeee')
+    	projects.deleteProject(projectID)
+    	.then(function(){
+    		projects.getUserProjects(Auth.getCurrentUser()._id)
+			.then( function() {
+			$scope.projects = projects.userProjects;
+		})
+			$scope.deleteProjectPage = false;
+			$location.path("/user");
+
+        })
+    }
 	$scope.createProjectPopUp = function(){
 		
-		console.log("createProject")
 		$scope.createProjectPage = true;
 	}
 
@@ -54,6 +71,7 @@ angular.module('shareSoundApp')
 
 		$scope.uploadTrackPage = false;
 		$scope.createProjectPage = false;
+		$scope.deleteProjectPage = false;
 
 	}
     
@@ -220,12 +238,9 @@ angular.module('shareSoundApp')
 			projects.getProject($stateParams.projectID).then(function(){
 				// console.log("holy mother of god" +projects.currProjects)
 				$scope.currentProject = projects.currProjects;
-				projects.getProjectTracks($stateParams.projectID)
-					.then(function () {
-						console.log('Project tracks:..' + projects.currProjectTracks);
-						$scope.tracks = projects.currProjectTracks;
-					});
+
 			})
+			projects.getProjectTracks($stateParams.projectID)
 
 		}
 
@@ -236,6 +251,7 @@ angular.module('shareSoundApp')
 
 			// console.log("projects..... " + JSON.stringify($scope.projects));
 		})
+
 
 	});
 

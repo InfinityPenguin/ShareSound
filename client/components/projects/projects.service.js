@@ -20,6 +20,15 @@ angular.module('shareSoundApp')
         })
     };
 
+    service.deleteProject = function(projectId){
+      return $http.delete('/api/projects/'+projectId)
+        .success(function(data){
+          console.log("success");
+          // service.userProjects.remove(data);
+        });
+
+    };
+
     service.getUserProjects = function(userId){
       console.log("getting projects") 
 
