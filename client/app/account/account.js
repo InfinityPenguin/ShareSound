@@ -35,5 +35,10 @@ angular.module('shareSoundApp')
         url: '/profile/:username',
         templateUrl: 'app/account/profileview/profileview.html',
         controller: 'ProfileviewCtrl',
+      })
+      .state('profileprojectview', {
+        url: '/profile/:username/:projectID',
+        templateUrl: 'app/account/user/templates/user.project.html',
+        controller: 'ProfileviewCtrl',
       });
   });
