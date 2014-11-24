@@ -14,6 +14,7 @@ angular.module('shareSoundApp')
 	$scope.project = {};
 	$scope.isOnUserPage = true; //allows the tag add/delete buttonns to not be displayed by search 
 	// $scope.currentProject;
+	$scope.projectservice = projects;
 
     $scope.$on('$destroy', function(event) {
         console.log("leaving page..."); 
@@ -184,48 +185,45 @@ angular.module('shareSoundApp')
 
 	$scope.viewProject = function(projectID){
 
-
 		$location.path("/user/" + projectID)
-		// $scope.projectView = false;
+		projects.getProject(projectID);
+		projects.getProjectTracks(projectID)
 
-		// Tracks.getTracks(projectID)
-		// .then( function() {
-		// 	$scope.tracks = Tracks.userTracks;
-		// 	console.log("tracks..... " + JSON.stringify($scope.tracks));
-		// })
 		
 	}
 	$scope.getProject = function(){
 
 		projects.getProject($stateParams.projectID);
-
+		projects.getProjectTracks($stateParams.projectID)
+		.then(function () {
+			console.log('Project tracks:..' + projects.currProjectTracks);
+			$scope.tracks = projects.currProjectTracks;
+		});
 	}
 
 
 	Auth.isLoggedInAsync(function(response){ 
-		if(response){
-			console.log("is logged in!!!!!!!!");
-			console.log(Auth.getCurrentUser());
-			console.log(Auth.getCurrentUser()._id); 
-		console.log("the id is "+ $stateParams.projectID)
+
+		// if(response){
+		// 	console.log("is logged in!!!!!!!!");
+		// 	console.log(Auth.getCurrentUser());
+		// 	console.log(Auth.getCurrentUser()._id); 
+
 		// Tracks.getTracks(Auth.getCurrentUser()._id)
 		// .then( function() {
 		// 	$scope.tracks = Tracks.userTracks;
 		// 	console.log("tracks..... " + JSON.stringify($scope.tracks));
 		// })
-		if($stateParams.projectID != undefined){
+		// // if($stateParams.projectID){
 
-			projects.getProject($stateParams.projectID).then( function(){
-
-				$scope.currentProject = projects.currProject;
-				console.log("name of project " + $scope.currentProject.name);
-			})
-		}
-		}
-		else{
-			console.log("nope!!!!"); 
-			$location.path('login'); 
-		};
+		// // 	$scope.currentProject = projects.getProject($stateParams.projectID);
+		// // 	console.log("name of project" +$scope.currentProject.name);
+		// // }
+		// }
+		// else{
+		// 	console.log("nope!!!!"); 
+		// 	$location.path('login'); 
+		// };
 		projects.getUserProjects(Auth.getCurrentUser()._id)
 		.then( function() {
 			$scope.projects = projects.userProjects;
