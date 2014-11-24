@@ -194,6 +194,11 @@ angular.module('shareSoundApp')
 		// 	console.log("tracks..... " + JSON.stringify($scope.tracks));
 		// })
 		
+	}
+	$scope.getProject = function(){
+
+		projects.getProject($stateParams.projectID);
+
 
 	}
 
@@ -209,6 +214,11 @@ angular.module('shareSoundApp')
 			$scope.tracks = Tracks.userTracks;
 			console.log("tracks..... " + JSON.stringify($scope.tracks));
 		})
+		// if($stateParams.projectID){
+
+		// 	$scope.currentProject = projects.getProject($stateParams.projectID);
+		// 	console.log("name of project" +$scope.currentProject.name);
+		// }
 		}
 		else{
 			console.log("nope!!!!"); 
