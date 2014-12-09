@@ -14,6 +14,7 @@ angular.module('shareSoundApp')
 	$scope.deleteProjectPage = false;
 	$scope.project = {};
 	$scope.isOnUserPage = true; //allows the tag add/delete buttonns to not be displayed by search 
+	$scope.projectError = false; // True if the "Project" field in the Create new project pop-up is blank when clicking "Create"
 	// $scope.currentProject;
 	$scope.projectservice = projects;
 
@@ -72,6 +73,7 @@ angular.module('shareSoundApp')
 		$scope.uploadTrackPage = false;
 		$scope.createProjectPage = false;
 		$scope.deleteProjectPage = false;
+		$scope.projectError = false;
 
 	}
     
@@ -179,6 +181,12 @@ angular.module('shareSoundApp')
 		$scope.user = {};
     	$scope.errors = {};
 	  	console.log(Auth.getCurrentUser());
+	  	if ($scope.project.name === undefined){
+	  		$scope.projectError = true;
+	  		return;
+	  	}
+
+	  	$scope.projectError = false; 
 
         projects.createProject({
         	owner: Auth.getCurrentUser()._id,
