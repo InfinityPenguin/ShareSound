@@ -184,7 +184,7 @@ angular.module('shareSoundApp')
         	owner: Auth.getCurrentUser()._id,
         	name: $scope.project.name,
         	description: $scope.project.description,
-        	tags: $scope.project.tags
+        	tags: $scope.project.tags.split(' ') 
 
 
         }).then(function(){
