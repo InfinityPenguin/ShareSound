@@ -70,10 +70,10 @@ exports.getUserProjects = function(req, res){
 };
 
 exports.getUserProjectsByUsername = function(req, res){
-  console.log("getting projects by name for ..... " + req.params.id); 
+  console.log("getting projects by name for ..... " + req.params.username); 
   User.findOne({username : req.params.username}, function(err, user) {
     if(err) { return handleError(res, err); }
-    if(!user) { return res.send(404); }
+    if(!user) { return res.send(404, {error: "No such user"}); }
     var userid = user._id
     Project.find({owner : userid}, function (err, project) {
       if(err) { return handleError(res, err); }
