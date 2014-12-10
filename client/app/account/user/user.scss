@@ -126,7 +126,6 @@ label {
     display: inline-block;
 }
 form{
-	
 	float:left;
 }
 .uploadLabel{
@@ -135,4 +134,7 @@ form{
 .projectForm{
 
 	width: 100%;
+}
+.projectError{
+	color: red;
 }

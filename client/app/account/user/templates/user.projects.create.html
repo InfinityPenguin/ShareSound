@@ -4,7 +4,7 @@
 		<form class="form projectForm" name="form" ng-submit="submit()" novalidate>
 
 			<div class="uploadLabel">
-				<label for="Project">Project:</label><input type="name" id="name" placeholder="Project Name" required="required" ng-model="project.name" />
+				<label for="Project">Project*:</label><input type="name" id="name" placeholder="Project Name" required="required" ng-model="project.name" />
 			</div>
             <div class="uploadLabel">
 				<label for="Description">Description:</label><input type="description" id="description" placeholder="Briefly describe this project." required="required" ng-model="project.description"/>
@@ -13,7 +13,13 @@
 				<label for="Tags">Tags:</label><input type="tags" id="tags" placeholder="tags" required="required" ng-model="project.tags"  />
 			</div>
   			</form>
+  		     * Required 
+  		<br>
   		<button ng-click="createProject()">Create</button>
 
 		<button ng-click="Close()" class="closeButton button">Close</button>
+		<p>
+		<div class ="projectError" ng-show="projectError">
+			Error: project name is blank.
+		</div>
 </div>
