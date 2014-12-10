@@ -18,137 +18,130 @@ angular.module('shareSoundApp')
 	// $scope.currentProject;
 	$scope.projectservice = projects;
 
-    $scope.$on('$destroy', function(event) {
-        console.log("leaving page..."); 
-        $scope.wavesurfers.map(function(ws) {
-                if (!ws.backend.isPaused()){
-                    return ws.pause();    
-                }
-			});
-        
-      });
-    $scope.showProjectView = function(){
+	$scope.deleteProject = {};
+	$scope.deleteAttemptName = "";
 
-    	$location.path("/user");
+	$scope.deleteMatch = function() {
+		return $scope.deleteProject.name == $scope.deleteAttemptName;
+	};
 
+	$scope.$on('$destroy', function(event) {
+		console.log("leaving page..."); 
+		$scope.wavesurfers.map(function(ws) {
+			if (!ws.backend.isPaused()){
+				return ws.pause();    
+			}
+		});
 
-    }
-    $scope.deleteProjectPopUp = function(){
-    	$scope.deleteProjectPage = true;
-    }
-    
-    $scope.removeProject = function(projectID){
-    	console.log('deleteProject yeee')
-    	projects.deleteProject(projectID)
-    	.then(function(){
-    		projects.getUserProjects(Auth.getCurrentUser()._id)
-			.then( function() {
-			$scope.projects = projects.userProjects;
-		})
+	});
+	$scope.showProjectView = function(){
+		$location.path("/user");
+	}
+	$scope.deleteProjectPopUp = function(project){
+		console.log("want to delete project" + JSON.stringify(project));
+		$scope.deleteProjectPage = true;
+		$scope.deleteProject = project;
+	}
+
+	$scope.removeProject = function(projectID){
+		console.log('deleteProject yeee')
+			projects.deleteProject(projectID)
+			.then(function(){
+				projects.getUserProjects(Auth.getCurrentUser()._id)
+				.then( function() {
+					$scope.projects = projects.userProjects;
+				})
 			$scope.deleteProjectPage = false;
 			$location.path("/user");
 
-        })
-    }
+			})
+	}
 	$scope.createProjectPopUp = function(){
-		
 		$scope.createProjectPage = true;
 	}
 
 	$scope.uploadTrack = function(){
-
-
 		$scope.uploadTrackPage = true;
-
-
 	}
-    
-    $scope.showAddTag = function(track){
-        $scope.addTagPage = true;   
-        $scope.trackToChange = track; 
-    }
+
+	$scope.showAddTag = function(track){
+		$scope.addTagPage = true;   
+		$scope.trackToChange = track; 
+	}
 
 	$scope.Close = function(){
-
 		$scope.uploadTrackPage = false;
 		$scope.createProjectPage = false;
 		$scope.deleteProjectPage = false;
 		$scope.projectError = false;
-
 	}
-    
-    $scope.addTag = function(){
-        console.log("submitted......"); 
-        console.log($scope.track.tags); 
-    
-        Tracks.addTags($scope.trackToChange, $scope.track.tags); 
-        $scope.showAddTag = false; 
-        $state.transitionTo($state.current, $stateParams, {
-                    reload: true,
-                    inherit: false,
-                    notify: true
-        });
-    } 
-    
-    $scope.deleteTag = function(id, tag){
-        console.log("deleting " + tag + " for " + id); 
-        Tracks.deleteTag(id, tag);
-        $state.transitionTo($state.current, $stateParams, {
-                    reload: true,
-                    inherit: false,
-                    notify: true
-    
-        }); 
-        
-    }
-    
+
+	$scope.addTag = function(){
+		console.log("submitted......"); 
+		console.log($scope.track.tags); 
+
+		Tracks.addTags($scope.trackToChange, $scope.track.tags); 
+		$scope.showAddTag = false; 
+		$state.transitionTo($state.current, $stateParams, {
+			reload: true,
+			inherit: false,
+			notify: true
+		});
+	} 
+
+	$scope.deleteTag = function(id, tag){
+		console.log("deleting " + tag + " for " + id); 
+		Tracks.deleteTag(id, tag);
+		$state.transitionTo($state.current, $stateParams, {
+			reload: true,
+			inherit: false,
+			notify: true
+		}); 
+	}
+
 
 	$scope.submit = function() {
-      $scope.submitted = true;
+		$scope.submitted = true;
 
-      console.log($scope.track.project)
- 
-      console.log($scope.track.tags)
-      var tagArray = $scope.track.tags.split(" ")
-      console.log("The tag array is : " + tagArray)
-      $scope.tagArray = tagArray;
-        
-    };
-    
-    $scope.searchTag = function(query){
-      console.log("SEARCHINGGGG"); 
-      console.log(query); 
-      Tracks.searchTracks(query)
-      .then( function() {
-			$scope.searchResults = Tracks.resultTracks; 
-			console.log("found tracks..... " + JSON.stringify($scope.searchResults));
-            //$location.path('search'); 
-            //this is better than location.path because refresh page if current page 
-            $state.transitionTo('search' , $stateParams, {
-                reload: true,
-                inherit: false,
-                notify: true
-            });
-		})
-    
-    };
+		console.log($scope.track.project)
 
+			console.log($scope.track.tags)
+			var tagArray = $scope.track.tags.split(" ")
+			console.log("The tag array is : " + tagArray)
+			$scope.tagArray = tagArray;
+	};
+
+	$scope.searchTag = function(query){
+		console.log("SEARCHINGGGG"); 
+		console.log(query); 
+		Tracks.searchTracks(query)
+			.then( function() {
+				$scope.searchResults = Tracks.resultTracks; 
+				console.log("found tracks..... " + JSON.stringify($scope.searchResults));
+				//$location.path('search'); 
+				//this is better than location.path because refresh page if current page 
+				$state.transitionTo('search' , $stateParams, {
+					reload: true,
+					inherit: false,
+					notify: true
+				});
+			})
+	};
 
 	$scope.s3_upload = function (){
 		console.log("s3_upload");
 		var status_elem = document.getElementById("status");
 		//var url_elem = document.getElementById("avatar_url");
 		// var preview_elem = document.getElementById("preview");
-        
-        //add tags and project 
-        var tagEncode = encodeURIComponent($scope.track.tags);
-        var projectEncode = encodeURIComponent($scope.currentProject._id);
-        var descriptionEncode = encodeURIComponent($scope.track.description); 
-        
-        console.log("The encoded tags is : " + tagEncode);
-        console.log("The encoded project is : " + projectEncode); 
-        
-        
+
+		//add tags and project 
+		var tagEncode = encodeURIComponent($scope.track.tags);
+		var projectEncode = encodeURIComponent($scope.currentProject._id);
+		var descriptionEncode = encodeURIComponent($scope.track.description); 
+
+		console.log("The encoded tags is : " + tagEncode);
+		console.log("The encoded project is : " + projectEncode); 
+
 		var s3upload = new S3Upload({
 			user: Auth.getCurrentUser(),
 			file_dom_selector: 'files',
@@ -160,67 +153,58 @@ angular.module('shareSoundApp')
 				//status_elem.innerHTML = 'Upload completed. Uploaded to: '+ public_url;
 				//url_elem.value = public_url;
 				//preview_elem.innerHTML = '<img src="'+public_url+'" style="width:300px;" />';
-            
-                console.log("reloading"); 
-              
-                $state.transitionTo($state.current, $stateParams, {
-                    reload: true,
-                    inherit: false,
-                    notify: true
-                });
+
+				console.log("reloading"); 
+
+				$state.transitionTo($state.current, $stateParams, {
+					reload: true,
+					inherit: false,
+					notify: true
+				});
 			},
 			onError: function(status) {
 				status_elem.innerHTML = 'Upload error: ' + status;
 			}
 		});
 		$scope.uploadPage = false;
-    
 	}
 
 	$scope.createProject = function(){
 		$scope.user = {};
-    	$scope.errors = {};
-	  	console.log(Auth.getCurrentUser());
-	  	if ($scope.project.name === undefined){
-	  		$scope.projectError = true;
-	  		return;
-	  	}
+		$scope.errors = {};
+		console.log(Auth.getCurrentUser());
+		if ($scope.project.name === undefined){
+			$scope.projectError = true;
+			return;
+		}
 
-	  	$scope.projectError = false; 
+		$scope.projectError = false; 
 
-        projects.createProject({
-        	owner: Auth.getCurrentUser()._id,
-        	name: $scope.project.name,
-        	description: $scope.project.description,
-        	tags: $scope.project.tags
+		projects.createProject({
+			owner: Auth.getCurrentUser()._id,
+			name: $scope.project.name,
+			description: $scope.project.description,
+			tags: $scope.project.tags
 
-
-        }).then(function(){
+		}).then(function(){
 			$scope.createProjectPage = false;
-        })
-        .catch( function(err) {
-          err = err.data;
-          $scope.errors = {};
-          console.log(err);
-          $scope.errors.username = err;
-          });
-
-
-
+		})
+		.catch( function(err) {
+			err = err.data;
+			$scope.errors = {};
+			console.log(err);
+			$scope.errors.username = err;
+		});
 	};
 
 	$scope.viewProject = function(projectID){
-
 		$location.path("/user/" + projectID)
-		projects.getProject(projectID);
+			projects.getProject(projectID);
 		projects.getProjectTracks(projectID)
-
-		
 	}
 
 
 	Auth.isLoggedInAsync(function(response){ 
-
 		// if(response){
 		// 	console.log("is logged in!!!!!!!!");
 		// 	console.log(Auth.getCurrentUser());
@@ -243,22 +227,20 @@ angular.module('shareSoundApp')
 		// };
 		if($stateParams.projectID!=undefined){
 			console.log("not undefined")
-			projects.getProject($stateParams.projectID).then(function(){
-				// console.log("holy mother of god" +projects.currProjects)
-				$scope.currentProject = projects.currProjects;
+				projects.getProject($stateParams.projectID).then(function(){
+					// console.log("holy mother of god" +projects.currProjects)
+					$scope.currentProject = projects.currProjects;
 
-			})
+				})
 			projects.getProjectTracks($stateParams.projectID)
-
 		}
 
 		projects.getUserProjects(Auth.getCurrentUser()._id)
-		.then( function() {
-			$scope.projects = projects.userProjects;
+			.then( function() {
+				$scope.projects = projects.userProjects;
 
-
-			// console.log("projects..... " + JSON.stringify($scope.projects));
-		})
+				// console.log("projects..... " + JSON.stringify($scope.projects));
+			})
 
 	});
 
@@ -298,7 +280,6 @@ angular.module('shareSoundApp')
 			$scope.show = true;
 			$scope.showplayall = true;
 			if (!$scope.tracksinit){
-
 				$scope.tracksinit = true;
 				$scope.wavesurfers = [].map.call(document.querySelectorAll(".track_list li .wavesurfers"), function(element) {
 					console.log(element);
@@ -320,8 +301,8 @@ angular.module('shareSoundApp')
 					progressColor : 'gold',
 					loaderColor   : 'gold',
 					cursorColor   : 'red',
-                    normalize: true,
-                    height: 100
+					normalize: true,
+					height: 100
 				};
 
 				if (location.search.match('scroll')) {
