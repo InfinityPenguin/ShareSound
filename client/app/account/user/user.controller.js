@@ -180,21 +180,25 @@ angular.module('shareSoundApp')
 
 		$scope.projectError = false; 
 
-		projects.createProject({
-			owner: Auth.getCurrentUser()._id,
-			name: $scope.project.name,
-			description: $scope.project.description,
-			tags: $scope.project.tags
-
+        projects.createProject({
+        	owner: Auth.getCurrentUser()._id,
+        	name: $scope.project.name,
+        	description: $scope.project.description,
+        	tags: $scope.project.tags.split(' ') 
 		}).then(function(){
 			$scope.createProjectPage = false;
-		})
-		.catch( function(err) {
-			err = err.data;
-			$scope.errors = {};
-			console.log(err);
-			$scope.errors.username = err;
-		});
+			var projectID = projects.newProjectID;
+			$location.path("/user/" + projectID)
+			projects.getProject(projectID);
+			projects.getProjectTracks(projectID)
+        })
+        .catch( function(err) {
+          err = err.data;
+          $scope.errors = {};
+          console.log(err);
+          $scope.errors.username = err;
+          });
+
 	};
 
 	$scope.viewProject = function(projectID){

@@ -12,18 +12,22 @@ angular.module('shareSoundApp')
     service.currProjects = {};
     service.currProjectTracks = [];
     service.query = "";
+    service.newProjectID = "";
 
     service.createProject = function (projectObj) {
       return $http.post('/api/projects', projectObj)
         .success(function (data) {
           service.userProjects.push(data);
+          console.log(data._id);
+          service.newProjectID = data._id;
+          return data._id;
         })
     };
 
     service.deleteProject = function(projectId){
       return $http.delete('/api/projects/'+projectId)
         .success(function(data){
-          console.log("success");
+          
           // service.userProjects.remove(data);
         });
 
@@ -35,17 +39,6 @@ angular.module('shareSoundApp')
       return $http.get('/api/projects/user/' + userId)
         .success(function (projects){
             console.log("the projects for user " + userId + " are " + JSON.stringify(projects)); 
-            service.userProjects = projects; 
-            return projects; 
-      });
-    };
-
-    service.getUserProjectsByUsername = function(username){
-      console.log("getting projects by username") 
-
-      return $http.get('/api/projects/getprojectsbyusername/' + username)
-        .success(function (projects){
-            console.log("the projects for user " + username + " are " + JSON.stringify(projects)); 
             service.userProjects = projects; 
             return projects; 
       });
