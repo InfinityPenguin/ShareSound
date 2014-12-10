@@ -64,9 +64,9 @@
 -->
 
 <div class = "popUp" ng-show = "addTagPage">		
-	<form class="form" name="form" ng-submit="addTag()" novalidate>
+	<form class="form" name="form" ng-submit="addProjectTag()" novalidate>
 		<div class="newTag">
-			<label for="Tags">Add space separated tags:</label><input type="tags" id="tags" placeholder="tags" required="required" ng-model="track.tags"  />
+			<label for="Tags">Add space separated tags for this project:</label><input type="tags" id="tags" placeholder="tags" required="required" ng-model="project.tags"  />
 			<button class="btn btn-inverse btn-sm" type="submit">
 				Add
 			</button>

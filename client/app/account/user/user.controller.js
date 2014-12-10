@@ -64,9 +64,9 @@ angular.module('shareSoundApp')
 		$scope.uploadTrackPage = true;
 	}
 
-	$scope.showAddTag = function(track){
+	$scope.showAddTag = function(item){
 		$scope.addTagPage = true;   
-		$scope.trackToChange = track; 
+		$scope.itemToChange = item; 
 	}
 
 	$scope.Close = function(){
@@ -75,12 +75,35 @@ angular.module('shareSoundApp')
 		$scope.deleteProjectPage = false;
 		$scope.projectError = false;
 	}
+    
+    $scope.addProjectTag = function(){
+		console.log("submitted project tags......"); 
+		console.log($scope.project.tags); 
+
+		projects.addTags($scope.itemToChange, $scope.project.tags); 
+		$scope.showAddTag = false; 
+		$state.transitionTo($state.current, $stateParams, {
+			reload: true,
+			inherit: false,
+			notify: true
+		});
+	} 
+    
+    $scope.deleteProjectTag = function(id, tag){
+		console.log("deleting " + tag + " for " + id); 
+        projects.deleteTag(id, tag);
+		$state.transitionTo($state.current, $stateParams, {
+			reload: true,
+			inherit: false,
+			notify: true
+		}); 
+	}
 
 	$scope.addTag = function(){
 		console.log("submitted......"); 
 		console.log($scope.track.tags); 
 
-		Tracks.addTags($scope.trackToChange, $scope.track.tags); 
+		Tracks.addTags($scope.itemToChange, $scope.track.tags); 
 		$scope.showAddTag = false; 
 		$state.transitionTo($state.current, $stateParams, {
 			reload: true,

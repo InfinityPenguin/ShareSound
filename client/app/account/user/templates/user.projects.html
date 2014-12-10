@@ -9,11 +9,15 @@
 				<button type="button" class="btn btn-default btn-sm" style="float:left" ng-click="searchTag(tag)">
 					{{tag}}  
 				</button>
-				<button type="button" class="btn btn-default btn-sm" style="float:left" ng-click="deleteTag(project._id, tag)" ng-show="isOnUserPage">
+				<button type="button" class="btn btn-default btn-sm" style="float:left" ng-click="deleteProjectTag(project._id, tag)" ng-show="isOnUserPage">
 					<i class="glyphicon glyphicon-remove"></i>
 				</button>
 			</div>
 		</div>
+        <button type="button" class="btn btn-default btn-sm" style="float:left" ng-click="showAddTag(project._id)" ng-show="isOnUserPage">
+                <i class="glyphicon glyphicon-plus"></i>
+                  Add tag...
+            </button>
 		<button type="button" class="btn btn-default btn-sm" style="float:right" ng-click="deleteProjectPopUp(project)" ng-show="isOnUserPage">
 			<i class="glyphicon glyphicon-trash"></i>
 		</button>
