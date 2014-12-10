@@ -9,14 +9,17 @@
 		</div>
 		<div  class = "buttonList">	
 			<ul class = "bList">
-	
+
 
 				<li class = "userOptions" ng-show = "projectView" ng-click = "createProjectPopUp()">
-					Create Project
+				Create Project
+
 				</li>
+				<!--
 				<li class = "userOptions" ng-show = "projectView" ng-click = "deleteProjectPopUp()">
-					Delete Project
+				Delete Project
 				</li>
+				-->
 
 			</ul>
 		</div>
@@ -26,52 +29,53 @@
 			<span  class= "message">
 				<h1>Welcome {{getCurrentUser().username }}</h1>
 				<h2>Your projects: </h2>
-				</span>
+			</span>
 
-				<div class= "tracks" ng-hide = "projectView" ng-include src="'app/account/user/templates/user.tracks.html'"></div>
-				<div class= "projects" ng-show = "projectView" ng-include src="'app/account/user/templates/user.projects.html'"></div>
-
-			</div>
+			<div class= "tracks" ng-hide = "projectView" ng-include src="'app/account/user/templates/user.tracks.html'"></div>
+			<div class= "projects" ng-show = "projectView" ng-include src="'app/account/user/templates/user.projects.html'"></div>
+		</div>
 	</div>
 </div>
 
 <div class = "popUp" ng-show = "deleteProjectPage">		
-		
-		<li ng-repeat = "project in projects">
-			<div style = "margin-top:1em">
-				<p>{{project.name}}
-				    <button type="button" class="btn btn-default btn-sm" style="float:right" ng-click="removeProject(project._id)">
-	                    <i class="glyphicon glyphicon-remove"></i>
-	                </button>
-				 </p>
-			</div>
-		</li>
-		<button ng-click="Close()" class="closeButton button">Close</button>
+	<div style = "margin-top:1em">
+		<p class="bg-warning">Are you absolutely sure? This action <b>CANNOT</b> be undone. This will permanently delete the project: "{{deleteProject.name}}" <i>forever!</i>
+		Please type in the name of the project to confirm.</p>
+		<input type="text" class="form-control" ng-model="deleteAttemptName">
+		<button type="button" class="btn btn-default btn-sm" style="float:right" ng-click="removeProject(deleteProject._id)" ng-disabled="!deleteMatch()">
+			<i class="glyphicon glyphicon-remove"></i>
+		</button>
+	</div>
+	<button ng-click="Close()" class="closeButton button">Close</button>
 </div>
-
-
-
-
+<!--
+<div class = "popUp" ng-show = "deleteProjectPage">		
+	<li ng-repeat = "project in projects">
+	<div style = "margin-top:1em">
+		<p>{{project.name}}
+		<button type="button" class="btn btn-default btn-sm" style="float:right" ng-click="removeProject(project._id)">
+			<i class="glyphicon glyphicon-remove"></i>
+		</button>
+		</p>
+	</div>
+	</li>
+	<button ng-click="Close()" class="closeButton button">Close</button>
+</div>
+-->
 
 <div class = "popUp" ng-show = "addTagPage">		
-		<form class="form" name="form" ng-submit="addTag()" novalidate>
-			<div class="newTag">
-				<label for="Tags">Add space separated tags:</label><input type="tags" id="tags" placeholder="tags" required="required" ng-model="track.tags"  />
-                <button class="btn btn-inverse btn-sm" type="submit">
-                    Add
-                </button>
-			</div>
-  		</form>
-		<button ng-click="Close()" class="closeButton button">Close</button>
+	<form class="form" name="form" ng-submit="addTag()" novalidate>
+		<div class="newTag">
+			<label for="Tags">Add space separated tags:</label><input type="tags" id="tags" placeholder="tags" required="required" ng-model="track.tags"  />
+			<button class="btn btn-inverse btn-sm" type="submit">
+				Add
+			</button>
+		</div>
+	</form>
+	<button ng-click="Close()" class="closeButton button">Close</button>
 </div>
-
 
 <div class = "popUp" ng-show = "createProjectPage" ng-include src="'app/account/user/templates/user.projects.create.html'"></div>
 
-
 <!-- <div ng-show= "uploadPage" id="fade" class="black_overlay"></div>
  -->
-
-
-
-
