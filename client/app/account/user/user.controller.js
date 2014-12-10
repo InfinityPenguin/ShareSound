@@ -197,6 +197,10 @@ angular.module('shareSoundApp')
 
         }).then(function(){
 			$scope.createProjectPage = false;
+			var projectID = projects.newProjectID;
+			$location.path("/user/" + projectID)
+			projects.getProject(projectID);
+			projects.getProjectTracks(projectID)
         })
         .catch( function(err) {
           err = err.data;
@@ -204,7 +208,9 @@ angular.module('shareSoundApp')
           console.log(err);
           $scope.errors.username = err;
           });
-
+  //       $location.path("/user/" + projectID)
+		// projects.getProject(projectID);
+		// projects.getProjectTracks(projectID)
 
 
 	};
