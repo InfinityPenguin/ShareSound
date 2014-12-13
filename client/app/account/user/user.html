@@ -27,7 +27,14 @@
 	<div class="u-content">
 		<div class = "banner">
 			<span  class= "message">
-				<h1>Welcome {{getCurrentUser().username }}</h1>
+                
+                <div class="page-header" >
+                <h1 >Welcome {{getCurrentUser().username }}</h1>
+                <small>
+                    This is your dashboard, where all of your projects will be. Each project will have tracks. Create projects here, and click on a project to go to the project page and add tracks to the project.
+                </small>
+                </div>
+                
 				<h2>Your projects: </h2>
 			</span>
 
@@ -43,7 +50,7 @@
 		Please type in the name of the project to confirm.</p>
 		<input type="text" class="form-control" ng-model="deleteAttemptName">
 		<button type="button" class="btn btn-default btn-sm" style="float:right" ng-click="removeProject(deleteProject._id)" ng-disabled="!deleteMatch()">
-			<i class="glyphicon glyphicon-remove"></i>
+			<i class="glyphicon glyphicon-remove">Delete Project</i>
 		</button>
 	</div>
 	<button ng-click="Close()" class="closeButton button">Close</button>

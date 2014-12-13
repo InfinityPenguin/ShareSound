@@ -2,8 +2,8 @@
 
 	<li ng-repeat = "project in projects">
 
-	<div class = "well" style="cursor:pointer">
-		<h3 ng-click="viewProject(project._id)">{{project.name}}</h3>
+	<div class = "well" >
+		<h3 ng-click="viewProject(project._id)" style="cursor:pointer">{{project.name}}</h3>
 		<div ng-repeat="tag in project.tags" >
 			<div class="btn-group" style="float:left">
 				<button type="button" class="btn btn-default btn-sm" style="float:left" ng-click="searchTag(tag)">

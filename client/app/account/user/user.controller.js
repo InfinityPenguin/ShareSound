@@ -74,6 +74,7 @@ angular.module('shareSoundApp')
 		$scope.createProjectPage = false;
 		$scope.deleteProjectPage = false;
 		$scope.projectError = false;
+        $scope.addTagPage = false; 
 	}
     
     $scope.addProjectTag = function(){
