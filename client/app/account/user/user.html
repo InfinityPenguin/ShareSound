@@ -4,16 +4,18 @@
 	<div class = "u-sidebar">
 		<div class = "userInfo">
 			<div class = "profile-picture">
-				<img class= "logo" src="assets/images/logo.png" alt="">
+				<img class= "logo" src="assets/images/ShareSoundLogo.png" alt="">
 			</div>
 		</div>
 		<div  class = "buttonList">	
 			<ul class = "bList">
 
 
-				<li class = "userOptions" ng-show = "projectView" ng-click = "createProjectPopUp()">
+				<li class = "userOptions" ng-show = "projectView" ng-click = "createProjectPopUp()" >
+                    
+                     <button type="button" class="btn btn-default">
 				Create Project
-
+                    </button>
 				</li>
 				<!--
 				<li class = "userOptions" ng-show = "projectView" ng-click = "deleteProjectPopUp()">
@@ -30,9 +32,9 @@
                 
                 <div class="page-header" >
                 <h1 >Welcome {{getCurrentUser().username }}</h1>
-                <small>
-                    This is your dashboard, where all of your projects will be. Each project will have tracks. Create projects here, and click on a project to go to the project page and add tracks to the project.
-                </small>
+                <p>
+                Create/Delete projects here, and click on a project to go to the project page and add tracks to the project.
+                    </p>
                 </div>
                 
 				<h2>Your projects: </h2>
