@@ -107,7 +107,7 @@ exports.addTags = function(req, res){
                 console.log(err);
         }else{
                 console.log("Successfully added");
-                return res.json(tagArray); 
+                //return res.json(tagArray); 
         }
       });
   })
