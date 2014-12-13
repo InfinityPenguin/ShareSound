@@ -157,19 +157,36 @@ angular.module('shareSoundApp')
 		var status_elem = document.getElementById("status");
 		//var url_elem = document.getElementById("avatar_url");
 		// var preview_elem = document.getElementById("preview");
+        
+        var projectEncode = encodeURIComponent($scope.currentProject._id);
+        //add tags and project 
 
-		//add tags and project 
-		var tagEncode = encodeURIComponent($scope.track.tags);
-		var projectEncode = encodeURIComponent($scope.currentProject._id);
-		var descriptionEncode = encodeURIComponent($scope.track.description); 
+        var tagEncode;
+        var descriptionEncode;
 
-		console.log("The encoded tags is : " + tagEncode);
-		console.log("The encoded project is : " + projectEncode); 
+        console.log("CURRENT USER: " + JSON.stringify(Auth.getCurrentUser().username));
+
+
+        if ($scope.track !== undefined) {
+        	tagEncode = encodeURIComponent($scope.track.tags);
+        	if ($scope.track.description === undefined) {
+				descriptionEncode = encodeURIComponent("No description"); 
+			}
+			else {
+				descriptionEncode = encodeURIComponent($scope.track.description);
+			}
+    	}
+        else{
+        	tagEncode = encodeURIComponent(undefined);
+        	descriptionEncode = encodeURIComponent('No description');
+        }
+        console.log("The encoded tags is : " + tagEncode);
+        console.log("The encoded project is : " + projectEncode); 
 
 		var s3upload = new S3Upload({
 			user: Auth.getCurrentUser(),
 			file_dom_selector: 'files',
-			s3_sign_put_url: '/api/tracks/uploadTrack/'+tagEncode+'/'+projectEncode+'/'+descriptionEncode,
+			s3_sign_put_url: '/api/tracks/uploadTrack/'+projectEncode+'/'+tagEncode+'/'+descriptionEncode,
 			onProgress: function(percent, message) {
 				status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
 			},
