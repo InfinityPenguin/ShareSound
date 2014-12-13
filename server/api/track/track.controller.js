@@ -184,10 +184,15 @@ exports.create = function(req, res, callback) {
 			req.body = { 
 				name: name,
 				uploader_id: userId,
-                tags: tags.split(" "),
                 project_id : project_id,
                 description: description
 			};
+			if (tags === 'undefined'){
+				req.body.tags = [];
+			}
+			else {
+				req.body.tags = tags.split(' ');
+			}
 			console.log('Created track for user: ' + userId);
 			Track.create(req.body, function(err, track) {
 				uploadTrackID = track._id.toString();
