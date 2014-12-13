@@ -203,11 +203,19 @@ angular.module('shareSoundApp')
 
 		$scope.projectError = false; 
 
+		var tagList;
+		if ($scope.project.tags === undefined){
+			tagList = [];
+		}
+		else{
+			tagList = $scope.project.tags.split(' ');
+		}
+
         projects.createProject({
         	owner: Auth.getCurrentUser()._id,
         	name: $scope.project.name,
         	description: $scope.project.description,
-        	tags: $scope.project.tags.split(' ') 
+        	tags: tagList
 		}).then(function(){
 			$scope.createProjectPage = false;
 			var projectID = projects.newProjectID;
