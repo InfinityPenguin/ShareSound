@@ -37,13 +37,24 @@
 	</div>
 </div>
 
+
+<!-- Small modal
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-sm">
+			  <div class="modal-content">
+							</div>
+							  </div>
+						  </div>
+-->
 <div class = "popUp" ng-show = "deleteProjectPage">		
 	<div style = "margin-top:1em">
-		<p class="bg-warning">Are you absolutely sure? This action <b>CANNOT</b> be undone. This will permanently delete the project: "{{deleteProject.name}}" <i>forever!</i>
+		<p class="bg-warning">Are you absolutely sure? This action <b>CANNOT</b> be undone. This will permanently delete the project: "{{deleteProject.name}}" <i>forever!</i><br><br>
 		Please type in the name of the project to confirm.</p>
 		<input type="text" class="form-control" ng-model="deleteAttemptName">
 		<button type="button" class="btn btn-default btn-sm" style="float:right" ng-click="removeProject(deleteProject._id)" ng-disabled="!deleteMatch()">
-			<i class="glyphicon glyphicon-remove"></i>
+			<p style="color: red"><b>I understand the consequences of my actions. Delete "{{deleteProject.name}}"</b></p>
 		</button>
 	</div>
 	<button ng-click="Close()" class="closeButton button">Close</button>
