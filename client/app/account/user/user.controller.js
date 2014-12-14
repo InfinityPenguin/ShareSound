@@ -335,12 +335,12 @@ angular.module('shareSoundApp')
 			if (!$scope.tracksinit){
 				$scope.tracksinit = true;
 				$scope.wavesurfers = [].map.call(document.querySelectorAll(".track_list li .wavesurfers"), function(element) {
-					console.log(element);
+					//console.log(element);
 					var trackurl = element.getElementsByClassName("url")[0].textContent;
-					console.log(element.getElementsByClassName("url")[0]);
-					var trackid = element.getElementsByClassName("controls")[0].getAttribute("id");
-					console.log("url: " + trackurl);
-					console.log("trackid: " + trackid);
+					//console.log(element.getElementsByClassName("url")[0]);
+					var trackid = element.getElementsByClassName("waveform")[0].getAttribute("id");
+					//console.log("url: " + trackurl);
+					//console.log("trackid: " + trackid);
 					// Create an instance
 					var wavesurfer = Object.create(WaveSurfer);
 					console.log("made wavesurfer");
@@ -355,7 +355,7 @@ angular.module('shareSoundApp')
 					loaderColor   : 'gold',
 					cursorColor   : 'red',
 					normalize: true,
-					height: 100
+					height: 64
 				};
 
 				if (location.search.match('scroll')) {
@@ -411,13 +411,15 @@ angular.module('shareSoundApp')
 					}
 				};
 				var controlselstr = trackid;
-				console.log("selstr: " + controlselstr);
-				var controlele = document.getElementById(controlselstr);
+				var controlele = document.getElementById('controlling:' + trackid);
+				console.log ("WTF CONTROL ELEMENT: ", controlele);
 				[].forEach.call(controlele.querySelectorAll('[data-action]'), function (el) {
 					el.addEventListener('click', function (e) {
+						console.log("CLICKING", e);
+						//console.log(e);
 						var action = e.currentTarget.dataset.action;
 						if (action in GLOBAL_ACTIONS) {
-							e.preventDefault();
+							//e.preventDefault();
 							GLOBAL_ACTIONS[action](e);
 						}
 					});
