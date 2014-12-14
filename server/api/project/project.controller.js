@@ -70,10 +70,10 @@ exports.getUserProjects = function(req, res){
 };
 
 exports.getUserProjectsByUsername = function(req, res){
-  console.log("getting projects by name for ..... " + req.params.id); 
+  console.log("getting projects by name for ..... " + req.params.username); 
   User.findOne({username : req.params.username}, function(err, user) {
     if(err) { return handleError(res, err); }
-    if(!user) { return res.send(404); }
+    if(!user) { return res.send(404, {error: "No such user"}); }
     var userid = user._id
     Project.find({owner : userid}, function (err, project) {
       if(err) { return handleError(res, err); }
@@ -94,6 +94,44 @@ exports.search = function(req, res){
     return res.json(project);
         
     });
+};
+
+exports.addTags = function(req, res){
+  var tagArray = req.params.tags.split(" "); 
+  var projectToChange = req.params.id; 
+    
+  console.log("adding tags " + req.params.tags + " for " + projectToChange); 
+  tagArray.forEach(function(tag){
+      Project.update({_id: projectToChange},{$addToSet: {tags:tag}},{upsert:false},function(err){
+        if(err){
+                console.log(err);
+        }else{
+                console.log("Successfully added");
+                // return res.json(tagArray); 
+
+        }
+      });
+  })
+};
+
+exports.deleteTag = function(req, res){
+  var tag = decodeURIComponent(req.params.tag);  
+  var projectToChange = decodeURIComponent(req.params.id); 
+  console.log("DELETING......"+tag);     
+    
+    
+  Project.update(
+  { _id: projectToChange },
+  { $pull: {tags: tag } },
+      function(err){
+        if(err){
+                console.log(err);
+        }else{
+                console.log("Removed");
+                return res.json(tag); 
+        }
+          
+      }); 
 };
 // // Creates a new project in the DB. 
 // exports.create = function(req, res, callback) {

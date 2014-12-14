@@ -36,6 +36,9 @@ angular.module('shareSoundApp', [
         }
         if(response.status === 404) {
           $location.path('/');
+          if (response.data.error){
+            alert(response.data.error);
+          }
           return $q.reject(response);
         }
         else {

@@ -3,8 +3,8 @@
 angular.module('shareSoundApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth, Tracks, $state, $stateParams) {
     $scope.menu = [{
-      'title': 'Home',
-      'link': '/'
+      // 'title': 'Home',
+      // 'link': '/'
     }];
 
     $scope.isCollapsed = true;

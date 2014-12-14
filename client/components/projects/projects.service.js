@@ -32,6 +32,22 @@ angular.module('shareSoundApp')
         });
 
     };
+    
+    service.addTags = function(id, tags){
+      return $http.get('/api/projects/tags/add/' + encodeURIComponent(id)  + '/' + encodeURIComponent(tags))
+        .success(function (tracks){
+            console.log("send add tags...");
+      });
+    };
+    
+    service.deleteTag = function(id, tag){
+      return $http.get('/api/projects/tags/delete/' + encodeURIComponent(id)  + '/' + encodeURIComponent(tag))
+        .success(function (tracks){
+            console.log("send remove tags..."); 
+
+      });
+    };
+    
 
     service.getUserProjects = function(userId){
       console.log("getting projects") 
