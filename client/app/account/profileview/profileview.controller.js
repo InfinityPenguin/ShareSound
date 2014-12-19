@@ -138,20 +138,36 @@ angular.module('shareSoundApp')
 		var status_elem = document.getElementById("status");
 		//var url_elem = document.getElementById("avatar_url");
 		// var preview_elem = document.getElementById("preview");
-        
-        //add tags and project 
-        var tagEncode = encodeURIComponent($scope.track.tags);
-        var projectEncode = encodeURIComponent($scope.currentProject._id);
-        var descriptionEncode = encodeURIComponent($scope.track.description); 
-        
-        console.log("The encoded tags is : " + tagEncode);
-        console.log("The encoded project is : " + projectEncode); 
-        
-        
+
+		var projectEncode = encodeURIComponent($scope.currentProject._id);
+		//add tags and project 
+
+		var tagEncode;
+		var descriptionEncode;
+
+		console.log("CURRENT USER: " + JSON.stringify(Auth.getCurrentUser().username));
+
+
+		if ($scope.track !== undefined) {
+			tagEncode = encodeURIComponent($scope.track.tags);
+			if ($scope.track.description === undefined) {
+				descriptionEncode = encodeURIComponent("No description"); 
+			}
+			else {
+				descriptionEncode = encodeURIComponent($scope.track.description);
+			}
+		}
+		else{
+			tagEncode = encodeURIComponent(undefined);
+			descriptionEncode = encodeURIComponent('No description');
+		}
+		console.log("The encoded tags is : " + tagEncode);
+		console.log("The encoded project is : " + projectEncode); 
+
 		var s3upload = new S3Upload({
 			user: Auth.getCurrentUser(),
 			file_dom_selector: 'files',
-			s3_sign_put_url: '/api/tracks/uploadTrack/'+tagEncode+'/'+projectEncode+'/'+descriptionEncode,
+			s3_sign_put_url: '/api/tracks/uploadTrack/'+projectEncode+'/'+tagEncode+'/'+descriptionEncode,
 			onProgress: function(percent, message) {
 				status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
 			},
@@ -159,21 +175,20 @@ angular.module('shareSoundApp')
 				//status_elem.innerHTML = 'Upload completed. Uploaded to: '+ public_url;
 				//url_elem.value = public_url;
 				//preview_elem.innerHTML = '<img src="'+public_url+'" style="width:300px;" />';
-            
-                console.log("reloading"); 
-              
-                $state.transitionTo($state.current, $stateParams, {
-                    reload: true,
-                    inherit: false,
-                    notify: true
-                });
+
+				console.log("reloading"); 
+
+				$state.transitionTo($state.current, $stateParams, {
+					reload: true,
+					inherit: false,
+					notify: true
+				});
 			},
 			onError: function(status) {
 				status_elem.innerHTML = 'Upload error: ' + status;
 			}
 		});
 		$scope.uploadPage = false;
-    
 	}
 
 	// $scope.createProject = function(){
@@ -246,15 +261,17 @@ angular.module('shareSoundApp')
 			$scope.show = true;
 			$scope.showplayall = true;
 			if (!$scope.tracksinit){
-
+				var waveColors = ['#66CCFF', '#66FF66', '#FF9933', 'violet'];
+				var progressColors = ['#0033CC', '#009900', '#FF6600', 'purple'];
+				var color = 0; // for selecting the color
 				$scope.tracksinit = true;
 				$scope.wavesurfers = [].map.call(document.querySelectorAll(".track_list li .wavesurfers"), function(element) {
-					console.log(element);
+					//console.log(element);
 					var trackurl = element.getElementsByClassName("url")[0].textContent;
-					console.log(element.getElementsByClassName("url")[0]);
-					var trackid = element.getElementsByClassName("controls")[0].getAttribute("id");
-					console.log("url: " + trackurl);
-					console.log("trackid: " + trackid);
+					//console.log(element.getElementsByClassName("url")[0]);
+					var trackid = element.getElementsByClassName("waveform")[0].getAttribute("id");
+					//console.log("url: " + trackurl);
+					//console.log("trackid: " + trackid);
 					// Create an instance
 					var wavesurfer = Object.create(WaveSurfer);
 					console.log("made wavesurfer");
@@ -262,94 +279,93 @@ angular.module('shareSoundApp')
 					// Init & load audio file
 					var qstring = '#waveform'
 					console.log("q: "+qstring);
-				var options = {
-					container     : element,
-					waveColor     : 'silver',
-					progressColor : 'gold',
-					loaderColor   : 'gold',
-					cursorColor   : 'red',
-                    normalize: true,
-                    height: 100
-				};
+					var options = {
+						container     : element,
+						waveColor     : waveColors[color % 4],
+						progressColor : progressColors[color % 4],
+						loaderColor   : 'red',
+						cursorColor   : 'red',
+						normalize: true,
+						height: 64
+					};
 
-				if (location.search.match('scroll')) {
-					options.minPxPerSec = 100;
-					options.scrollParent = true;
-				};
+					if (location.search.match('scroll')) {
+						options.minPxPerSec = 100;
+						options.scrollParent = true;
+					};
 
-				if (location.search.match('normalize')) {
-					options.normalize = true;
-				};
+					if (location.search.match('normalize')) {
+						options.normalize = true;
+					};
 
-				// Init
-				wavesurfer.init(options);
-				// Load audio from URL
-				// wavesurfer.load('/assets/media/samp.mp3');
-				wavesurfer.load(trackurl);
-				// Regions
-				if (wavesurfer.enableDragSelection) {
-					wavesurfer.enableDragSelection({
-						color: 'rgba(0, 255, 0, 0.1)'
-					});
-				}
-				// Play at once when ready
-				// Won't work on iOS until you touch the page
-				wavesurfer.on('ready', function () {
-					//wavesurfer.play();
-				});
-
-				// Report errors
-				wavesurfer.on('error', function (err) {
-					console.error(err);
-				});
-
-				// Do something when the clip is over
-				wavesurfer.on('finish', function () {
-					console.log('Finished playing');
-				});
-				var GLOBAL_ACTIONS = {
-					'play': function () {
-						wavesurfer.playPause();
-					},
-
-					'back': function () {
-						wavesurfer.skipBackward();
-					},
-
-					'forth': function () {
-						wavesurfer.skipForward();
-					},
-
-					'toggle-mute': function () {
-						wavesurfer.toggleMute();
+					// Init
+					wavesurfer.init(options);
+					// Load audio from URL
+					// wavesurfer.load('/assets/media/samp.mp3');
+					wavesurfer.load(trackurl);
+					// Regions
+					if (wavesurfer.enableDragSelection) {
+						wavesurfer.enableDragSelection({
+							color: 'rgba(0, 255, 0, 0.1)'
+						});
 					}
-				};
-				var controlselstr = trackid;
-				console.log("selstr: " + controlselstr);
-				var controlele = document.getElementById(controlselstr);
-				[].forEach.call(controlele.querySelectorAll('[data-action]'), function (el) {
-					el.addEventListener('click', function (e) {
-						var action = e.currentTarget.dataset.action;
-						if (action in GLOBAL_ACTIONS) {
-							e.preventDefault();
-							GLOBAL_ACTIONS[action](e);
-						}
+
+					// Play at once when ready
+					// Won't work on iOS until you touch the page
+					wavesurfer.on('ready', function () {
+						//wavesurfer.play();
 					});
+
+					// Report errors
+					wavesurfer.on('error', function (err) {
+						console.error(err);
+					});
+
+					// Do something when the clip is over
+					wavesurfer.on('finish', function () {
+						console.log('Finished playing');
+					});
+
+					var GLOBAL_ACTIONS = {
+						'play': function () {
+							wavesurfer.playPause();
+						},
+
+						'back': function () {
+							wavesurfer.skipBackward();
+						},
+
+						'forth': function () {
+							wavesurfer.skipForward();
+						},
+
+						'toggle-mute': function () {
+							wavesurfer.toggleMute();
+						}
+					};
+					var controlselstr = trackid;
+					var controlele = document.getElementById('controlling:' + trackid);
+					[].forEach.call(controlele.querySelectorAll('[data-action]'), function (el) {
+						el.addEventListener('click', function (e) {
+							//console.log("CLICKING", e);
+							//console.log(e);
+							var action = e.currentTarget.dataset.action;
+							if (action in GLOBAL_ACTIONS) {
+								e.preventDefault();
+								GLOBAL_ACTIONS[action](e);
+							}
+						});
+					});
+					color++;
+					return wavesurfer;	
 				});
-				return wavesurfer;
-				});
+				
 			};
 		} else {
 			$scope.show = false;
 			$scope.showplayall = false;
 		}
-
-		// angular.forEach($scope.tracks, function(track, key) {
-
-		// });
-		// });
-
-}
+	}
 });
 
 
