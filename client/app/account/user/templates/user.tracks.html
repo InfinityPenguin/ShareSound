@@ -55,35 +55,27 @@
 		</audio> -->
 
 			<div id = "{{track.name}}" class="controls" ng-show = "show">
-				<button class="btn btn-primary" data-action="back">
-					<i class="glyphicon glyphicon-step-backward"></i>
-					Backward
-				</button>
+				<div class="btn-group" role="group" aria-label="...">
 
-				<button class="btn btn-primary" data-action="play">
+				<button type="button" class="btn btn-default" data-action="play">
 					<i class="glyphicon glyphicon-play"></i>
-					Play
-					/
+				
+					
 					<i class="glyphicon glyphicon-pause"></i>
-					Pause
+					
 				</button>
 
-				<button class="btn btn-primary" data-action="forth">
-					<i class="glyphicon glyphicon-step-forward"></i>
-					Forward
-				</button>
-
-				<button class="btn btn-primary" data-action="toggle-mute">
+                <button type="button" class="btn btn-default"  data-action="toggle-mute">
 					<i class="glyphicon glyphicon-volume-off"></i>
-					Toggle Mute
 				</button>
 
 				<a href={{track.url}} download={{track.url}}>
-					<button class="btn btn-primary">
+                    <button type="button" class="btn btn-default">
 						<i class="glyphicon glyphicon-download"></i>
-						Download
+					
 					</button>
 				</a>
+            </div>
 			</div>
 		</div>
             </div>

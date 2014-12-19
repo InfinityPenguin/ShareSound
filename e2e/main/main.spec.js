@@ -35,20 +35,23 @@ describe('Dashboard', function() {
  
  
 it('should expect track names before button click', function() {
-    expect(element.all(by.repeater('track in tracks').column('track.name')).getText()).
-           toEqual([ 'Wareru9', 'Wind Dark', 'Horror Gyaku', 'Lost Chair', 'Rumor' ]);
+    expect(element.all(by.repeater('project in project').column('project.name')).getText()).
+           toEqual(['awesome project', 'blank', 'new project', 'test project' ]);
   }); 
 
 it('should expect track names after button click', function() {
     browser.waitForAngular();
-    element(by.cssContainingText('.userOptions', 'Show')).click();
+    element(by.cssContainingText('h3', 'test project')).click();
     browser.waitForAngular(); 
     
-    expect(element.all(by.repeater('track in tracks').column('track.name')).getText()).
-           toEqual([ 'Wareru9', 'Wind Dark', 'Horror Gyaku', 'Lost Chair', 'Rumor' ]);
+    expect(element.all(by.repeater('track in projectservice.currProjectTracks').column('track.name')).getText()).
+           toEqual([ 'Wareru9' ]);
     
-    expect(element.all(by.css(".track_list li .wavesurfers")).getText()).
-    toEqual([ 'Backward Play / Pause Forward Toggle Mute Download', 'Backward Play / Pause Forward Toggle Mute Download', 'Backward Play / Pause Forward Toggle Mute Download', 'Backward Play / Pause Forward Toggle Mute Download', 'Backward Play / Pause Forward Toggle Mute Download' ]);
+    element(by.buttonText('Show Tracks')).click();
+     browser.waitForAngular(); 
+    
+    expect(element.all(by.css(".controls")).getText()).
+    toEqual([ 'Play All Pause All Stop All', '' ]);
     
     
   }); 
