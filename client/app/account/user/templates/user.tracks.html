@@ -14,35 +14,14 @@
 			Stop All
 		</button>
 		<p>
-		</div>
+	</div>
 
-		<li ng-repeat ="track in projectservice.currProjectTracks">
+	<li ng-repeat ="track in projectservice.currProjectTracks">
 
 	    <div class="well" style="padding-top:0px;padding-bottom:0px"> 
-         	<!--div ng-repeat="tag in track.tags" >
-	             <div class="btn-group" style="float:left">
-	                <button type="button" class="btn btn-default btn-sm" style="float:left" ng-click="searchTag(tag)">
-	                  {{tag}}  
-	                </button>
-	                <button type="button" class="btn btn-default btn-sm" style="float:left" ng-click="deleteTag(track._id, tag)" ng-show="isOnUserPage">
-	                    <i class="glyphicon glyphicon-remove"></i>
-	                </button>
-	             </div>
-            </div>
-
-            <button type="button" class="btn btn-default btn-sm" style="float:left" ng-click="showAddTag(track._id)" ng-show="isOnUserPage">
-                <i class="glyphicon glyphicon-plus"></i>
-                  Add tag...
-            </button>
-                                                      
-        	<p>
-        	<br>
-        	<br>
-        	{{track.description}} 
-        	</p-->
         	<div class="container-fluid">
-	            <div class="row" style="padding-top:0em">
-	            	<div class = "col-lg-2" style="vertical-align:middle">
+	            <div class="row" style="padding-top:0em;margin-left:-30px">
+	            	<div class = "col-lg-2">
 	            		<h4> {{ track.name }} </h4> 
 	            	</div>
 	            	<div class ="col-lg-3">
@@ -68,11 +47,36 @@
 						<div class = "wavesurfers" ng-show = "show">
 							<p class = "url" ng-hide = "true">{{track.url}}<p>
 								<div id = "{{track._id}}" class="waveform" ng-show = "show">
+									<!--waveform will be filled here!-->
 								</div>
 						</div>
 					</div>
 				</div>
 			</div> 
+
+			<div class="track-info" ng-hide="show">
+				<div ng-repeat="tag in track.tags">
+		             <div class="btn-group" style="float:left">
+		                <button type="button" class="btn btn-default btn-sm" style="float:left" ng-click="searchTag(tag)">
+		                  {{tag}}  
+		                </button>
+		                <button type="button" class="btn btn-default btn-sm" style="float:left" ng-click="deleteTag(track._id, tag)" ng-show="isOnUserPage">
+		                    <i class="glyphicon glyphicon-remove"></i>
+		                </button>
+		             </div>
+	            </div>
+
+	            <button type="button" class="btn btn-default btn-sm" style="float:left" ng-click="showAddTag(track._id)" ng-show="isOnUserPage">
+	                <i class="glyphicon glyphicon-plus"></i>
+	                  Add tag...
+	            </button>
+	                                                      
+	        	<p>
+	        	<br>
+	        	<br>
+	        	{{track.description}} 
+	        	</p>
+	        </div>
         </div>
 	</li>
 </div>
