@@ -1,7 +1,40 @@
 'use strict';
 angular.module('shareSoundApp')
+.controller('UserCtrl', function ($scope, $modal, Auth, projects, Tracks, $location, $window, $sce, $state, $stateParams) {
+	//$scope.items = ['item1', 'item2', 'item3'];
+	/*
+	   $scope.cancel = function () {
+	   $modalInstance.dismiss('cancel');
+	   };
+	   $scope.test = function() {
+	   console.log($scope.info);
+	   };
+	   $scope.info = "";
+	 */
 
-.controller('UserCtrl', function ($scope, Auth, projects, Tracks, $location, $window, $sce, $state, $stateParams) {
+	$scope.open = function (size) {
+		var modalInstance = $modal.open({
+			templateUrl: 'myModalContent.html',
+			controller: 'ModalInstanceCtrl',
+			size: size,
+			resolve: {
+				deleteProject: function () {
+					return $scope.deleteProject;
+				}
+			}
+		});
+
+		modalInstance.result.then(function (removed) {
+			//$scope.tracksinit = removed;
+		}, function () {
+			console.log('Modal dismissed at: ' + new Date());
+			$state.transitionTo($state.current, $stateParams, {
+				reload: true,
+				inherit: false,
+				notify: true
+			});
+		});
+	};
 
 	$scope.getCurrentUser = Auth.getCurrentUser;
 	$scope.getToken = Auth.getToken; 
@@ -11,7 +44,7 @@ angular.module('shareSoundApp')
 	$scope.projectView = true;
 	$scope.uploadTrackPage = false;
 	$scope.createProjectPage = false;
-	$scope.deleteProjectPage = false;
+	//$scope.deleteProjectPage = false;
 	$scope.project = {};
 	$scope.isOnUserPage = true; //allows the tag add/delete buttonns to not be displayed by search 
 	$scope.projectError = false; // True if the "Project" field in the Create new project pop-up is blank when clicking "Create"
@@ -19,11 +52,13 @@ angular.module('shareSoundApp')
 	$scope.projectservice = projects;
 
 	$scope.deleteProject = {};
-	$scope.deleteAttemptName = "";
+	//$scope.deleteAttemptName = "";
 
-	$scope.deleteMatch = function() {
-		return $scope.deleteProject.name == $scope.deleteAttemptName;
-	};
+	/*
+	   $scope.deleteMatch = function() {
+	   return $scope.deleteProject.name == $scope.deleteAttemptName;
+	   };
+	 */
 
 	$scope.$on('$destroy', function(event) {
 		console.log("leaving page..."); 
@@ -35,27 +70,15 @@ angular.module('shareSoundApp')
 
 	});
 	$scope.showProjectView = function(){
+		console.log("update");
 		$location.path("/user");
 	}
 	$scope.deleteProjectPopUp = function(project){
 		console.log("want to delete project" + JSON.stringify(project));
-		$scope.deleteProjectPage = true;
+		//$scope.deleteProjectPage = true;
 		$scope.deleteProject = project;
 	}
 
-	$scope.removeProject = function(projectID){
-		console.log('deleteProject yeee')
-			projects.deleteProject(projectID)
-			.then(function(){
-				projects.getUserProjects(Auth.getCurrentUser()._id)
-				.then( function() {
-					$scope.projects = projects.userProjects;
-				})
-			$scope.deleteProjectPage = false;
-			$location.path("/user");
-
-			})
-	}
 	$scope.createProjectPopUp = function(){
 		$scope.createProjectPage = true;
 	}
@@ -74,10 +97,10 @@ angular.module('shareSoundApp')
 		$scope.createProjectPage = false;
 		$scope.deleteProjectPage = false;
 		$scope.projectError = false;
-        $scope.addTagPage = false; 
+		$scope.addTagPage = false; 
 	}
-    
-    $scope.addProjectTag = function(){
+
+	$scope.addProjectTag = function(){
 		console.log("submitted project tags......"); 
 		console.log($scope.project.tags); 
 
@@ -89,10 +112,10 @@ angular.module('shareSoundApp')
 			notify: true
 		});
 	} 
-    
-    $scope.deleteProjectTag = function(id, tag){
+
+	$scope.deleteProjectTag = function(id, tag){
 		console.log("deleting " + tag + " for " + id); 
-        projects.deleteTag(id, tag);
+		projects.deleteTag(id, tag);
 		$state.transitionTo($state.current, $stateParams, {
 			reload: true,
 			inherit: false,
@@ -157,31 +180,31 @@ angular.module('shareSoundApp')
 		var status_elem = document.getElementById("status");
 		//var url_elem = document.getElementById("avatar_url");
 		// var preview_elem = document.getElementById("preview");
-        
-        var projectEncode = encodeURIComponent($scope.currentProject._id);
-        //add tags and project 
 
-        var tagEncode;
-        var descriptionEncode;
+		var projectEncode = encodeURIComponent($scope.currentProject._id);
+		//add tags and project 
 
-        console.log("CURRENT USER: " + JSON.stringify(Auth.getCurrentUser().username));
+		var tagEncode;
+		var descriptionEncode;
+
+		console.log("CURRENT USER: " + JSON.stringify(Auth.getCurrentUser().username));
 
 
-        if ($scope.track !== undefined) {
-        	tagEncode = encodeURIComponent($scope.track.tags);
-        	if ($scope.track.description === undefined) {
+		if ($scope.track !== undefined) {
+			tagEncode = encodeURIComponent($scope.track.tags);
+			if ($scope.track.description === undefined) {
 				descriptionEncode = encodeURIComponent("No description"); 
 			}
 			else {
 				descriptionEncode = encodeURIComponent($scope.track.description);
 			}
-    	}
-        else{
-        	tagEncode = encodeURIComponent(undefined);
-        	descriptionEncode = encodeURIComponent('No description');
-        }
-        console.log("The encoded tags is : " + tagEncode);
-        console.log("The encoded project is : " + projectEncode); 
+		}
+		else{
+			tagEncode = encodeURIComponent(undefined);
+			descriptionEncode = encodeURIComponent('No description');
+		}
+		console.log("The encoded tags is : " + tagEncode);
+		console.log("The encoded project is : " + projectEncode); 
 
 		var s3upload = new S3Upload({
 			user: Auth.getCurrentUser(),
@@ -229,24 +252,24 @@ angular.module('shareSoundApp')
 			tagList = $scope.project.tags.split(' ');
 		}
 
-        projects.createProject({
-        	owner: Auth.getCurrentUser()._id,
-        	name: $scope.project.name,
-        	description: $scope.project.description,
-        	tags: tagList
+		projects.createProject({
+			owner: Auth.getCurrentUser()._id,
+			name: $scope.project.name,
+			description: $scope.project.description,
+			tags: tagList
 		}).then(function(){
 			$scope.createProjectPage = false;
 			var projectID = projects.newProjectID;
 			$location.path("/user/" + projectID)
 			projects.getProject(projectID);
-			projects.getProjectTracks(projectID)
-        })
-        .catch( function(err) {
-          err = err.data;
-          $scope.errors = {};
-          console.log(err);
-          $scope.errors.username = err;
-          });
+		projects.getProjectTracks(projectID)
+		})
+		.catch( function(err) {
+			err = err.data;
+			$scope.errors = {};
+			console.log(err);
+			$scope.errors.username = err;
+		});
 
 	};
 
@@ -471,3 +494,42 @@ angular.module('shareSoundApp')
 
 
  */
+angular.module('shareSoundApp').controller('ModalInstanceCtrl', function ($scope, $modalInstance, Auth, $location, deleteProject, projects) {
+	/*$scope.items = items;
+	  $scope.selected = {
+	  item: $scope.items[0]
+	  };
+
+	  $scope.ok = function () {
+	  $modalInstance.close($scope.selected.item);
+	  };
+	 */
+	$scope.deleteProject = deleteProject;
+	$scope.attempt = {};
+	$scope.deleteMatch = function() {
+		return $scope.deleteProject.name == $scope.attempt.name;
+	};
+	$scope.test = function() {
+		//console.log($scope.deleteProject);
+		//console.log($scope.attempt.name);
+	};
+
+	$scope.cancel = function () {
+		$modalInstance.dismiss('cancel');
+	};
+
+	$scope.removeProject = function(projectID){
+		console.log('deleteProject yeee');
+		projects.deleteProject(projectID)
+			.then(function(){
+				projects.getUserProjects(Auth.getCurrentUser()._id)
+				.then( function() {
+					$scope.projects = projects.userProjects;
+				})
+			//$scope.deleteProjectPage = false;
+			});
+			$modalInstance.dismiss('cancel');
+			//console.log("location switch");
+			//$location.path("/user");
+	}
+});

@@ -1,4 +1,3 @@
-
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div class= "u-container">
 	<div class = "u-sidebar">
@@ -9,13 +8,10 @@
 		</div>
 		<div  class = "buttonList">	
 			<ul class = "bList">
-
-
 				<li class = "userOptions" ng-show = "projectView" ng-click = "createProjectPopUp()" >
-                    
-                     <button type="button" class="btn btn-default">
-				Create Project
-                    </button>
+				<button type="button" class="btn btn-default">
+					Create Project
+				</button>
 				</li>
 				<!--
 				<li class = "userOptions" ng-show = "projectView" ng-click = "deleteProjectPopUp()">
@@ -29,14 +25,19 @@
 	<div class="u-content">
 		<div class = "banner">
 			<span  class= "message">
-                
-                <div class="page-header" >
-                <h1 >Welcome {{getCurrentUser().username }}</h1>
-                <p>
-                Create/Delete projects here, and click on a project to go to the project page and add tracks to the project.
-                    </p>
-                </div>
-                
+
+				<div class="page-header" >
+					<h1 >Welcome {{getCurrentUser().username }}</h1>
+					<p>
+					Create/Delete projects here, and click on a project to go to the project page and add tracks to the project.
+					</p>
+					<div>
+						<script type="text/ng-template" id="myModalContent.html">
+						<div id=deleteModal ng-include src="'app/account/user/templates/myModalContent.html'"></div>
+						</script>
+					</div>
+				</div>
+
 				<h2>Your projects: </h2>
 			</span>
 
@@ -46,9 +47,24 @@
 	</div>
 </div>
 
+<!--
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+		</div>
+	</div>
+</div>
+<div class="modal fade deleteProject" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<p class="bg-warning">Are you absolutely sure? This action <b>CANNOT</b> be undone. This will permanently delete the project: "{{deleteProject.name}}" <i>forever!</i><br><br>
+		</div>
+	</div>
+</div>
+
 <div class = "popUp" ng-show = "deleteProjectPage">		
 	<div style = "margin-top:1em">
-		<p class="bg-warning">Are you absolutely sure? This action <b>CANNOT</b> be undone. This will permanently delete the project: "{{deleteProject.name}}" <i>forever!</i>
+		<p class="bg-warning">Are you absolutely sure? This action <b>CANNOT</b> be undone. This will permanently delete the project: "{{deleteProject.name}}" <i>forever!</i><br><br>
 		Please type in the name of the project to confirm.</p>
 		<input type="text" class="form-control" ng-model="deleteAttemptName">
 		<button type="button" class="btn btn-default btn-sm" style="float:right" ng-click="removeProject(deleteProject._id)" ng-disabled="!deleteMatch()">
@@ -57,7 +73,6 @@
 	</div>
 	<button ng-click="Close()" class="closeButton button">Close</button>
 </div>
-<!--
 <div class = "popUp" ng-show = "deleteProjectPage">		
 	<li ng-repeat = "project in projects">
 	<div style = "margin-top:1em">
