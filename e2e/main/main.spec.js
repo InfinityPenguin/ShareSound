@@ -51,7 +51,7 @@ it('should expect track names after button click', function() {
      browser.waitForAngular(); 
     
     expect(element.all(by.css(".controls")).getText()).
-    toEqual([ 'Play All Pause All Stop All', '' ]);
+    toEqual([ 'Play All Pause All Stop All' ]);
     
     
   }); 

@@ -41,8 +41,8 @@
 	<div class="u-content">
 		<div class = "banner">
 			<span  class= "message">
-				<h1>{{currentProject.name }}</h1>
-				<h2>{{currentProject.description }} </h2>
+				<h2>{{currentProject.name }}</h2>
+				<h3>{{currentProject.description }} </h3>
 				</span>
 
 				<div class= "tracks" ng-include src="'app/account/user/templates/user.tracks.html'"></div>
@@ -85,7 +85,7 @@
            
             <div class="modal-footer">
 		<input type="file" id="files"/>
-		<button ng-click="s3_upload()">Upload me, son</button>
+		<button ng-click="s3_upload()">Upload me</button>
 		<button ng-click="Close()" class="closeButton button">Close</button>
             </div>
         </div>
