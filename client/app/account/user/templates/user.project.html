@@ -21,7 +21,7 @@
                     </button>
 				</li>
 				
-				<li class = "userOptions" ng-click = "uploadTrack()">
+				<li class = "userOptions" ng-show="isLoggedIn()" ng-click = "uploadTrack()">
                     <button type="button" class="btn btn-default">
 					Upload Track
                     </button>
@@ -85,7 +85,7 @@
            
             <div class="modal-footer">
 		<input type="file" id="files"/>
-		<button ng-click="s3_upload()">Upload me</button>
+		<button ng-click="s3_upload()">Upload</button>
 		<button ng-click="Close()" class="closeButton button">Close</button>
             </div>
         </div>

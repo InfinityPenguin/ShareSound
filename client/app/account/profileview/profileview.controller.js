@@ -2,7 +2,7 @@
 angular.module('shareSoundApp')
 
 .controller('ProfileviewCtrl', function ($scope, Auth, projects, Tracks, $location, $window, $sce, $state, $stateParams) {
-
+	
 	$scope.getCurrentUser = Auth.getCurrentUser;
 	$scope.getToken = Auth.getToken; 
 	$scope.isLoggedIn = Auth.isLoggedIn;
@@ -12,10 +12,11 @@ angular.module('shareSoundApp')
 	$scope.uploadTrackPage = false;
 	$scope.createProjectPage = false;
 	$scope.project = {};
-	$scope.isOnUserPage = true; //allows the tag add/delete buttonns to not be displayed by search 
+	$scope.isOnUserPage = true; //allows the tag add/delete buttons to not be displayed by search 
 	// $scope.currentProject;
 	$scope.projectservice = projects;
-	$scope.profileusername = $stateParams.username
+	$scope.profileusername = $stateParams.username;
+	
 
 	if($stateParams.projectID!=undefined){
 		console.log("not undefined")
@@ -26,14 +27,14 @@ angular.module('shareSoundApp')
 		projects.getProjectTracks($stateParams.projectID)
 
 	}
-
+	
 	projects.getUserProjectsByUsername($scope.profileusername)
 	.then( function() {
+		console.log(projects.userProjects);
 		$scope.projects = projects.userProjects;
 		console.log("projects..... " + JSON.stringify($scope.projects));
 	})
-
-
+	
     $scope.$on('$destroy', function(event) {
         console.log("leaving page..."); 
         $scope.wavesurfers.map(function(ws) {

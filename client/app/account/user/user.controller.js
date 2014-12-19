@@ -11,7 +11,10 @@ angular.module('shareSoundApp')
 	   };
 	   $scope.info = "";
 	 */
-
+	$scope.isLoggedIn = function(){
+		console.log("CURRENT USER: ");
+		return (Auth.getCurrentUser() === undefined)
+	}
 	$scope.open = function (size) {
 		var modalInstance = $modal.open({
 			templateUrl: 'myModalContent.html',
@@ -46,7 +49,7 @@ angular.module('shareSoundApp')
 	$scope.createProjectPage = false;
 	//$scope.deleteProjectPage = false;
 	$scope.project = {};
-	$scope.isOnUserPage = true; //allows the tag add/delete buttonns to not be displayed by search 
+	$scope.isOnUserPage = true; //allows the tag add/delete buttons to not be displayed by search 
 	$scope.projectError = false; // True if the "Project" field in the Create new project pop-up is blank when clicking "Create"
 	// $scope.currentProject;
 	$scope.projectservice = projects;
